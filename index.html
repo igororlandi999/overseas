@@ -28,22 +28,12 @@
     <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loader" id="loader">
-        <div class="loader-content">
-            <div class="loader-logo">OVERSEAS</div>
-            <div class="loader-bar">
-                <div class="loader-progress"></div>
-            </div>
-        </div>
-    </div>
-
     <!-- Scroll Progress -->
     <div class="scroll-progress" id="scrollProgress"></div>
 
@@ -51,12 +41,17 @@
     <header id="header">
         <nav role="navigation" aria-label="Menu principal">
             <a href="#home" class="logo" aria-label="Overseas Trading - Página inicial">
-                <img src="assets/images/logo.png" alt="Overseas Trading" class="logo-img">
+                OVERSEAS
             </a>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#about">Sobre</a></li>
-                <li><a href="#services">Serviços</a></li>
-                <li><a href="#solutions">Soluções</a></li>
+                <li class="dropdown">
+                    <a href="#sobre">Sobre</a>
+                    <div class="dropdown-content">
+                        <a href="/sobre-nos">Sobre Nós</a>
+                        <a href="/servicos">Serviços</a>
+                        <a href="/solucoes">Soluções</a>
+                    </div>
+                </li>
                 <li><a href="/blog">Blog</a></li>
                 <li><a href="#contact">Contato</a></li>
             </ul>
@@ -70,196 +65,279 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="hero-bg"></div>
-        <div class="particles" id="particles"></div>
         <div class="hero-content">
-            <h1>Levando seu negócio para o mundo</h1>
-            <p>Soluções completas que facilitam as operações de importação e exportação da sua empresa</p>
+            <h1>Transforme suas operações de comércio internacional</h1>
+            <p>Ecossistema especializado que trabalha para eliminar complexidade e ampliar a produtividade das suas operações globais</p>
+            
+            <!-- Hero Chart -->
+            <div class="hero-chart">
+                <h3>Processos por Ano</h3>
+                <div class="chart-container">
+                    <div class="chart-bars">
+                        <div class="chart-bar" data-year="2020" data-value="235" style="height: 47%;">
+                            <span class="bar-value">235</span>
+                            <div class="bar-fill bar-2020"></div>
+                        </div>
+                        <div class="chart-bar" data-year="2021" data-value="286" style="height: 57%;">
+                            <span class="bar-value">286</span>
+                            <div class="bar-fill bar-2021"></div>
+                        </div>
+                        <div class="chart-bar" data-year="2022" data-value="336" style="height: 67%;">
+                            <span class="bar-value">336</span>
+                            <div class="bar-fill bar-2022"></div>
+                        </div>
+                        <div class="chart-bar" data-year="2023" data-value="342" style="height: 68%;">
+                            <span class="bar-value">342</span>
+                            <div class="bar-fill bar-2023"></div>
+                        </div>
+                        <div class="chart-bar" data-year="2024" data-value="442" style="height: 88%;">
+                            <span class="bar-value">442</span>
+                            <div class="bar-fill bar-2024"></div>
+                        </div>
+                    </div>
+                    <div class="chart-labels">
+                        <span>2020</span>
+                        <span>2021</span>
+                        <span>2022</span>
+                        <span>2023</span>
+                        <span>2024</span>
+                    </div>
+                </div>
+                <p class="chart-subtitle">Crescimento consistente em operações de comércio exterior</p>
+            </div>
+            
             <a href="#contact" class="cta-button">Solicite sua consultoria gratuita</a>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="fade-in">
-        <h2 class="section-title">Sobre Nós</h2>
-        <p class="section-subtitle enhanced-subtitle">Há 23 anos ajudando empresas a economizar e expandir no comércio exterior</p>
-        <div class="about-content">
-            <div class="about-text slide-left">
-                <h3 class="about-title">Experiência Internacional</h3>
-                <p>Há 23 anos trabalhando com uma equipe de profissionais com ampla experiência em Comércio Exterior, capacitados para assessorar nossos clientes em todas as etapas da sua operação.</p>
-                <br>
-                <p>Prestando consultoria e viabilizando operações de importação e exportação, sempre focados em otimizar processos e reduzir custos para nossos parceiros.</p>
-                <br>
-                <div class="about-cta">
-                    <a href="https://wa.me/5548999999999" class="whatsapp-cta" target="_blank">
-                        <span class="whatsapp-icon">💬</span>
-                        Fale com um especialista agora
-                    </a>
+    <!-- Diferenciais Section -->
+    <section class="diferenciais">
+        <div class="diferenciais-container">
+            <h2>Por que escolher a Overseas?</h2>
+            <div class="diferenciais-grid">
+                <div class="diferencial-item">
+                    <div class="diferencial-icon">🏆</div>
+                    <h3>Ampla Experiência</h3>
+                    <p>23 anos de atuação no mercado internacional com equipe especializada e track record comprovado</p>
+                </div>
+                <div class="diferencial-item">
+                    <div class="diferencial-icon">💡</div>
+                    <h3>Capacidade de Inovação</h3>
+                    <p>Soluções tecnológicas avançadas e processos otimizados para maximizar eficiência</p>
+                </div>
+                <div class="diferencial-item">
+                    <div class="diferencial-icon">⚡</div>
+                    <h3>Atendimento Ágil</h3>
+                    <p>Estimativas em até 48h e acompanhamento em tempo real de todas as operações</p>
+                </div>
+                <div class="diferencial-item">
+                    <div class="diferencial-icon">🤝</div>
+                    <h3>Parcerias Estratégicas</h3>
+                    <p>Rede global de parceiros e filiais em EUA, Portugal e China</p>
                 </div>
             </div>
-            <div class="about-stats-container slide-right">
-                <div class="about-stats">
-                    <div class="stat-card">
-                        <div class="stat-number" data-target="23">0</div>
-                        <div class="stat-label">Anos de Experiência</div>
+        </div>
+    </section>
+
+    <!-- Indicadores Section - SEÇÃO ATUALIZADA COM 6 CARDS -->
+    <section class="indicadores">
+        <div class="indicadores-container">
+            <h2>Resultados que Comprovam nossa Excelência</h2>
+            <p class="indicadores-subtitle">Números que refletem nosso comprometimento com o sucesso dos nossos clientes</p>
+            <div class="indicadores-grid">
+                <!-- Card 1: Economia em Impostos -->
+                <div class="indicador-card">
+                    <div class="indicador-icon">💰</div>
+                    <div class="indicador-number" data-target="8000000" data-prefix="R$" data-separator="true">R$0</div>
+                    <div class="indicador-label">Economia direta gerada em processos de otimização fiscal, regimes especiais e revisão de classificação tributária</div>
+                </div>
+                
+                <!-- Card 2: Economia USD -->
+                <div class="indicador-card">
+                    <div class="indicador-icon">💵</div>
+                    <div class="indicador-number" data-target="2000000" data-prefix="USD$" data-separator="true">USD$0</div>
+                    <div class="indicador-label">Economizados pelos nossos clientes nos últimos 24 meses através de soluções integradas de comércio exterior</div>
+                </div>
+                
+                <!-- Card 3: Crescimento de Processos -->
+                <div class="indicador-card crescimento-card">
+                    <div class="indicador-icon">📈</div>
+                    <div class="indicador-number" data-target="88" data-suffix="%">+0%</div>
+                    <div class="indicador-title">de crescimento desde 2020</div>
+                    <div class="indicador-label">Em 2020 eram 235 processos. Em 2024 ultrapassamos 440, refletindo nossa eficiência, carteira ativa e confiabilidade do mercado</div>
+                    <div class="mini-chart">
+                        <div class="mini-bar" data-height="47%"></div>
+                        <div class="mini-bar" data-height="57%"></div>
+                        <div class="mini-bar" data-height="67%"></div>
+                        <div class="mini-bar" data-height="68%"></div>
+                        <div class="mini-bar" data-height="88%"></div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-number" data-target="500">0</div>
-                        <div class="stat-label">Clientes Atendidos</div>
+                </div>
+                
+                <!-- Card 4: Economia ICMS -->
+                <div class="indicador-card icms-card">
+                    <div class="indicador-icon">🏛️</div>
+                    <div class="indicador-number" data-target="35019349" data-prefix="R$" data-centavos="73" data-separator="true">R$0,00</div>
+                    <div class="indicador-title">economizados em ICMS em 2024</div>
+                    <div class="indicador-label">Redução comprovada através de regimes tributários especiais, revisões técnicas e expertise aduaneira. Desde 2020, mais de R$125 milhões economizados</div>
+                </div>
+                
+                <!-- Card 5: Volume Movimentado -->
+                <div class="indicador-card volume-card">
+                    <div class="indicador-icon">🚛</div>
+                    <div class="indicador-number" data-target="387600395" data-prefix="R$" data-centavos="04" data-separator="true">R$0,00</div>
+                    <div class="indicador-title">movimentados em 2024</div>
+                    <div class="indicador-label">Volume consolidado de importações gerenciadas, com rastreabilidade ponta a ponta. Total desde 2020 ultrapassa R$1 bilhão</div>
+                    <div class="volume-trend">
+                        <svg viewBox="0 0 100 30" class="trend-line">
+                            <polyline points="10,25 25,20 40,15 55,12 70,8 85,5" fill="none" stroke="currentColor" stroke-width="2"/>
+                        </svg>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-number" data-target="1000">0</div>
-                        <div class="stat-label">Operações Realizadas</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" data-target="50">0</div>
-                        <div class="stat-label">Países de Atuação</div>
+                </div>
+                
+                <!-- Card 6: Fechamentos Mensais -->
+                <div class="indicador-card fechamentos-card">
+                    <div class="indicador-icon">📅</div>
+                    <div class="indicador-number" data-target="82" data-suffix=" operações">0 operações</div>
+                    <div class="indicador-title">finalizadas só em janeiro de 2025</div>
+                    <div class="indicador-label">Alta consistência mês a mês, com média de mais de 50 fechamentos mensais no último ano. Constância operacional e previsibilidade para o cliente</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-progress="82"></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="fade-in">
-        <h2 class="section-title">Nossos Serviços</h2>
-        <p class="section-subtitle">Soluções personalizadas para sua empresa</p>
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">🚢</div>
-                <h3>Trading</h3>
-                <p>Experiência de 23 anos de atuação, redução de custos, benefício fiscal, expertise e análises de alta performance com velocidade em estimativas de até 48h.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">📋</div>
-                <h3>Despacho Aduaneiro</h3>
-                <p>Gestão completa do processo de despacho, garantindo agilidade e conformidade com todas as regulamentações aduaneiras.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">🏭</div>
-                <h3>Outsourcing</h3>
-                <p>Terceirização especializada de processos de comércio exterior, permitindo que você foque no seu core business.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">💰</div>
-                <h3>Estimativas de Custos</h3>
-                <p>Análise detalhada e transparente de todos os custos envolvidos em suas operações internacionais.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">📊</div>
-                <h3>NCM's</h3>
-                <p>Classificação fiscal precisa e otimizada para seus produtos, garantindo a melhor tributação possível.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">🎯</div>
-                <h3>Assessoria</h3>
-                <p>Consultoria especializada em comércio exterior, com foco em estratégias para maximizar seus resultados.</p>
-            </div>
-        </div>
-    </section>
+    <!-- Soluções Section -->
+    <section class="solucoes">
+        <div class="solucoes-container">
+            <h2>Nossas Soluções</h2>
+            <p class="solucoes-subtitle">Serviços especializados para otimizar suas operações de comércio exterior</p>
+            <div class="solucoes-grid">
+                <div class="solucao-card">
+                    <h3>Trading</h3>
+                    <ul>
+                        <li>Experiência: 23 anos de atuação</li>
+                        <li>Redução de custos, benefício fiscal</li>
+                        <li>Expertise em análises de alta performance</li>
+                        <li>Velocidade: estimativas em até 48h</li>
+                        <li>Gestão integrada do processo</li>
+                    </ul>
+                </div>
 
-    <!-- Solutions Section -->
-    <section id="solutions" class="fade-in">
-        <h2 class="section-title">Nossas Soluções</h2>
-        <p class="section-subtitle">Casos de sucesso que comprovam nossa expertise</p>
-        <div class="solutions-grid">
-            <div class="solution-card">
-                <div class="solution-image">
-                    <img src="assets/images/overwine.png" alt="Overwine - Vinhos de Portugal" loading="lazy">
+                <div class="solucao-card">
+                    <h3>Despacho Aduaneiro</h3>
+                    <ul>
+                        <li>Agilidade: média de 3 dias para desembaraço</li>
+                        <li>Eficiência: 99% Canal Verde</li>
+                        <li>Diferencial: valores especiais com armadores</li>
+                        <li>Acompanhamento online em tempo real</li>
+                        <li>Transparência e confiabilidade</li>
+                    </ul>
                 </div>
-                <div class="solution-info">
-                    <h3 class="solution-title">Overwine</h3>
-                    <p class="solution-description">Com muito cuidado, prospectamos em Portugal novas vinícolas que ainda não estão presentes no Brasil. +30 vinícolas portuguesas importadas com redução de 25% nos custos logísticos.</p>
-                    <a href="https://overwine.com.br" class="solution-btn" target="_blank">Visite o site</a>
+
+                <div class="solucao-card">
+                    <h3>Outsourcing</h3>
+                    <ul>
+                        <li>Desenvolvimento de produtos e fornecedores internacionais</li>
+                        <li>Confiabilidade e confidencialidade</li>
+                        <li>Filiais em EUA, Portugal e China</li>
+                        <li>Gestão completa da cadeia de suprimentos</li>
+                        <li>Redução de riscos operacionais</li>
+                    </ul>
                 </div>
-            </div>
-            
-            <div class="solution-card">
-                <div class="solution-image">
-                    <img src="assets/images/egang.png" alt="Egang - Mobilidade Sustentável" loading="lazy">
+
+                <div class="solucao-card">
+                    <h3>Estimativas de Custos</h3>
+                    <ul>
+                        <li>Planilha de custo detalhada e transparente</li>
+                        <li>Cotações com os melhores agentes</li>
+                        <li>Tarifas diferenciadas</li>
+                        <li>Entendimento facilitado para tomada de decisão</li>
+                        <li>Análise de viabilidade econômica</li>
+                    </ul>
                 </div>
-                <div class="solution-info">
-                    <h3 class="solution-title">Egang</h3>
-                    <p class="solution-description">Soluções inovadoras e inteligentes! Sustentabilidade, com inovação, qualidade, segurança e design. Economia de 40% em impostos através de classificação fiscal otimizada.</p>
-                    <a href="https://egang.com.br" class="solution-btn" target="_blank">Visite o site</a>
+
+                <div class="solucao-card">
+                    <h3>Classificação de NCMs</h3>
+                    <ul>
+                        <li>Análise criteriosa da descrição dos produtos</li>
+                        <li>Classificação correta com foco em resultado</li>
+                        <li>Assessoria para sucesso no desembaraço</li>
+                        <li>Otimização tributária</li>
+                        <li>Conformidade com regulamentações</li>
+                    </ul>
                 </div>
-            </div>
-            
-            <div class="solution-card">
-                <div class="solution-image">
-                    <img src="assets/images/overcel.png" alt="Overcel - Baterias de Alta Performance" loading="lazy">
-                </div>
-                <div class="solution-info">
-                    <h3 class="solution-title">Overcel</h3>
-                    <p class="solution-description">Células de bateria 18650 com alto desempenho, processamento de qualidade e garantia. +10.000 unidades importadas mensalmente com lead time reduzido em 60%.</p>
-                    <a href="https://overcel.com.br" class="solution-btn" target="_blank">Visite o site</a>
-                </div>
-            </div>
-            
-            <div class="solution-card">
-                <div class="solution-image">
-                    <img src="assets/images/ipig.png" alt="iPig - Gaming e Tecnologia" loading="lazy">
-                </div>
-                <div class="solution-info">
-                    <h3 class="solution-title">iPig</h3>
-                    <p class="solution-description">Importação e distribuição própria de produtos gaming e tecnológicos inovadores. Market share de 15% no segmento gaming nacional.</p>
+
+                <div class="solucao-card">
+                    <h3>Assessoria Geral</h3>
+                    <ul>
+                        <li>Apoio nas áreas econômica, financeira, jurídica</li>
+                        <li>Regimes tributários diferenciados (Ex-tarifário, etc.)</li>
+                        <li>Habilitação no SISCOMEX/RADAR</li>
+                        <li>Consultoria estratégica personalizada</li>
+                        <li>Acompanhamento regulatório</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="fade-in">
-        <h2 class="section-title">Entre em Contato</h2>
-        <p class="section-subtitle">Envie-nos uma mensagem e entraremos em contato em breve</p>
-        <div class="contact-content">
-            <div class="contact-info slide-left">
-                <h3 class="contact-title">Grupo Overseas<br>Negócios Internacionais</h3>
-                <div class="contact-item">
-                    <div class="contact-item-icon">📞</div>
-                    <div>
-                        <strong>Telefone</strong><br>
-                        +55 (48) 3204-9798
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <h2>Entre em Contato</h2>
+            <p class="contact-subtitle">Envie-nos uma mensagem e entraremos em contato em breve</p>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Grupo Overseas<br>Negócios Internacionais</h3>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">📞</div>
+                        <div>
+                            <strong>Telefone</strong><br>
+                            +55 (48) 3204-9798
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">✉️</div>
+                        <div>
+                            <strong>E-mail</strong><br>
+                            comercial@overseastrading.com.br
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">🌍</div>
+                        <div>
+                            <strong>Atuação</strong><br>
+                            Global - Mais de 50 países
+                        </div>
                     </div>
                 </div>
-                <div class="contact-item">
-                    <div class="contact-item-icon">✉️</div>
-                    <div>
-                        <strong>E-mail</strong><br>
-                        comercial@overseastrading.com.br
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nome *</label>
+                        <input type="text" id="name" name="name" required>
                     </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-item-icon">🌍</div>
-                    <div>
-                        <strong>Atuação</strong><br>
-                        Global - Mais de 50 países
+                    <div class="form-group">
+                        <label for="company">Empresa</label>
+                        <input type="text" id="company" name="company">
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label for="email">E-mail *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Telefone</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensagem *</label>
+                        <textarea id="message" name="message" rows="5" required placeholder="Conte-nos sobre seu projeto, operação ou desafio logístico..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Enviar Mensagem</button>
+                </form>
             </div>
-            <form class="contact-form slide-right" id="contactForm">
-                <div class="form-group">
-                    <label for="name">Nome *</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="company">Empresa</label>
-                    <input type="text" id="company" name="company">
-                </div>
-                <div class="form-group">
-                    <label for="email">E-mail *</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Telefone</label>
-                    <input type="tel" id="phone" name="phone">
-                </div>
-                <div class="form-group">
-                    <label for="message">Mensagem *</label>
-                    <textarea id="message" name="message" rows="5" required placeholder="Conte-nos sobre seu projeto, operação ou desafio logístico..."></textarea>
-                </div>
-                <button type="submit" class="submit-btn">Enviar Mensagem</button>
-            </form>
         </div>
     </section>
 
