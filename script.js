@@ -118,7 +118,7 @@ document.querySelectorAll('.fade-in, .slide-left, .slide-right').forEach(el => {
     observer.observe(el);
 });
 
-// Statistics Counter Animation - FUNÇÃO ATUALIZADA PARA VERSÃO ANTERIOR
+// Statistics Counter Animation - ATUALIZADA PARA 3 CARDS
 function animateCounters() {
     const counters = document.querySelectorAll('.indicador-number');
     
@@ -144,10 +144,9 @@ function animateCounters() {
         }, 16);
     });
     
-    // Animate mini charts and progress bars
+    // Animate mini charts
     setTimeout(() => {
         animateMiniCharts();
-        animateProgressBars();
     }, 500);
 }
 
@@ -171,29 +170,7 @@ function formatNumberComplete(value, prefix, suffix, centavos, useSeparator) {
     return `${prefix}${formattedValue}${suffix}`;
 }
 
-// Format Numbers Function - FUNÇÃO ANTIGA MANTIDA PARA COMPATIBILIDADE
-function formatNumber(value, prefix, suffix, format) {
-    let formattedValue = value;
-    
-    if (format === 'currency') {
-        // Format large currency numbers
-        if (value >= 1000000) {
-            formattedValue = (value / 1000000).toFixed(1) + 'M';
-            // Remove .0 if it's a whole number
-            formattedValue = formattedValue.replace('.0M', 'M');
-        } else if (value >= 1000) {
-            formattedValue = (value / 1000).toFixed(0) + 'K';
-        } else {
-            formattedValue = value.toLocaleString('pt-BR');
-        }
-    } else {
-        formattedValue = value.toLocaleString('pt-BR');
-    }
-    
-    return `${prefix}${formattedValue}${suffix}`;
-}
-
-// Animate Mini Charts - NOVA FUNÇÃO
+// Animate Mini Charts
 function animateMiniCharts() {
     const miniBars = document.querySelectorAll('.mini-bar');
     miniBars.forEach((bar, index) => {
@@ -204,18 +181,7 @@ function animateMiniCharts() {
     });
 }
 
-// Animate Progress Bars - NOVA FUNÇÃO
-function animateProgressBars() {
-    const progressBars = document.querySelectorAll('.progress-fill');
-    progressBars.forEach(bar => {
-        const progress = bar.getAttribute('data-progress');
-        setTimeout(() => {
-            bar.style.width = progress + '%';
-        }, 500);
-    });
-}
-
-// Trigger counter animation when stats section is visible - MELHORADO COM CONTROLE DE EXECUÇÃO ÚNICA
+// Trigger counter animation when stats section is visible
 const statsSection = document.querySelector('.indicadores');
 let animationTriggered = false; // Controle para executar apenas uma vez
 
@@ -227,7 +193,7 @@ const statsObserver = new IntersectionObserver((entries) => {
             statsObserver.unobserve(entry.target);
         }
     });
-}, { threshold: 0.3 }); // Reduzido threshold para disparar mais cedo
+}, { threshold: 0.3 });
 
 if (statsSection) {
     statsObserver.observe(statsSection);
@@ -253,8 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     console.log('Overseas Trading - Seção de indicadores inicializada! ✅');
-    console.log('🔢 Números serão animados de 0 até valores completos (sem abreviação)');
-    console.log('💰 R$ 8.000.000 | 💵 USD$ 2.000.000 | 📈 +88% | 🏛️ R$ 35.019.349,73 | 🚛 R$ 387.600.395,04 | 📅 82 operações');
+    console.log('🔢 3 cards principais: 📈 88% | 🏛️ R$ 35.019.349,73 | 🚛 R$ 387.600.395,04');
 });
 
 // Form Validation and Submission
@@ -568,32 +533,6 @@ function initSectionTransitions() {
 // Initialize section transitions
 initSectionTransitions();
 
-// Add typing effect to hero title (optional enhancement)
-function typeWriter(element, text, speed = 100) {
-    let i = 0;
-    element.innerHTML = '';
-    
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-    
-    type();
-}
-
-// Optional: Apply typing effect to hero title
-document.addEventListener('DOMContentLoaded', () => {
-    const heroTitle = document.querySelector('.hero h1');
-    if (heroTitle) {
-        const originalText = heroTitle.textContent;
-        // Uncomment the line below to enable typing effect
-        // typeWriter(heroTitle, originalText, 50);
-    }
-});
-
 // Cleanup function for performance
 function cleanup() {
     // Remove unused event listeners and observers when page unloads
@@ -625,34 +564,6 @@ document.querySelectorAll('.form-group input, .form-group textarea').forEach(inp
     }
 });
 
-// Add smooth scroll behavior for better UX
-function smoothScrollTo(target, duration = 1000) {
-    const targetElement = document.querySelector(target);
-    if (!targetElement) return;
-    
-    const startPosition = window.pageYOffset;
-    const targetPosition = targetElement.offsetTop - header.offsetHeight;
-    const distance = targetPosition - startPosition;
-    let startTime = null;
-    
-    function animation(currentTime) {
-        if (startTime === null) startTime = currentTime;
-        const timeElapsed = currentTime - startTime;
-        const run = ease(timeElapsed, startPosition, distance, duration);
-        window.scrollTo(0, run);
-        if (timeElapsed < duration) requestAnimationFrame(animation);
-    }
-    
-    function ease(t, b, c, d) {
-        t /= d / 2;
-        if (t < 1) return c / 2 * t * t + b;
-        t--;
-        return -c / 2 * (t * (t - 2) - 1) + b;
-    }
-    
-    requestAnimationFrame(animation);
-}
-
 // Enhanced CTA button interactions
 document.querySelectorAll('.cta-button, .submit-btn').forEach(button => {
     button.addEventListener('mouseenter', () => {
@@ -683,23 +594,6 @@ document.querySelectorAll('.social-link').forEach(link => {
     });
 });
 
-// Number Animation Effect for Real-time Updates
-function addNumberPulseEffect() {
-    const numbers = document.querySelectorAll('.indicador-number');
-    
-    numbers.forEach(number => {
-        setInterval(() => {
-            number.style.transform = 'scale(1.05)';
-            setTimeout(() => {
-                number.style.transform = 'scale(1)';
-            }, 200);
-        }, 5000); // Pulse every 5 seconds
-    });
-}
-
-// Initialize number pulse effect
-setTimeout(addNumberPulseEffect, 3000);
-
 // Console welcome message
 console.log(`
 🌊 Overseas Trading - Website loaded successfully! 🚀
@@ -707,24 +601,19 @@ console.log(`
 📱 WhatsApp: +55 (48) 3204-9798
 🌍 23 years of international trade experience
 
-📊 Seção de Indicadores Corrigida:
-💰 R$ 8.000.000 em economia de impostos
-💵 USD$ 2.000.000 economizados (24 meses) ✅ OVERFLOW CORRIGIDO
+📊 Seção de Indicadores Atualizada:
 📈 +88% crescimento de processos desde 2020
 🏛️ R$ 35.019.349,73 economizados em ICMS (2024)
 🚛 R$ 387.600.395,04 movimentados (2024)
-📅 82 operações finalizadas (Janeiro 2025)
 
-✨ Correções Aplicadas:
-🔧 Texto USD não corta mais no card
-📱 Responsividade mobile otimizada
-🎯 Fonte ajustada com clamp() responsivo
+✨ Mantidos apenas os 3 cards solicitados
+🎯 Grid responsivo: 3 colunas desktop, 1 coluna mobile
 ⚡ Animação countUp única por visita
-🎨 Padding otimizado para todos os números
+🎨 Layout otimizado e limpo
 `);
 
 // Initialize all functions when DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Overseas Trading - All systems initialized! ✅');
-    console.log('🎯 Problema de overflow do card USD corrigido! 📊');
+    console.log('🎯 Seção de indicadores atualizada com 3 cards! 📊');
 });
