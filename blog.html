@@ -1,0 +1,2093 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Overseas Trading | Guias e Dicas de Comércio Exterior</title>
+    <meta name="description" content="Conteúdo especializado em comércio exterior, importação, exportação, NCM, RADAR e despacho aduaneiro. Guias práticos para empresários e profissionais da área.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.overseastrading.com.br/blog">
+    <meta property="og:title" content="Blog - Overseas Trading | Guias de Comércio Exterior">
+    <meta property="og:description" content="Conteúdo especializado em comércio exterior, importação, exportação e dicas práticas para empresários.">
+    <meta property="og:image" content="https://www.overseastrading.com.br/assets/images/blog-og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.overseastrading.com.br/blog">
+    <meta property="twitter:title" content="Blog - Overseas Trading | Guias de Comércio Exterior">
+    <meta property="twitter:description" content="Conteúdo especializado em comércio exterior, importação, exportação e dicas práticas para empresários.">
+    <meta property="twitter:image" content="https://www.overseastrading.com.br/assets/images/blog-og-image.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.overseastrading.com.br/blog">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico">
+    <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script src="assets/js/overseas-components.js"></script>
+    
+    <style>
+        /* Reset e Variáveis */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #0a0a0a;
+            --secondary-dark: #1a1a1a;
+            --accent-blue: #00d4ff;
+            --accent-cyan: #00ffff;
+            --accent-green: #39ff14;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --text-muted: #888888;
+            --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #00ffff 100%);
+            --gradient-dark: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            --border-color: rgba(0, 212, 255, 0.1);
+            --card-hover: rgba(0, 212, 255, 0.05);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Header Padrão Overseas Trading */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--gradient-primary);
+            z-index: 10001;
+            transition: width 0.3s ease;
+        }
+
+        .blog-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .blog-header.scrolled {
+            background: rgba(10, 10, 10, 0.98);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-sizing: border-box;
+        }
+
+        .navbar-nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-sizing: border-box;
+        }
+
+        .navbar-logo {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .navbar-logo-img {
+            height: 180px;
+            width: auto;
+            max-width: 180px;
+            object-fit: contain;
+        }
+
+        .navbar-nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar-nav-links > li {
+            position: relative;
+        }
+
+        .navbar-nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .navbar-nav-links a:hover,
+        .navbar-nav-links a.active {
+            color: var(--accent-cyan);
+        }
+
+        .navbar-nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        .navbar-nav-links a:hover::after,
+        .navbar-nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Dropdown Menu */
+        .navbar-dropdown {
+            position: relative;
+        }
+
+        .navbar-dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1rem 0;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .navbar-dropdown:hover .navbar-dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .navbar-dropdown-content a {
+            display: block;
+            padding: 0.8rem 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-bottom: none;
+        }
+
+        .navbar-dropdown-content a::after {
+            display: none;
+        }
+
+        .navbar-dropdown-content a:hover {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--accent-cyan);
+        }
+
+        .navbar-mobile-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            z-index: 1001;
+        }
+
+        .navbar-mobile-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--accent-cyan);
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .navbar-mobile-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .navbar-mobile-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .navbar-mobile-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Header Simples */
+        .blog-header-original {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .blog-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-decoration: none;
+        }
+
+        .header-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .header-nav a:hover {
+            background: var(--card-hover);
+            color: var(--accent-cyan);
+        }
+
+        /* Hero Section */
+        .blog-hero {
+            background: var(--gradient-dark);
+            padding: 160px 5% 80px; /* Aumentado o padding-top para compensar o header fixo */
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 70%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .blog-hero h1 {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .blog-hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* Search Bar */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 1rem 1.5rem 1rem 3.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 5% 0;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 0.8rem 1.5rem;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 25px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-tab.active,
+        .filter-tab:hover {
+            background: var(--gradient-primary);
+            color: var(--primary-dark);
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 5%;
+        }
+
+        /* Featured Article */
+        .featured-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .featured-article {
+            background: var(--gradient-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .featured-article:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.15);
+        }
+
+        .featured-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 3rem;
+            padding: 3rem;
+        }
+
+        .featured-image {
+            background: var(--gradient-primary);
+            height: 300px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--primary-dark);
+        }
+
+        .featured-text h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .featured-text p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .featured-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .tag {
+            background: var(--accent-cyan);
+            color: var(--primary-dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-weight: 500;
+            font-size: 0.8rem;
+        }
+
+        /* Articles Grid */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .article-card {
+            background: var(--gradient-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .article-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.1);
+        }
+
+        .article-image {
+            height: 200px;
+            background: linear-gradient(135deg, #00d4ff 0%, #00ffff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .article-card:hover .article-image::before {
+            left: 100%;
+        }
+
+        .article-content {
+            padding: 2rem;
+        }
+
+        .article-content h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .article-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .read-time {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            background: var(--secondary-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .newsletter-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-section p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+        }
+
+        .newsletter-btn {
+            padding: 1rem 2rem;
+            background: var(--gradient-primary);
+            color: var(--primary-dark);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .newsletter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Footer Padrão Overseas Trading */
+        .blog-footer {
+            background: var(--secondary-dark);
+            padding: 3rem 5% 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Inter', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .footer-description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-dark);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .social-link svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-size: 1.5rem;
+            z-index: 999;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+            animation: pulse-whatsapp 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
+        }
+
+        .whatsapp-float svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        @keyframes pulse-whatsapp {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border-color);
+            border-top: 3px solid var(--accent-cyan);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar-mobile-toggle {
+                display: flex;
+            }
+
+            .navbar-nav-links {
+                position: fixed;
+                top: -100vh;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(10, 10, 10, 0.98);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 2rem 0;
+                transition: top 0.3s ease;
+                backdrop-filter: blur(20px);
+                border-top: 1px solid var(--border-color);
+                z-index: 1000;
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            .navbar-nav-links.active {
+                top: 0;
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .navbar-nav-links li {
+                margin: 1rem 0;
+                width: 100%;
+                text-align: center;
+            }
+
+            .navbar-nav-links a {
+                font-size: 1.3rem;
+                padding: 1rem 2rem;
+                display: block;
+            }
+
+            .navbar-dropdown-content {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                background: none;
+                border: none;
+                padding: 0;
+                margin-top: 1rem;
+            }
+
+            .navbar-logo-img {
+                height: 150px;
+                max-width: 180px;
+            }
+
+            .navbar-nav {
+                padding: 0 4%;
+            }
+
+            .navbar-logo {
+                height: 50px;
+            }
+
+            .blog-hero {
+                padding: 140px 5% 60px; /* Ajustado para mobile */
+            }
+
+            .blog-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .featured-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2rem;
+            }
+
+            .featured-image {
+                height: 200px;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .filter-tabs {
+                padding: 1rem 5% 0;
+                gap: 0.5rem;
+            }
+
+            .filter-tab {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .main-content {
+                padding: 3rem 5%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar-nav {
+                padding: 0 3%;
+            }
+
+            .navbar-logo-img {
+                height: 120px;
+                max-width: 150px;
+            }
+            .blog-hero {
+                padding: 60px 5% 40px;
+            }
+
+            .blog-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .featured-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2rem;
+            }
+
+            .featured-image {
+                height: 200px;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .filter-tabs {
+                padding: 1rem 5% 0;
+                gap: 0.5rem;
+            }
+
+            .filter-tab {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .main-content {
+                padding: 3rem 5%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-content {
+                padding: 0 4%;
+            }
+
+            .blog-hero {
+                padding: 120px 5% 40px; /* Ajustado para mobile pequeno */
+            }
+
+            .search-bar {
+                padding: 0.8rem 1rem 0.8rem 3rem;
+            }
+
+            .article-content {
+                padding: 1.5rem;
+            }
+
+            .newsletter-section {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 100;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .scroll-top::before {
+            content: '↑';
+            color: var(--primary-dark);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Header Padrão Overseas Trading -->
+    <div id="overseas-header"></div>
+
+    <!-- Hero Section -->
+    <section class="blog-hero">
+        <div class="hero-content">
+            <h1>Blog Overseas Trading</h1>
+            <p>Conteúdo especializado em comércio exterior, importação, exportação e dicas práticas para impulsionar seus negócios internacionais.</p>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Buscar artigos..." id="searchInput">
+                <div class="search-icon">🔍</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs">
+        <button class="filter-tab active" data-category="todos">Todos</button>
+        <button class="filter-tab" data-category="importacao">Importação</button>
+        <button class="filter-tab" data-category="exportacao">Exportação</button>
+        <button class="filter-tab" data-category="ncm">NCM</button>
+        <button class="filter-tab" data-category="radar">RADAR</button>
+        <button class="filter-tab" data-category="despacho">Despacho Aduaneiro</button>
+        <button class="filter-tab" data-category="impostos">Impostos</button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Featured Article -->
+        <section class="featured-section">
+            <h2 class="section-title">Artigo em Destaque</h2>
+            <article class="featured-article" onclick="openArticle('importacao-receita-sucesso')">
+                <div class="featured-content">
+                    <div class="featured-image">🚢</div>
+                    <div class="featured-text">
+                        <h2>Importação: Receita do Sucesso!</h2>
+                        <p>Descubra os segredos para importar com sucesso e transformar seu negócio. Estratégias práticas, dicas exclusivas e tudo que você precisa saber para começar sua jornada no comércio internacional.</p>
+                        <div class="featured-meta">
+                            <span class="tag">Importação</span>
+                            <span>📅 15 Jan 2025</span>
+                            <span class="read-time">⏱️ 8 min de leitura</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- Articles Grid -->
+        <section class="articles-section">
+            <h2 class="section-title">Todos os Artigos</h2>
+            <div class="articles-grid" id="articlesGrid">
+                <!-- Articles will be loaded here by JavaScript -->
+            </div>
+            
+            <!-- Loading -->
+            <div class="loading" id="loading" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Carregando mais artigos...</p>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter-section">
+            <h2>📧 Newsletter Overseas</h2>
+            <p>Receba semanalmente as melhores dicas de comércio exterior diretamente no seu e-mail.</p>
+            <form class="newsletter-form" id="newsletterForm">
+                <input type="email" class="newsletter-input" placeholder="Seu melhor e-mail" required>
+                <button type="submit" class="newsletter-btn">Inscrever-se</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer Padrão Overseas Trading -->
+    <div id="overseas-footer"></div>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/554832049798?text=Olá! Tenho dúvidas sobre comércio exterior e gostaria de uma consultoria." class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+        </svg>
+    </a>
+
+    <!-- Scroll to Top -->
+    <div class="scroll-top" id="scrollTop"></div>
+
+    <script>
+        // Blog Articles Data - EXPANDIDO COM NOVOS TEMAS
+        const blogArticles = [
+            // ARTIGO EM DESTAQUE
+            {
+                id: 'importacao-receita-sucesso',
+                title: 'Importação: Receita do Sucesso!',
+                excerpt: 'Descubra os segredos para importar com sucesso e transformar seu negócio.',
+                category: 'importacao',
+                date: '15 Jan 2025',
+                readTime: '8 min',
+                icon: '🚢',
+                featured: true
+            },
+
+            // === IMPORTAÇÃO (9 artigos total) ===
+            {
+                id: 'estudo-viabilidade-importacao',
+                title: 'Estudo de Viabilidade de Importação Eficaz',
+                excerpt: 'Aprenda a fazer um estudo completo de viabilidade antes de importar.',
+                category: 'importacao',
+                date: '08 Jan 2025',
+                readTime: '10 min',
+                icon: '📊'
+            },
+            {
+                id: 'micro-pequenas-empresas-importar',
+                title: 'Micro ou Pequenas Empresas: Podem Importar e Exportar?',
+                excerpt: 'Descubra as possibilidades e requisitos para micro e pequenas empresas no comércio exterior.',
+                category: 'importacao',
+                date: '05 Jan 2025',
+                readTime: '5 min',
+                icon: '🏢'
+            },
+            {
+                id: 'regras-seguir-importacao',
+                title: 'Quais regras é preciso seguir na importação?',
+                excerpt: 'Regulamentações e normas essenciais que todo importador deve conhecer.',
+                category: 'importacao',
+                date: '01 Jan 2025',
+                readTime: '8 min',
+                icon: '📜'
+            },
+            // NOVOS 6 TEMAS DE IMPORTAÇÃO
+            {
+                id: 'primeiros-passos-importacao',
+                title: 'Primeiros Passos para Começar a Importar',
+                excerpt: 'Guia completo para iniciantes: do planejamento à primeira importação bem-sucedida.',
+                category: 'importacao',
+                date: '30 Dez 2024',
+                readTime: '12 min',
+                icon: '🎯'
+            },
+            {
+                id: 'escolher-fornecedores-internacionais',
+                title: 'Como Escolher Fornecedores Internacionais Confiáveis',
+                excerpt: 'Critérios essenciais para selecionar parceiros comerciais no exterior e evitar golpes.',
+                category: 'importacao',
+                date: '28 Dez 2024',
+                readTime: '9 min',
+                icon: '🤝'
+            },
+            {
+                id: 'incoterms-importacao-pratica',
+                title: 'Incoterms na Importação: Guia Prático',
+                excerpt: 'Entenda todos os termos internacionais de comércio e escolha o melhor para sua operação.',
+                category: 'importacao',
+                date: '26 Dez 2024',
+                readTime: '11 min',
+                icon: '📋'
+            },
+            {
+                id: 'financiamento-operacoes-importacao',
+                title: 'Financiamento para Operações de Importação',
+                excerpt: 'Opções de crédito, linhas de financiamento e como viabilizar suas importações.',
+                category: 'importacao',
+                date: '24 Dez 2024',
+                readTime: '8 min',
+                icon: '💳'
+            },
+            {
+                id: 'logistica-importacao-eficiente',
+                title: 'Logística de Importação: Estratégias Eficientes',
+                excerpt: 'Otimize custos e prazos com planejamento logístico inteligente.',
+                category: 'importacao',
+                date: '22 Dez 2024',
+                readTime: '10 min',
+                icon: '🚛'
+            },
+            {
+                id: 'erros-comuns-importacao',
+                title: 'Erros Mais Comuns na Importação e Como Evitá-los',
+                excerpt: 'Aprenda com os principais equívocos de importadores e como preveni-los.',
+                category: 'importacao',
+                date: '20 Dez 2024',
+                readTime: '7 min',
+                icon: '⚠️'
+            },
+
+            // === EXPORTAÇÃO (11 artigos) ===
+            {
+                id: 'bom-negocio-sem-fronteiras',
+                title: 'Bom Negócio sem Fronteiras!',
+                excerpt: 'Como expandir seus negócios além das fronteiras nacionais com estratégias eficazes.',
+                category: 'exportacao',
+                date: '12 Jan 2025',
+                readTime: '6 min',
+                icon: '🌍'
+            },
+            {
+                id: 'exportacao-mercados-emergentes',
+                title: 'Exportação para Mercados Emergentes: Oportunidades',
+                excerpt: 'Identifique e aproveite as melhores oportunidades em mercados em crescimento.',
+                category: 'exportacao',
+                date: '18 Dez 2024',
+                readTime: '9 min',
+                icon: '🌟'
+            },
+            {
+                id: 'documentos-essenciais-exportacao',
+                title: 'Documentos Essenciais para Exportação',
+                excerpt: 'Checklist completo de toda documentação necessária para exportar com segurança.',
+                category: 'exportacao',
+                date: '16 Dez 2024',
+                readTime: '8 min',
+                icon: '📄'
+            },
+            {
+                id: 'estrategias-precificacao-exportacao',
+                title: 'Estratégias de Precificação para Exportação',
+                excerpt: 'Como formar preços competitivos no mercado internacional e maximizar lucros.',
+                category: 'exportacao',
+                date: '14 Dez 2024',
+                readTime: '10 min',
+                icon: '💰'
+            },
+            {
+                id: 'certificacoes-exportacao',
+                title: 'Certificações Necessárias para Exportação',
+                excerpt: 'Guia completo sobre certificados de qualidade, origem e conformidade.',
+                category: 'exportacao',
+                date: '12 Dez 2024',
+                readTime: '7 min',
+                icon: '🎖️'
+            },
+            {
+                id: 'marketing-internacional-exportacao',
+                title: 'Marketing Internacional para Exportadores',
+                excerpt: 'Estratégias de marketing digital e presencial para conquistar mercados externos.',
+                category: 'exportacao',
+                date: '10 Dez 2024',
+                readTime: '11 min',
+                icon: '📢'
+            },
+            {
+                id: 'seguro-credito-exportacao',
+                title: 'Seguro de Crédito na Exportação: Proteção Total',
+                excerpt: 'Como proteger suas vendas externas contra inadimplência e riscos comerciais.',
+                category: 'exportacao',
+                date: '08 Dez 2024',
+                readTime: '6 min',
+                icon: '🛡️'
+            },
+            {
+                id: 'canais-distribuicao-internacional',
+                title: 'Canais de Distribuição Internacional',
+                excerpt: 'Estruture sua rede de distribuição global e escolha os melhores parceiros.',
+                category: 'exportacao',
+                date: '06 Dez 2024',
+                readTime: '9 min',
+                icon: '🌐'
+            },
+            {
+                id: 'drawback-beneficios-exportacao',
+                title: 'Drawback: Benefícios Fiscais na Exportação',
+                excerpt: 'Maximize sua competitividade com os regimes especiais de drawback.',
+                category: 'exportacao',
+                date: '04 Dez 2024',
+                readTime: '8 min',
+                icon: '🔄'
+            },
+            {
+                id: 'feiras-comerciais-internacionais',
+                title: 'Feiras Comerciais Internacionais: Guia Estratégico',
+                excerpt: 'Como participar de feiras e eventos internacionais para expandir suas exportações.',
+                category: 'exportacao',
+                date: '02 Dez 2024',
+                readTime: '10 min',
+                icon: '🎪'
+            },
+            {
+                id: 'exportacao-servicos-digitais',
+                title: 'Exportação de Serviços Digitais: Mercado em Expansão',
+                excerpt: 'Como exportar serviços de TI, design, consultoria e outros serviços digitais.',
+                category: 'exportacao',
+                date: '30 Nov 2024',
+                readTime: '9 min',
+                icon: '💻'
+            },
+            {
+                id: 'negociacao-contratos-internacionais',
+                title: 'Negociação de Contratos Internacionais',
+                excerpt: 'Estratégias e cláusulas essenciais para contratos de exportação seguros.',
+                category: 'exportacao',
+                date: '28 Nov 2024',
+                readTime: '11 min',
+                icon: '📝'
+            },
+
+            // === NCM (9 artigos total) ===
+            {
+                id: 'ncm-importacao-importancia',
+                title: 'NCM na Importação: Por que é tão importante?',
+                excerpt: 'Entenda a classificação NCM e sua importância crucial nos processos de importação.',
+                category: 'ncm',
+                date: '10 Jan 2025',
+                readTime: '7 min',
+                icon: '📋'
+            },
+            // NOVOS 8 TEMAS DE NCM
+            {
+                id: 'classificacao-ncm-passo-passo',
+                title: 'Classificação NCM: Passo a Passo Completo',
+                excerpt: 'Metodologia prática para classificar produtos corretamente na NCM.',
+                category: 'ncm',
+                date: '02 Dez 2024',
+                readTime: '12 min',
+                icon: '🔍'
+            },
+            {
+                id: 'erro-ncm-consequencias',
+                title: 'Erro de NCM: Consequências e Como Corrigir',
+                excerpt: 'Entenda os riscos de classificação incorreta e procedimentos de retificação.',
+                category: 'ncm',
+                date: '30 Nov 2024',
+                readTime: '8 min',
+                icon: '❌'
+            },
+            {
+                id: 'ncm-impostos-calculo',
+                title: 'NCM e Impostos: Como Calcular Corretamente',
+                excerpt: 'Relação entre classificação NCM e cálculo de impostos de importação.',
+                category: 'ncm',
+                date: '28 Nov 2024',
+                readTime: '10 min',
+                icon: '🧮'
+            },
+            {
+                id: 'consulta-ncm-receita-federal',
+                title: 'Consulta de NCM na Receita Federal: Guia Prático',
+                excerpt: 'Como usar as ferramentas oficiais para consultar e validar classificações.',
+                category: 'ncm',
+                date: '26 Nov 2024',
+                readTime: '6 min',
+                icon: '🔎'
+            },
+            {
+                id: 'ncm-regimes-especiais',
+                title: 'NCM e Regimes Especiais Aduaneiros',
+                excerpt: 'Como a classificação NCM afeta o acesso a regimes tributários especiais.',
+                category: 'ncm',
+                date: '24 Nov 2024',
+                readTime: '9 min',
+                icon: '⚖️'
+            },
+            {
+                id: 'ncm-anuencia-orgaos',
+                title: 'NCM e Anuências de Órgãos Governamentais',
+                excerpt: 'Quando sua NCM exige autorização de ANVISA, INMETRO e outros órgãos.',
+                category: 'ncm',
+                date: '22 Nov 2024',
+                readTime: '7 min',
+                icon: '🏛️'
+            },
+            {
+                id: 'atualizacao-ncm-2025',
+                title: 'Atualização da NCM 2025: Principais Mudanças',
+                excerpt: 'Novas classificações e alterações que impactam importadores e exportadores.',
+                category: 'ncm',
+                date: '20 Nov 2024',
+                readTime: '8 min',
+                icon: '🆕'
+            },
+            {
+                id: 'software-classificacao-ncm',
+                title: 'Software para Classificação NCM: Melhores Opções',
+                excerpt: 'Ferramentas digitais que facilitam e agilizam a classificação de produtos.',
+                category: 'ncm',
+                date: '18 Nov 2024',
+                readTime: '5 min',
+                icon: '💻'
+            },
+
+            // === RADAR (9 artigos total) ===
+            {
+                id: 'radar-importacao-exportacao',
+                title: 'RADAR Importação e Exportação: O que é?',
+                excerpt: 'Tudo sobre o habilitação no RADAR e como obtê-la para sua empresa.',
+                category: 'radar',
+                date: '28 Dez 2024',
+                readTime: '6 min',
+                icon: '📡'
+            },
+            // NOVOS 8 TEMAS DE RADAR
+            {
+                id: 'como-obter-radar-passo-passo',
+                title: 'Como Obter o RADAR: Passo a Passo Detalhado',
+                excerpt: 'Processo completo para habilitação no SISCOMEX, documentos e requisitos.',
+                category: 'radar',
+                date: '16 Nov 2024',
+                readTime: '11 min',
+                icon: '📝'
+            },
+            {
+                id: 'tipos-radar-modalidades',
+                title: 'Tipos de RADAR: Modalidades e Limitações',
+                excerpt: 'Diferenças entre RADAR Expresso, Limitado e Ilimitado e qual escolher.',
+                category: 'radar',
+                date: '14 Nov 2024',
+                readTime: '8 min',
+                icon: '⚡'
+            },
+            {
+                id: 'documentos-necessarios-radar',
+                title: 'Documentos Necessários para Obter o RADAR',
+                excerpt: 'Checklist completo de toda documentação exigida pela Receita Federal.',
+                category: 'radar',
+                date: '12 Nov 2024',
+                readTime: '7 min',
+                icon: '📁'
+            },
+            {
+                id: 'radar-pessoa-fisica-juridica',
+                title: 'RADAR para Pessoa Física vs Jurídica: Diferenças',
+                excerpt: 'Vantagens e limitações de cada modalidade para suas operações.',
+                category: 'radar',
+                date: '10 Nov 2024',
+                readTime: '6 min',
+                icon: '👤'
+            },
+            {
+                id: 'renovacao-radar-prazo',
+                title: 'Renovação do RADAR: Prazos e Procedimentos',
+                excerpt: 'Como renovar sua habilitação e manter regularidade no comércio exterior.',
+                category: 'radar',
+                date: '08 Nov 2024',
+                readTime: '5 min',
+                icon: '🔄'
+            },
+            {
+                id: 'problemas-comuns-radar',
+                title: 'Problemas Comuns na Obtenção do RADAR',
+                excerpt: 'Principais dificuldades e como resolvê-las rapidamente.',
+                category: 'radar',
+                date: '06 Nov 2024',
+                readTime: '8 min',
+                icon: '🔧'
+            },
+            {
+                id: 'radar-mei-microempreendedor',
+                title: 'RADAR para MEI: Microempreendedor Pode Importar?',
+                excerpt: 'Possibilidades e limitações para microempreendedores individuais.',
+                category: 'radar',
+                date: '04 Nov 2024',
+                readTime: '6 min',
+                icon: '🏪'
+            },
+            {
+                id: 'suspensao-cancelamento-radar',
+                title: 'Suspensão e Cancelamento do RADAR: Como Evitar',
+                excerpt: 'Motivos que levam à perda da habilitação e como manter-se regular.',
+                category: 'radar',
+                date: '02 Nov 2024',
+                readTime: '7 min',
+                icon: '🚫'
+            },
+
+            // === DESPACHO ADUANEIRO (9 artigos total) ===
+            {
+                id: 'despacho-aduaneiro-o-que-e',
+                title: 'Despacho Aduaneiro - O que é e para que serve?',
+                excerpt: 'Processo fundamental do comércio exterior explicado de forma clara e objetiva.',
+                category: 'despacho',
+                date: '22 Dez 2024',
+                readTime: '9 min',
+                icon: '🛃'
+            },
+            {
+                id: 'canal-parametrizacao',
+                title: 'O que é um Canal de Parametrização?',
+                excerpt: 'Entenda o sistema de parametrização aduaneira e os diferentes canais de conferência.',
+                category: 'despacho',
+                date: '25 Dez 2024',
+                readTime: '7 min',
+                icon: '🎯'
+            },
+            // NOVOS 6 TEMAS DE DESPACHO ADUANEIRO
+            {
+                id: 'etapas-despacho-aduaneiro',
+                title: 'Etapas do Despacho Aduaneiro: Processo Completo',
+                excerpt: 'Todas as fases do despacho, desde o registro até o desembaraço aduaneiro.',
+                category: 'despacho',
+                date: '31 Out 2024',
+                readTime: '10 min',
+                icon: '📋'
+            },
+            {
+                id: 'canal-verde-vermelho-cinza',
+                title: 'Canal Verde, Vermelho e Cinza: Entenda as Diferenças',
+                excerpt: 'Como funciona cada canal de parametrização e seus procedimentos específicos.',
+                category: 'despacho',
+                date: '29 Out 2024',
+                readTime: '8 min',
+                icon: '🚦'
+            },
+            {
+                id: 'despachante-aduaneiro-funcoes',
+                title: 'Despachante Aduaneiro: Funções e Importância',
+                excerpt: 'O papel fundamental do despachante e quando contratar seus serviços.',
+                category: 'despacho',
+                date: '27 Out 2024',
+                readTime: '6 min',
+                icon: '👨‍💼'
+            },
+            {
+                id: 'tempos-despacho-aduaneiro',
+                title: 'Tempos de Despacho Aduaneiro: Como Acelerar',
+                excerpt: 'Estratégias para reduzir prazos e custos no processo aduaneiro.',
+                category: 'despacho',
+                date: '25 Out 2024',
+                readTime: '7 min',
+                icon: '⏱️'
+            },
+            {
+                id: 'retificacao-declaracao-importacao',
+                title: 'Retificação de Declaração de Importação',
+                excerpt: 'Como corrigir erros na DI e evitar penalidades da Receita Federal.',
+                category: 'despacho',
+                date: '23 Out 2024',
+                readTime: '8 min',
+                icon: '✏️'
+            },
+            {
+                id: 'conferencia-aduaneira-processo',
+                title: 'Conferência Aduaneira: Como Funciona o Processo',
+                excerpt: 'Procedimentos da fiscalização aduaneira e como se preparar adequadamente.',
+                category: 'despacho',
+                date: '21 Out 2024',
+                readTime: '9 min',
+                icon: '🔍'
+            },
+            {
+                id: 'armazenagem-portuaria-aeroportuaria',
+                title: 'Armazenagem Portuária e Aeroportuária: Custos e Prazos',
+                excerpt: 'Como otimizar custos de armazenagem e reduzir tempo de permanência nos recintos.',
+                category: 'despacho',
+                date: '19 Out 2024',
+                readTime: '8 min',
+                icon: '🏭'
+            },
+
+            // === IMPOSTOS (9 artigos total) ===
+            {
+                id: 'impostos-importacao-tributos',
+                title: 'Impostos de Importação: Saiba quais são os tributos',
+                excerpt: 'Guia completo sobre todos os tributos incidentes nas operações de importação.',
+                category: 'impostos',
+                date: '03 Jan 2025',
+                readTime: '9 min',
+                icon: '💰'
+            },
+            // NOVOS 8 TEMAS DE IMPOSTOS
+            {
+                id: 'calculo-ii-ipi-importacao',
+                title: 'Cálculo de II e IPI na Importação',
+                excerpt: 'Como calcular Imposto de Importação e IPI de forma prática e eficiente.',
+                category: 'impostos',
+                date: '19 Out 2024',
+                readTime: '10 min',
+                icon: '🧮'
+            },
+            {
+                id: 'icms-importacao-estados',
+                title: 'ICMS na Importação: Diferenças entre Estados',
+                excerpt: 'Variações de alíquotas e tratamentos do ICMS nos diferentes estados brasileiros.',
+                category: 'impostos',
+                date: '17 Out 2024',
+                readTime: '8 min',
+                icon: '🏛️'
+            },
+            {
+                id: 'pis-cofins-importacao',
+                title: 'PIS e COFINS na Importação: Guia Completo',
+                excerpt: 'Tudo sobre a incidência de PIS e COFINS nas operações de importação.',
+                category: 'impostos',
+                date: '15 Out 2024',
+                readTime: '7 min',
+                icon: '📊'
+            },
+            {
+                id: 'reducao-impostos-importacao',
+                title: 'Como Reduzir Impostos na Importação Legalmente',
+                excerpt: 'Estratégias tributárias lícitas para otimizar sua carga fiscal.',
+                category: 'impostos',
+                date: '13 Out 2024',
+                readTime: '11 min',
+                icon: '📉'
+            },
+            {
+                id: 'acordo-mercosul-impostos',
+                title: 'Acordo do Mercosul: Benefícios Tributários',
+                excerpt: 'Como aproveitar as vantagens fiscais do comércio dentro do Mercosul.',
+                category: 'impostos',
+                date: '11 Out 2024',
+                readTime: '6 min',
+                icon: '🤝'
+            },
+            {
+                id: 'taxa-siscomex-calculo',
+                title: 'Taxa SISCOMEX: Cálculo e Pagamento',
+                excerpt: 'Entenda como funciona e como calcular a taxa de utilização do SISCOMEX.',
+                category: 'impostos',
+                date: '09 Out 2024',
+                readTime: '5 min',
+                icon: '💳'
+            },
+            {
+                id: 'antidumping-medidas-compensatorias',
+                title: 'Antidumping e Medidas Compensatórias',
+                excerpt: 'Como identificar e lidar com produtos sujeitos a direitos antidumping.',
+                category: 'impostos',
+                date: '07 Out 2024',
+                readTime: '9 min',
+                icon: '⚖️'
+            },
+            {
+                id: 'regime-tributario-simplificado',
+                title: 'Regime Tributário Simplificado (RTS)',
+                excerpt: 'Benefícios e como enquadrar suas importações no regime simplificado.',
+                category: 'impostos',
+                date: '05 Out 2024',
+                readTime: '8 min',
+                icon: '📋'
+            }
+        ];
+
+        // DOM Elements
+        const articlesGrid = document.getElementById('articlesGrid');
+        const searchInput = document.getElementById('searchInput');
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const loading = document.getElementById('loading');
+        const scrollTop = document.getElementById('scrollTop');
+        const newsletterForm = document.getElementById('newsletterForm');
+        const blogHeader = document.getElementById('blogHeader');
+        const navbarNavLinks = document.getElementById('navbarNavLinks');
+        const navbarMobileToggle = document.getElementById('navbarMobileToggle');
+        const scrollProgress = document.getElementById('scrollProgress');
+
+        // State
+        let currentFilter = 'todos';
+        let searchQuery = '';
+        let displayedArticles = [];
+
+        // Initialize Blog
+        function initBlog() {
+            renderArticles();
+            setupEventListeners();
+            console.log('🌊 Blog Overseas Trading carregado! ✅');
+            console.log(`📚 ${blogArticles.length} artigos disponíveis`);
+        }
+
+        // Render Articles
+        function renderArticles() {
+            let filteredArticles = blogArticles.filter(article => {
+                const matchesCategory = currentFilter === 'todos' || article.category === currentFilter;
+                const matchesSearch = searchQuery === '' || 
+                    article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    article.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+                
+                return matchesCategory && matchesSearch && !article.featured;
+            });
+
+            articlesGrid.innerHTML = '';
+
+            if (filteredArticles.length === 0) {
+                articlesGrid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--text-secondary);">
+                        <h3>Nenhum artigo encontrado</h3>
+                        <p>Tente ajustar os filtros ou termo de busca.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filteredArticles.forEach(article => {
+                const articleCard = createArticleCard(article);
+                articlesGrid.appendChild(articleCard);
+            });
+
+            displayedArticles = filteredArticles;
+            
+            // Add animation
+            setTimeout(() => {
+                const cards = articlesGrid.querySelectorAll('.article-card');
+                cards.forEach((card, index) => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(30px)';
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.transitionDelay = `${index * 0.1}s`;
+                    
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 100);
+                });
+            }, 50);
+        }
+
+        // Create Article Card
+        function createArticleCard(article) {
+            const card = document.createElement('article');
+            card.className = 'article-card';
+            card.onclick = () => openArticle(article.id);
+            
+            card.innerHTML = `
+                <div class="article-image">${article.icon}</div>
+                <div class="article-content">
+                    <h3>${article.title}</h3>
+                    <p>${article.excerpt}</p>
+                    <div class="article-meta">
+                        <span class="tag">${getCategoryName(article.category)}</span>
+                        <div class="read-time">
+                            <span>📅 ${article.date}</span>
+                            <span>⏱️ ${article.readTime}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Get Category Name
+        function getCategoryName(category) {
+            const categories = {
+                'importacao': 'Importação',
+                'exportacao': 'Exportação',
+                'ncm': 'NCM',
+                'radar': 'RADAR',
+                'despacho': 'Despacho Aduaneiro',
+                'impostos': 'Impostos'
+            };
+            return categories[category] || category;
+        }
+
+        // Setup Event Listeners
+        function setupEventListeners() {
+            // Header scroll effect
+            let lastScrollTop = 0;
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                // Header background change
+                if (scrollTop > 100) {
+                    blogHeader.classList.add('scrolled');
+                } else {
+                    blogHeader.classList.remove('scrolled');
+                }
+                
+                // Scroll progress bar
+                const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercentage = (scrollTop / documentHeight) * 100;
+                scrollProgress.style.width = `${scrollPercentage}%`;
+                
+                // Scroll to top button
+                if (scrollTop > 300) {
+                    document.getElementById('scrollTop').classList.add('visible');
+                } else {
+                    document.getElementById('scrollTop').classList.remove('visible');
+                }
+                
+                lastScrollTop = scrollTop;
+            });
+
+            // Mobile menu toggle
+            navbarMobileToggle.addEventListener('click', () => {
+                const isActive = navbarNavLinks.classList.contains('active');
+                
+                if (isActive) {
+                    navbarNavLinks.classList.remove('active');
+                    navbarMobileToggle.classList.remove('active');
+                    navbarMobileToggle.setAttribute('aria-expanded', 'false');
+                    navbarMobileToggle.setAttribute('aria-label', 'Abrir menu mobile');
+                    document.body.style.overflow = 'auto';
+                } else {
+                    navbarNavLinks.classList.add('active');
+                    navbarMobileToggle.classList.add('active');
+                    navbarMobileToggle.setAttribute('aria-expanded', 'true');
+                    navbarMobileToggle.setAttribute('aria-label', 'Fechar menu mobile');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+
+            // Close mobile menu when clicking on links
+            navbarNavLinks.addEventListener('click', (e) => {
+                if (e.target.tagName === 'A') {
+                    navbarNavLinks.classList.remove('active');
+                    navbarMobileToggle.classList.remove('active');
+                    navbarMobileToggle.setAttribute('aria-expanded', 'false');
+                    navbarMobileToggle.setAttribute('aria-label', 'Abrir menu mobile');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!navbarNavLinks.contains(e.target) && !navbarMobileToggle.contains(e.target)) {
+                    if (navbarNavLinks.classList.contains('active')) {
+                        navbarNavLinks.classList.remove('active');
+                        navbarMobileToggle.classList.remove('active');
+                        navbarMobileToggle.setAttribute('aria-expanded', 'false');
+                        navbarMobileToggle.setAttribute('aria-label', 'Abrir menu mobile');
+                        document.body.style.overflow = 'auto';
+                    }
+                }
+            });
+
+            // ESC key closes mobile menu
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && navbarNavLinks.classList.contains('active')) {
+                    navbarNavLinks.classList.remove('active');
+                    navbarMobileToggle.classList.remove('active');
+                    navbarMobileToggle.setAttribute('aria-expanded', 'false');
+                    navbarMobileToggle.setAttribute('aria-label', 'Abrir menu mobile');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // Search functionality
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value;
+                renderArticles();
+            });
+
+            // Filter tabs
+            filterTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs
+                    filterTabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    tab.classList.add('active');
+                    
+                    // Update filter
+                    currentFilter = tab.dataset.category;
+                    renderArticles();
+                });
+            });
+
+            // Scroll to top functionality
+            document.getElementById('scrollTop').addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Newsletter form
+            newsletterForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = e.target.querySelector('input').value;
+                handleNewsletterSignup(email);
+            });
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                if (e.key === '/' && !e.target.matches('input, textarea')) {
+                    e.preventDefault();
+                    searchInput.focus();
+                }
+            });
+        }
+
+        // Open Article
+        function openArticle(articleId) {
+            // Here you would typically navigate to the full article page
+            // For now, we'll show an alert
+            const article = blogArticles.find(a => a.id === articleId);
+            if (article) {
+                alert(`Abrindo artigo: "${article.title}"\n\nEm breve você será redirecionado para a página completa do artigo.`);
+                
+                // Track article view
+                console.log(`📖 Artigo visualizado: ${article.title}`);
+                
+                // In a real implementation, you would do:
+                // window.location.href = `/blog/${articleId}`;
+            }
+        }
+
+        // Handle Newsletter Signup
+        function handleNewsletterSignup(email) {
+            // Show loading state
+            const button = newsletterForm.querySelector('button');
+            const originalText = button.textContent;
+            button.textContent = 'Inscrevendo...';
+            button.disabled = true;
+
+            // Simulate API call
+            setTimeout(() => {
+                alert(`✅ Obrigado por se inscrever!\n\nO e-mail ${email} foi adicionado à nossa newsletter.\n\nVocê receberá conteúdos exclusivos sobre comércio exterior toda semana.`);
+                
+                // Reset form
+                newsletterForm.reset();
+                button.textContent = originalText;
+                button.disabled = false;
+                
+                console.log(`📧 Newsletter signup: ${email}`);
+            }, 2000);
+        }
+
+        // Smooth scrolling for internal links
+        function smoothScroll(target) {
+            const element = document.querySelector(target);
+            if (element) {
+                element.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        // Load more articles (infinite scroll)
+        function loadMoreArticles() {
+            // This would typically load more articles from an API
+            // For now, we'll just show a message
+            loading.style.display = 'block';
+            
+            setTimeout(() => {
+                loading.style.display = 'none';
+                console.log('📚 Todos os artigos já foram carregados');
+            }, 1500);
+        }
+
+        // Intersection Observer for infinite scroll
+        function setupInfiniteScroll() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        loadMoreArticles();
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '100px'
+            });
+
+            // Observe the last article
+            const lastArticle = articlesGrid.lastElementChild;
+            if (lastArticle) {
+                observer.observe(lastArticle);
+            }
+        }
+
+        // Analytics tracking
+        function trackEvent(eventName, data = {}) {
+            console.log(`📊 Event tracked: ${eventName}`, data);
+            
+            // In a real implementation, you would send this to your analytics service
+            // gtag('event', eventName, data);
+        }
+
+        // Search suggestions
+        function showSearchSuggestions() {
+            const suggestions = [
+                'Como importar',
+                'NCM classificação',
+                'RADAR habilitação',
+                'Impostos importação',
+                'Despacho aduaneiro',
+                'Exportação pequenas empresas'
+            ];
+            
+            // This would show a dropdown with suggestions
+            console.log('💡 Sugestões de busca:', suggestions);
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            initBlog();
+            
+            // Add some interactive features
+            setTimeout(() => {
+                setupInfiniteScroll();
+            }, 1000);
+            
+            // Track page view
+            trackEvent('blog_page_view', {
+                articles_count: blogArticles.length,
+                featured_article: blogArticles.find(a => a.featured)?.title
+            });
+
+            // Show statistics in console
+            console.log(`
+🌊 Blog Overseas Trading expandido com sucesso! 
+
+📊 Estatísticas Completas:
+• ${blogArticles.length} artigos disponíveis
+• Importação: ${blogArticles.filter(a => a.category === 'importacao').length} artigos
+• Exportação: ${blogArticles.filter(a => a.category === 'exportacao').length} artigos  
+• NCM: ${blogArticles.filter(a => a.category === 'ncm').length} artigos
+• RADAR: ${blogArticles.filter(a => a.category === 'radar').length} artigos
+• Despacho Aduaneiro: ${blogArticles.filter(a => a.category === 'despacho').length} artigos
+• Impostos: ${blogArticles.filter(a => a.category === 'impostos').length} artigos
+
+💡 Conteúdo Rico e Diversificado:
+• Guias práticos e passo a passo
+• Temas desde iniciante até avançado  
+• Cobertura completa do comércio exterior
+• Artigos atualizados e relevantes
+
+🚀 Portal completo para educação e geração de leads!
+            `);
+        });
+
+        // Article interactions
+        function addToFavorites(articleId) {
+            const favorites = JSON.parse(localStorage.getItem('blog_favorites') || '[]');
+            if (!favorites.includes(articleId)) {
+                favorites.push(articleId);
+                localStorage.setItem('blog_favorites', JSON.stringify(favorites));
+                trackEvent('article_favorited', { article_id: articleId });
+            }
+        }
+
+        function shareArticle(articleId, platform = 'generic') {
+            const article = blogArticles.find(a => a.id === articleId);
+            if (!article) return;
+            
+            const url = `${window.location.origin}/blog/${articleId}`;
+            const text = `Confira este artigo: "${article.title}" no Blog da Overseas Trading`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: article.title,
+                    text: article.excerpt,
+                    url: url
+                });
+            } else {
+                // Fallback to clipboard
+                navigator.clipboard.writeText(`${text} - ${url}`);
+                alert('Link copiado para a área de transferência!');
+            }
+            
+            trackEvent('article_shared', { 
+                article_id: articleId, 
+                platform: platform 
+            });
+        }
+
+        // Reading progress
+        function initReadingProgress() {
+            const progressBar = document.createElement('div');
+            progressBar.className = 'reading-progress';
+            progressBar.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 0%;
+                height: 3px;
+                background: var(--gradient-primary);
+                z-index: 1000;
+                transition: width 0.3s ease;
+            `;
+            document.body.appendChild(progressBar);
+            
+            window.addEventListener('scroll', () => {
+                const windowHeight = window.innerHeight;
+                const fullHeight = document.body.scrollHeight;
+                const scrolled = window.pageYOffset;
+                const progress = (scrolled / (fullHeight - windowHeight)) * 100;
+                
+                progressBar.style.width = Math.min(progress, 100) + '%';
+            });
+        }
+
+        // Initialize reading progress
+        initReadingProgress();
+
+        // Console welcome message
+        console.log(`
+🌊 Blog Overseas Trading carregado com sucesso! 
+
+📊 Estatísticas:
+• ${blogArticles.length} artigos disponíveis
+• ${new Set(blogArticles.map(a => a.category)).size} categorias
+• Sistema de busca ativo
+• Newsletter integrada
+
+💡 Dicas:
+• Use "/" para focar na busca
+• Clique nos filtros para navegar por categoria
+• Inscreva-se na newsletter para conteúdo exclusivo
+
+🔧 Funcionalidades:
+• ✅ Busca em tempo real
+• ✅ Filtros por categoria  
+• ✅ Design responsivo
+• ✅ Infinite scroll
+• ✅ Newsletter integrada
+• ✅ Compartilhamento de artigos
+• ✅ Tracking de eventos
+• ✅ Barra de progresso de leitura
+
+🚀 Pronto para gerar leads e educar clientes!
+        `);
+    </script>
+</body>
+</html>

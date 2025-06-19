@@ -1,0 +1,434 @@
+/* 
+ * Overseas Trading - Header Component CSS
+ * Arquivo: overseas-header.css
+ * Versão: 1.0.0
+ * Descrição: Estilos padronizados para o header em todas as páginas
+ */
+
+/* Variáveis CSS Globais - Devem estar no main.css */
+:root {
+    --primary-dark: #0a0a0a;
+    --secondary-dark: #1a1a1a;
+    --accent-blue: #00d4ff;
+    --accent-cyan: #00ffff;
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #00ffff 100%);
+    --border-color: rgba(0, 212, 255, 0.1);
+}
+
+/* Scroll Progress Bar */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: var(--gradient-primary);
+    z-index: 10001;
+    transition: width 0.3s ease;
+}
+
+/* Header Principal */
+.overseas-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(20px);
+    z-index: 1000;
+    border-bottom: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.overseas-header.scrolled {
+    background: rgba(10, 10, 10, 0.98);
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.1);
+}
+
+/* Navegação */
+.overseas-nav {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 5%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+/* Logo */
+.overseas-logo {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    transition: transform 0.3s ease;
+}
+
+.overseas-logo:hover {
+    transform: scale(1.05);
+}
+
+.overseas-logo-img {
+    height: 180px;
+    width: auto;
+    max-width: 180px;
+    object-fit: contain;
+    transition: filter 0.3s ease;
+}
+
+.overseas-logo:hover .overseas-logo-img {
+    filter: brightness(1.1);
+}
+
+/* Links de Navegação */
+.overseas-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.overseas-nav-links > li {
+    position: relative;
+}
+
+.overseas-nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0.5rem 0;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.overseas-nav-links a:hover,
+.overseas-nav-links a.active {
+    color: var(--accent-cyan);
+}
+
+.overseas-nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    transition: width 0.3s ease;
+}
+
+.overseas-nav-links a:hover::after,
+.overseas-nav-links a.active::after {
+    width: 100%;
+}
+
+/* Dropdown Menu */
+.overseas-dropdown {
+    position: relative;
+}
+
+.overseas-dropdown-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgba(10, 10, 10, 0.98);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1rem 0;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1001;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.overseas-dropdown:hover .overseas-dropdown-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.overseas-dropdown-content a {
+    display: block;
+    padding: 0.8rem 1.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    border-bottom: none;
+    border-radius: 0;
+    transition: all 0.3s ease;
+}
+
+.overseas-dropdown-content a::after {
+    display: none;
+}
+
+.overseas-dropdown-content a:hover {
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--accent-cyan);
+    transform: translateX(5px);
+}
+
+/* Mobile Toggle Button */
+.overseas-mobile-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    z-index: 1001;
+    transition: transform 0.3s ease;
+}
+
+.overseas-mobile-toggle:hover {
+    transform: scale(1.1);
+}
+
+.overseas-mobile-toggle span {
+    width: 25px;
+    height: 3px;
+    background: var(--accent-cyan);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    border-radius: 2px;
+}
+
+.overseas-mobile-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.overseas-mobile-toggle.active span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(20px);
+}
+
+.overseas-mobile-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Animações de entrada */
+@keyframes slideInFromTop {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInScale {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.overseas-header {
+    animation: slideInFromTop 0.6s ease-out;
+}
+
+.overseas-nav-links li {
+    animation: fadeInScale 0.4s ease-out forwards;
+    animation-delay: calc(var(--delay, 0) * 0.1s);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .overseas-nav {
+        padding: 0 4%;
+    }
+    
+    .overseas-nav-links {
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .overseas-mobile-toggle {
+        display: flex;
+    }
+
+    .overseas-nav-links {
+        position: fixed;
+        top: -100vh;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(10, 10, 10, 0.98);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem 0;
+        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        backdrop-filter: blur(20px);
+        border-top: 1px solid var(--border-color);
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .overseas-nav-links.active {
+        top: 0;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .overseas-nav-links li {
+        margin: 1rem 0;
+        width: 100%;
+        text-align: center;
+        transform: translateY(30px);
+        opacity: 0;
+        animation: none;
+    }
+
+    .overseas-nav-links.active li {
+        animation: slideInMobile 0.4s ease-out forwards;
+        animation-delay: calc(var(--mobile-delay, 0) * 0.1s);
+    }
+
+    .overseas-nav-links a {
+        font-size: 1.3rem;
+        padding: 1rem 2rem;
+        display: block;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .overseas-nav-links a:hover {
+        background: rgba(0, 212, 255, 0.1);
+        transform: scale(1.05);
+    }
+
+    .overseas-dropdown-content {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        margin-top: 1rem;
+        padding: 0.5rem 0;
+    }
+
+    .overseas-dropdown-content a {
+        font-size: 1.1rem;
+        padding: 0.8rem 1.5rem;
+    }
+
+    .overseas-logo-img {
+        height: 150px;
+        max-width: 180px;
+    }
+
+    .overseas-nav {
+        padding: 0 4%;
+        height: 70px;
+    }
+
+    .overseas-logo {
+        height: 50px;
+    }
+}
+
+@keyframes slideInMobile {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .overseas-logo-img {
+        height: 120px;
+        max-width: 150px;
+    }
+
+    .overseas-nav {
+        height: 65px;
+        padding: 0 3%;
+    }
+
+    .overseas-nav-links a {
+        font-size: 1.2rem;
+        padding: 0.8rem 1.5rem;
+    }
+
+    .overseas-dropdown-content a {
+        font-size: 1rem;
+        padding: 0.6rem 1rem;
+    }
+}
+
+/* Focus States para Acessibilidade */
+.overseas-nav-links a:focus,
+.overseas-mobile-toggle:focus {
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Estados de carregamento */
+.overseas-header.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.overseas-header.loading .overseas-logo-img {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Modo de alto contraste */
+@media (prefers-contrast: high) {
+    .overseas-header {
+        background: rgba(0, 0, 0, 0.98);
+        border-bottom: 2px solid var(--accent-cyan);
+    }
+    
+    .overseas-nav-links a {
+        color: #ffffff;
+    }
+    
+    .overseas-nav-links a:hover {
+        background: var(--accent-cyan);
+        color: #000000;
+        border-radius: 4px;
+    }
+}
+
+/* Redução de movimento */
+@media (prefers-reduced-motion: reduce) {
+    .overseas-header,
+    .overseas-nav-links,
+    .overseas-dropdown-content,
+    .overseas-mobile-toggle span {
+        transition: none;
+        animation: none;
+    }
+}

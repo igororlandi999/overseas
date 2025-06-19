@@ -1,0 +1,108 @@
+/* /assets/css/main.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-dark: #0a0a0a;
+    --secondary-dark: #1a1a1a;
+    --accent-blue: #00d4ff;
+    --accent-cyan: #00ffff;
+    --accent-green: #39ff14;
+    --accent-orange: #ff8c00;
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --text-muted: #888888;
+    --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #00ffff 100%);
+    --gradient-dark: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    --border-color: rgba(0, 212, 255, 0.1);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--primary-dark);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+/* Estilos globais para botões WhatsApp, footer, etc. */
+.whatsapp-float {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    background: #25d366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+    z-index: 999;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+}
+
+.overseas-footer {
+    background: var(--secondary-dark);
+    padding: 3rem 5% 1rem;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.overseas-footer .footer-logo {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+}
+
+.overseas-footer .footer-description {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.overseas-footer .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.overseas-footer .social-link {
+    width: 50px;
+    height: 50px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-dark);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.overseas-footer .social-link:hover {
+    transform: translateY(-3px) scale(1.1);
+}
+
+.overseas-footer .footer-text {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}

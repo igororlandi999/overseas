@@ -128,20 +128,35 @@ function animateCounters() {
         const suffix = counter.getAttribute('data-suffix') || '';
         const centavos = counter.getAttribute('data-centavos') || '';
         const useSeparator = counter.getAttribute('data-separator') === 'true';
-        const duration = 2500; // Duração otimizada para melhor efeito visual
-        const step = target / (duration / 16);
+        const duration = 2000;
+        const steps = 60;
+        const increment = target / steps;
         let current = 0;
+        let step = 0;
         
         const timer = setInterval(() => {
-            current += step;
-            if (current >= target) {
-                counter.textContent = formatNumberComplete(target, prefix, suffix, centavos, useSeparator);
+            step++;
+            current = Math.min(increment * step, target);
+            
+            counter.textContent = formatNumberComplete(
+                Math.floor(current), 
+                prefix, 
+                suffix, 
+                centavos, 
+                useSeparator
+            );
+            
+            if (step >= steps) {
                 clearInterval(timer);
-            } else {
-                const value = Math.floor(current);
-                counter.textContent = formatNumberComplete(value, prefix, suffix, centavos, useSeparator);
+                counter.textContent = formatNumberComplete(
+                    target, 
+                    prefix, 
+                    suffix, 
+                    centavos, 
+                    useSeparator
+                );
             }
-        }, 16);
+        }, duration / steps);
     });
     
     // Animate mini charts
@@ -150,21 +165,12 @@ function animateCounters() {
     }, 500);
 }
 
-// Format Numbers Function - NÚMEROS COMPLETOS SEM ABREVIAÇÃO
+// Improved formatNumberComplete function
 function formatNumberComplete(value, prefix, suffix, centavos, useSeparator) {
-    let formattedValue = value;
+    let formattedValue = useSeparator ? value.toLocaleString('pt-BR') : value;
     
-    if (useSeparator) {
-        // Formatação brasileira com separadores de milhares
-        formattedValue = value.toLocaleString('pt-BR');
-        
-        // Adicionar centavos se especificado
-        if (centavos && centavos !== '') {
-            formattedValue = formattedValue + ',' + centavos;
-        }
-    } else {
-        // Apenas separador de milhares, sem centavos
-        formattedValue = value.toLocaleString('pt-BR');
+    if (centavos && prefix.includes('R')) {
+        formattedValue = formattedValue + ',' + centavos;
     }
     
     return `${prefix}${formattedValue}${suffix}`;
@@ -564,35 +570,53 @@ document.querySelectorAll('.form-group input, .form-group textarea').forEach(inp
     }
 });
 
-// Enhanced CTA button interactions
-document.querySelectorAll('.cta-button, .submit-btn').forEach(button => {
-    button.addEventListener('mouseenter', () => {
-        button.style.transform = 'translateY(-3px) scale(1.02)';
-    });
+// Optimized button interactions
+const buttonInteractions = {
+    init() {
+        document.querySelectorAll('.cta-button, .submit-btn').forEach(button => {
+            button.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+            this.addButtonListeners(button);
+        });
+        
+        document.querySelectorAll('.social-link').forEach(link => {
+            link.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+            this.addLinkListeners(link);
+        });
+    },
     
-    button.addEventListener('mouseleave', () => {
-        button.style.transform = 'translateY(0) scale(1)';
-    });
+    addButtonListeners(button) {
+        const states = {
+            default: 'translateY(0) scale(1)',
+            hover: 'translateY(-3px) scale(1.02)',
+            active: 'translateY(-1px) scale(0.98)'
+        };
+        
+        button.addEventListener('mouseenter', () => {
+            button.style.transform = states.hover;
+        });
+        button.addEventListener('mouseleave', () => {
+            button.style.transform = states.default;
+        });
+        button.addEventListener('mousedown', () => {
+            button.style.transform = states.active;
+        });
+        button.addEventListener('mouseup', () => {
+            button.style.transform = states.hover;
+        });
+    },
     
-    button.addEventListener('mousedown', () => {
-        button.style.transform = 'translateY(-1px) scale(0.98)';
-    });
-    
-    button.addEventListener('mouseup', () => {
-        button.style.transform = 'translateY(-3px) scale(1.02)';
-    });
-});
+    addLinkListeners(link) {
+        link.addEventListener('mouseenter', () => {
+            link.style.transform = 'translateY(-5px) scale(1.1)';
+        });
+        link.addEventListener('mouseleave', () => {
+            link.style.transform = 'translateY(0) scale(1)';
+        });
+    }
+};
 
-// Add subtle animation to social links
-document.querySelectorAll('.social-link').forEach(link => {
-    link.addEventListener('mouseenter', () => {
-        link.style.transform = 'translateY(-5px) scale(1.1) rotate(5deg)';
-    });
-    
-    link.addEventListener('mouseleave', () => {
-        link.style.transform = 'translateY(0) scale(1) rotate(0deg)';
-    });
-});
+// Initialize optimized interactions
+buttonInteractions.init();
 
 // Console welcome message
 console.log(`
