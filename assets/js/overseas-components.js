@@ -57,7 +57,7 @@
                                 <a href="#carreiras">Carreiras</a>
                                 <div class="overseas-dropdown-content">
                                     <a href="trabalhe-conosco.html">Trabalhe Conosco</a>
-                                    <a href="crescimento-e-carreira.html">Crescimento e Carreira</a>
+                                    <a href="talentos.html">Talentos</a>
                                 </div>
                             </li>
                             <li><a href="index.html#contact" data-page="contact">Contato</a></li>
@@ -95,7 +95,7 @@
                                     <h4>Carreiras</h4>
                                     <ul>
                                         <li><a href="trabalhe-conosco.html">Trabalhe Conosco</a></li>
-                                        <li><a href="crescimento-e-carreira.html">Crescimento</a></li>
+                                        <li><a href="talentos.html">Talentos</a></li>
                                     </ul>
                                 </div>
                                 

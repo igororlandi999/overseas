@@ -1,837 +1,249 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estudo de Viabilidade de Importação Eficaz | Blog Overseas Trading</title>
-    <meta name="description"
-        content="Aprenda a fazer um estudo completo de viabilidade antes de importar. Guia prático com análises financeiras e critérios para tomar decisões assertivas no comércio exterior.">
+    <meta name="description" content="Aprenda a fazer um estudo completo de viabilidade antes de importar. Guia prático com análises financeiras e critérios para tomar decisões assertivas no comércio exterior.">
 
     <!-- Open Graph -->
     <meta property="og:type" content="article">
     <meta property="og:title" content="Estudo de Viabilidade de Importação Eficaz">
-    <meta property="og:description"
-        content="Guia prático para fazer um estudo completo de viabilidade antes de importar.">
+    <meta property="og:description" content="Guia prático para fazer um estudo completo de viabilidade antes de importar.">
     <meta property="og:url" content="https://www.overseastrading.com.br/blog/estudo-viabilidade-importacao">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS Global do Blog -->
+    <link rel="stylesheet" href="/assets/css/blog-article.css">
 
     <!-- Components System -->
     <script src="/assets/js/overseas-components.js"></script>
-
-    <style>
-        :root {
-            --primary-dark: #0a0a0a;
-            --secondary-dark: #1a1a1a;
-            --tertiary-dark: #2a2a2a;
-            --accent-blue: #00d4ff;
-            --accent-cyan: #00ffff;
-            --accent-green: #39ff14;
-            --text-primary: #ffffff;
-            --text-secondary: #b0b0b0;
-            --text-muted: #888888;
-            --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #00ffff 100%);
-            --gradient-dark: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-            --border-color: rgba(0, 212, 255, 0.1);
-            --card-hover: rgba(0, 212, 255, 0.05);
-            --font-family: 'Inter', sans-serif;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: var(--font-family);
-            background: var(--primary-dark);
-            color: var(--text-primary);
-            line-height: 1.6;
-            font-size: 1rem;
-            padding: 1rem;
-            overflow-x: hidden; /* Previne scroll horizontal */
-            width: 100%;
-        }
-
-        /* Garantir que nenhum elemento ultrapasse a largura */
-        * {
-            max-width: 100%;
-        }
-
-        /* Telas maiores */
-        @media (min-width: 768px) {
-            body {
-                font-size: 1.1rem;
-                padding: 2rem;
-            }
-        }
-
-        /* Scroll Progress */
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 3px;
-            background: var(--gradient-primary);
-            z-index: 10001;
-            transition: width 0.3s ease;
-        }
-
-        /* Article Header */
-        .article-header {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 120px 1rem 2rem;
-            width: 100%;
-        }
-
-        @media (min-width: 768px) {
-            .article-header {
-                padding: 120px 2rem 2rem;
-            }
-        }
-
-        .article-category {
-            display: inline-block;
-            background: var(--accent-blue);
-            color: var(--primary-dark);
-            padding: 0.5rem 1.2rem;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .article-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-            letter-spacing: -0.025em;
-            max-width: 900px;
-            word-wrap: break-word;
-        }
-
-        @media (min-width: 768px) {
-            .article-title {
-                font-size: 2.2rem;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .article-title {
-                font-size: 2.8rem;
-            }
-        }
-
-        .article-meta {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            font-weight: 500;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        @media (min-width: 768px) {
-            .article-meta {
-                gap: 2rem;
-                flex-wrap: nowrap;
-            }
-        }
-
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        /* Featured Image */
-        .featured-image {
-            width: 100%;
-            height: 200px;
-            background: var(--tertiary-dark);
-            border-radius: 16px;
-            margin-bottom: 2rem;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-        }
-
-        @media (min-width: 768px) {
-            .featured-image {
-                height: 350px;
-                margin-bottom: 3rem;
-            }
-        }
-
-        .featured-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Main Container */
-        .article-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 1rem 2rem;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            align-items: start;
-            width: 100%;
-        }
-
-        @media (min-width: 768px) {
-            .article-container {
-                padding: 0 2rem 4rem;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .article-container {
-                grid-template-columns: 1fr 350px;
-                gap: 4rem;
-            }
-        }
-
-        /* Article Content */
-        .article-content {
-            background: var(--secondary-dark);
-            border-radius: 16px;
-            padding: 1.5rem;
-            border: 1px solid var(--border-color);
-            width: 100%;
-            min-width: 0; /* Permite quebra de palavras longas */
-        }
-
-        @media (min-width: 768px) {
-            .article-content {
-                padding: 2rem;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .article-content {
-                padding: 3rem;
-            }
-        }
-
-        .article-content h2 {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin: 2rem 0 1rem 0;
-            letter-spacing: -0.025em;
-            border-bottom: 2px solid var(--accent-cyan);
-            padding-bottom: 0.5rem;
-            word-wrap: break-word;
-        }
-
-        @media (min-width: 768px) {
-            .article-content h2 {
-                font-size: 1.8rem;
-                margin: 2.5rem 0 1.2rem 0;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .article-content h2 {
-                font-size: 2.2rem;
-                margin: 3rem 0 1.5rem 0;
-            }
-        }
-
-        .article-content h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--accent-cyan);
-            margin: 1.5rem 0 0.8rem 0;
-            word-wrap: break-word;
-        }
-
-        @media (min-width: 768px) {
-            .article-content h3 {
-                font-size: 1.5rem;
-                margin: 2rem 0 1rem 0;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .article-content h3 {
-                font-size: 1.7rem;
-                margin: 2.5rem 0 1rem 0;
-            }
-        }
-
-        .article-content h4 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--accent-blue);
-            margin: 1.5rem 0 0.5rem 0;
-            word-wrap: break-word;
-        }
-
-        @media (min-width: 1024px) {
-            .article-content h4 {
-                font-size: 1.3rem;
-                margin: 2rem 0 0.75rem 0;
-            }
-        }
-
-        .article-content p {
-            margin-bottom: 1.2rem;
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.6;
-            word-wrap: break-word;
-        }
-
-        @media (min-width: 1024px) {
-            .article-content p {
-                margin-bottom: 1.5rem;
-                font-size: 1.1rem;
-                line-height: 1.7;
-            }
-        }
-
-        .article-content ul,
-        .article-content ol {
-            margin: 1.2rem 0;
-            padding-left: 1.2rem;
-        }
-
-        @media (min-width: 1024px) {
-            .article-content ul,
-            .article-content ol {
-                margin: 1.5rem 0;
-                padding-left: 1.5rem;
-            }
-        }
-
-        .article-content li {
-            margin-bottom: 0.6rem;
-            color: var(--text-secondary);
-            word-wrap: break-word;
-        }
-
-        @media (min-width: 1024px) {
-            .article-content li {
-                margin-bottom: 0.75rem;
-            }
-        }
-
-        .article-content strong {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        /* Caixa de destaque estilo Overcel */
-        .highlight-box {
-            background: var(--tertiary-dark);
-            border-left: 4px solid var(--accent-blue);
-            border-radius: 8px;
-            padding: 1.2rem;
-            margin: 1.5rem 0;
-            position: relative;
-            width: 100%;
-        }
-
-        @media (min-width: 1024px) {
-            .highlight-box {
-                padding: 1.5rem;
-                margin: 2rem 0;
-            }
-        }
-
-        .highlight-box.important {
-            border-left-color: var(--accent-cyan);
-            background: rgba(0, 255, 255, 0.05);
-        }
-
-        .highlight-box h4 {
-            color: var(--accent-cyan);
-            margin-bottom: 0.8rem;
-            font-size: 1rem;
-            word-wrap: break-word;
-        }
-
-        @media (min-width: 1024px) {
-            .highlight-box h4 {
-                margin-bottom: 1rem;
-                font-size: 1.1rem;
-            }
-        }
-
-        /* Tabelas - Scroll horizontal em mobile */
-        .table-container {
-            overflow-x: auto;
-            margin: 1.5rem 0;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            background: var(--tertiary-dark);
-            width: 100%;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        @media (min-width: 1024px) {
-            .table-container {
-                margin: 2rem 0;
-            }
-        }
-
-        table {
-            width: 100%;
-            min-width: 500px; /* Largura mínima para garantir legibilidade */
-            border-collapse: collapse;
-        }
-
-        th,
-        td {
-            padding: 0.8rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 0.85rem;
-            white-space: nowrap;
-        }
-
-        @media (min-width: 768px) {
-            th,
-            td {
-                padding: 1rem;
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            th,
-            td {
-                white-space: normal;
-            }
-        }
-
-        th {
-            background: rgba(0, 212, 255, 0.1);
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        td {
-            color: var(--text-secondary);
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        tr:hover {
-            background: var(--card-hover);
-        }
-
-        /* Sidebar */
-        .sidebar {
-            position: static;
-            height: fit-content;
-            width: 100%;
-        }
-
-        @media (min-width: 1024px) {
-            .sidebar {
-                position: sticky;
-                top: 120px;
-            }
-        }
-
-        /* Componentes da Sidebar */
-        .article-index,
-        .popular-posts,
-        .categories,
-        .tags-section,
-        .cta-section {
-            background: var(--secondary-dark);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            width: 100%;
-        }
-
-        @media (min-width: 1024px) {
-            .article-index,
-            .popular-posts,
-            .categories,
-            .tags-section,
-            .cta-section {
-                padding: 2rem;
-                margin-bottom: 2rem;
-            }
-        }
-
-        /* Ocultar sidebar em mobile */
-        @media (max-width: 1023px) {
-            .sidebar {
-                display: none;
-            }
-        }
-
-        .article-index h3,
-        .popular-posts h3,
-        .categories h3,
-        .tags-section h3 {
-            color: var(--accent-cyan);
-            margin-bottom: 1.2rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        @media (min-width: 1024px) {
-            .article-index h3,
-            .popular-posts h3,
-            .categories h3,
-            .tags-section h3 {
-                margin-bottom: 1.5rem;
-                font-size: 1.2rem;
-            }
-        }
-
-        .article-index ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .article-index li {
-            margin-bottom: 0.6rem;
-        }
-
-        @media (min-width: 1024px) {
-            .article-index li {
-                margin-bottom: 0.8rem;
-            }
-        }
-
-        .article-index a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            font-size: 0.9rem;
-            padding: 0.3rem 0;
-            display: block;
-            border-left: 2px solid transparent;
-            padding-left: 0.5rem;
-            word-wrap: break-word;
-        }
-
-        @media (min-width: 1024px) {
-            .article-index a {
-                font-size: 0.95rem;
-            }
-        }
-
-        .article-index a:hover {
-            color: var(--accent-cyan);
-            border-left-color: var(--accent-cyan);
-        }
-
-        /* Posts Populares */
-        .popular-post {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1.2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        @media (min-width: 1024px) {
-            .popular-post {
-                margin-bottom: 1.5rem;
-            }
-        }
-
-        .popular-post:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
-
-        .popular-post-image {
-            width: 50px;
-            height: 50px;
-            background: var(--tertiary-dark);
-            border-radius: 8px;
-            flex-shrink: 0;
-            overflow: hidden;
-        }
-
-        @media (min-width: 1024px) {
-            .popular-post-image {
-                width: 60px;
-                height: 60px;
-            }
-        }
-
-        .popular-post-content h4 {
-            font-size: 0.85rem;
-            color: var(--text-primary);
-            margin-bottom: 0.4rem;
-            line-height: 1.3;
-            word-wrap: break-word;
-        }
-
-        @media (min-width: 1024px) {
-            .popular-post-content h4 {
-                font-size: 0.9rem;
-                margin-bottom: 0.5rem;
-            }
-        }
-
-        .popular-post-meta {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        @media (min-width: 1024px) {
-            .popular-post-meta {
-                font-size: 0.8rem;
-            }
-        }
-
-        /* Categorias */
-        .category-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.6rem 0;
-            border-bottom: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        @media (min-width: 1024px) {
-            .category-item {
-                padding: 0.75rem 0;
-                font-size: 0.95rem;
-            }
-        }
-
-        .category-item:last-child {
-            border-bottom: none;
-        }
-
-        .category-item:hover {
-            color: var(--accent-cyan);
-            cursor: pointer;
-        }
-
-        .category-count {
-            background: var(--tertiary-dark);
-            color: var(--text-muted);
-            padding: 0.2rem 0.4rem;
-            border-radius: 12px;
-            font-size: 0.75rem;
-        }
-
-        @media (min-width: 1024px) {
-            .category-count {
-                padding: 0.25rem 0.5rem;
-                font-size: 0.8rem;
-            }
-        }
-
-        /* Tags */
-        .tag {
-            display: inline-block;
-            background: var(--tertiary-dark);
-            color: var(--text-secondary);
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            margin: 0.2rem 0.4rem 0.2rem 0;
-            font-size: 0.8rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            border: 1px solid var(--border-color);
-            word-wrap: break-word;
-        }
-
-        @media (min-width: 1024px) {
-            .tag {
-                padding: 0.5rem 1rem;
-                margin: 0.25rem 0.5rem 0.25rem 0;
-                font-size: 0.85rem;
-            }
-        }
-
-        .tag:hover {
-            background: var(--accent-cyan);
-            color: var(--primary-dark);
-            transform: translateY(-1px);
-        }
-
-        /* Call to Action */
-        .cta-section {
-            text-align: center;
-        }
-
-        .cta-section h3 {
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-            word-wrap: break-word;
-        }
-
-        @media (min-width: 1024px) {
-            .cta-section h3 {
-                font-size: 1.3rem;
-            }
-        }
-
-        .cta-section p {
-            color: var(--text-secondary);
-            margin-bottom: 1.2rem;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        @media (min-width: 1024px) {
-            .cta-section p {
-                margin-bottom: 1.5rem;
-                font-size: 0.95rem;
-            }
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: var(--gradient-primary);
-            color: var(--primary-dark);
-            padding: 0.7rem 1.2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            font-size: 0.85rem;
-        }
-
-        @media (min-width: 1024px) {
-            .cta-button {
-                padding: 0.8rem 1.5rem;
-                font-size: 0.9rem;
-            }
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
-        }
-
-        /* Botão de Voltar ao Topo */
-        .back-to-top {
-            position: fixed;
-            bottom: 2rem;
-            left: 2rem;
-            width: 50px;
-            height: 50px;
-            background: var(--accent-blue);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary-dark);
-            text-decoration: none;
-            font-size: 1.2rem;
-            z-index: 999;
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(20px);
-            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
-        }
-
-        @media (max-width: 767px) {
-            .back-to-top {
-                bottom: 1.5rem;
-                left: 1.5rem;
-                width: 45px;
-                height: 45px;
-                font-size: 1.1rem;
-            }
-        }
-
-        .back-to-top.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .back-to-top:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
-        }
-
-        /* Ocultar botão scroll to top do sistema Overseas */
-        .overseas-scroll-top {
-            display: none !important;
-        }
-
-        /* Smooth scroll */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Correções adicionais para overflow */
-        .article-container,
-        .article-content,
-        .sidebar {
-            overflow-x: hidden;
-        }
-
-        /* Quebra de palavras para textos longos */
-        .article-content p,
-        .article-content li,
-        .article-content h1,
-        .article-content h2,
-        .article-content h3,
-        .article-content h4 {
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            hyphens: auto;
-        }
-    </style>
 </head>
-
 <body>
     <!-- Scroll Progress -->
     <div class="scroll-progress" id="scrollProgress"></div>
 
     <!-- Header Overseas Trading -->
-    <div id="overseas-header"></div>
+    <header class="navbar-header">
+        <nav class="navbar-nav">
+            <!-- Logo Container -->
+            <div class="navbar-logo">
+                <a href="index.html" class="logo-link">
+                    <img src="/assets/images/logo.png" alt="Overseas Trading" class="logo-img">
+                </a>
+            </div>
+
+            <!-- Navigation Menu -->
+            <ul class="navbar-menu">
+                <!-- Dropdown Sobre -->
+                <li class="dropdown">
+                    <a href="#sobre" class="dropdown-toggle">Sobre</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/sobre.html">Sobre Nós</a></li>
+                        <li><a href="/servicos.html">Serviços</a></li>
+                        <li><a href="/solucoes.html">Soluções</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="/blog.html" class="active">Blog</a></li>
+                
+                <!-- Dropdown Carreiras -->
+                <li class="dropdown">
+                    <a href="#carreiras" class="dropdown-toggle">Carreiras</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/trabalhe-conosco.html">Trabalhe Conosco</a></li>
+                        <li><a href="/talentos.html">Talentos</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="/index.html#contact" data-page="contact">Contato</a></li>
+            </ul>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="navbar-toggle" id="mobileToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- CSS da Navbar -->
+    <style>
+        .navbar-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .navbar-nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-logo {
+            flex-shrink: 0;
+        }
+
+        .logo-link {
+            display: block;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 150px;
+            width: auto;
+            max-width: 200px;
+            object-fit: contain;
+        }
+
+        .navbar-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar-menu a {
+            color: #b0b0b0;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .navbar-menu a:hover,
+        .navbar-menu a.active {
+            color: #00ffff;
+        }
+
+        .navbar-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #00d4ff 0%, #00ffff 100%);
+            transition: width 0.3s ease;
+        }
+
+        .navbar-menu a:hover::after,
+        .navbar-menu a.active::after {
+            width: 100%;
+        }
+
+        .navbar-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+
+        .navbar-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #00ffff;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        /* Ajuste do body para navbar fixa */
+        body {
+            padding-top: 80px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .navbar-nav {
+                padding: 0 1rem;
+            }
+
+            .logo-img {
+                height: 40px;
+                max-width: 150px;
+            }
+
+            .navbar-toggle {
+                display: flex;
+            }
+
+            .navbar-menu {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: rgba(10, 10, 10, 0.98);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                backdrop-filter: blur(20px);
+            }
+
+            .navbar-menu.active {
+                transform: translateX(0);
+            }
+
+            .navbar-menu a {
+                font-size: 1.2rem;
+                padding: 1rem 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar-nav {
+                padding: 0 0.5rem;
+            }
+
+            .logo-img {
+                height: 35px;
+                max-width: 120px;
+            }
+        }
+    </style>
 
     <!-- Article Header -->
     <header class="article-header">
-        <span class="article-category">Importação</span>
+        <span class="article-category" data-category="importacao">Importação</span>
         <h1 class="article-title">Estudo de Viabilidade de Importação Eficaz</h1>
         <div class="article-meta">
             <div class="meta-item">
                 <span>📅</span>
-                <span>08 Jan 2025</span>
+                <span data-date="2025-01-08">08 Jan 2025</span>
             </div>
             <div class="meta-item">
                 <span>⏱️</span>
-                <span>12 min de leitura</span>
+                <span data-reading-time="12">12 min de leitura</span>
             </div>
             <div class="meta-item">
                 <span>👨‍💼</span>
-                <span>Por Ricardo Oliveira</span>
+                <span data-author="Ricardo Oliveira">Por Ricardo Oliveira</span>
             </div>
         </div>
 
@@ -845,18 +257,13 @@
     <div class="article-container">
         <!-- Article Content -->
         <main class="article-content">
-            <p>Um estudo de viabilidade de importação bem estruturado é o diferencial entre o sucesso e o fracasso no
-                comércio exterior. Antes de investir tempo e recursos em uma operação de importação, é fundamental
-                avaliar todos os aspectos financeiros, logísticos e comerciais envolvidos.</p>
+            <p>Um estudo de viabilidade de importação bem estruturado é o diferencial entre o sucesso e o fracasso no comércio exterior. Antes de investir tempo e recursos em uma operação de importação, é fundamental avaliar todos os aspectos financeiros, logísticos e comerciais envolvidos.</p>
 
-            <p>Este guia prático vai te ensinar a fazer uma análise completa de viabilidade, com planilhas, cálculos e
-                critérios objetivos para tomar decisões assertivas e minimizar riscos no seu negócio.</p>
+            <p>Este guia prático vai te ensinar a fazer uma análise completa de viabilidade, com planilhas, cálculos e critérios objetivos para tomar decisões assertivas e minimizar riscos no seu negócio.</p>
 
             <div class="highlight-box important">
                 <h4>Importante:</h4>
-                <p>Empresas que fazem estudos de viabilidade detalhados têm <strong>67% menos chances de
-                        prejuízo</strong> nas primeiras importações e <strong>40% mais assertividade</strong> na escolha
-                    de produtos, segundo pesquisa da Apex-Brasil.</p>
+                <p>Empresas que fazem estudos de viabilidade detalhados têm <strong>67% menos chances de prejuízo</strong> nas primeiras importações e <strong>40% mais assertividade</strong> na escolha de produtos, segundo pesquisa da Apex-Brasil.</p>
             </div>
 
             <h2 id="objetivos">🎯 Objetivos do Estudo de Viabilidade</h2>
@@ -864,8 +271,7 @@
             <p>Um estudo de viabilidade eficaz deve responder às seguintes questões estratégicas:</p>
 
             <ul>
-                <li><strong>💰 Viabilidade Financeira:</strong> O produto gerará lucro suficiente para justificar o
-                    investimento?</li>
+                <li><strong>💰 Viabilidade Financeira:</strong> O produto gerará lucro suficiente para justificar o investimento?</li>
                 <li><strong>📊 Viabilidade Comercial:</strong> Existe demanda real no mercado brasileiro?</li>
                 <li><strong>⚙️ Viabilidade Operacional:</strong> Temos capacidade para executar a operação?</li>
                 <li><strong>📋 Viabilidade Legal:</strong> O produto pode ser importado sem restrições?</li>
@@ -899,8 +305,7 @@
 
             <h2 id="analise-financeira">💰 Análise Financeira Detalhada</h2>
 
-            <p>Esta é a parte mais crítica do estudo. Você precisa calcular todos os custos envolvidos na importação com
-                precisão:</p>
+            <p>Esta é a parte mais crítica do estudo. Você precisa calcular todos os custos envolvidos na importação com precisão:</p>
 
             <h3>Estrutura de Custos Típica</h3>
 
@@ -1017,127 +422,55 @@
 
             <h2 id="conclusao">🎯 Conclusão</h2>
 
-            <p>Um estudo de viabilidade bem estruturado é a base fundamental para o sucesso no comércio exterior. Ele
-                funciona como um mapa estratégico que não apenas indica se você deve importar, mas também <strong>como
-                    executar</strong> a operação para maximizar as chances de sucesso.</p>
+            <p>Um estudo de viabilidade bem estruturado é a base fundamental para o sucesso no comércio exterior. Ele funciona como um mapa estratégico que não apenas indica se você deve importar, mas também <strong>como executar</strong> a operação para maximizar as chances de sucesso.</p>
 
-            <p>O investimento de tempo na análise prévia é sempre inferior ao tempo e recursos necessários para
-                recuperar-se de decisões mal fundamentadas. Use as ferramentas e metodologias apresentadas neste guia,
-                adapte-as à sua realidade específica e tome decisões baseadas em dados concretos e análises objetivas.
-            </p>
+            <p>O investimento de tempo na análise prévia é sempre inferior ao tempo e recursos necessários para recuperar-se de decisões mal fundamentadas. Use as ferramentas e metodologias apresentadas neste guia, adapte-as à sua realidade específica e tome decisões baseadas em dados concretos e análises objetivas.</p>
 
             <div class="highlight-box important">
                 <h4>💡 Dica Final:</h4>
-                <p>"O sucesso na importação não está em eliminar completamente os riscos, mas em compreendê-los
-                    profundamente e gerenciá-los de forma eficaz através de planejamento criterioso."</p>
+                <p>"O sucesso na importação não está em eliminar completamente os riscos, mas em compreendê-los profundamente e gerenciá-los de forma eficaz através de planejamento criterioso."</p>
             </div>
         </main>
 
-        <!-- Sidebar -->
+        <!-- Sidebar (será preenchida automaticamente pelo JavaScript) -->
         <aside class="sidebar">
             <!-- Índice do Artigo -->
             <div class="article-index">
                 <h3>Índice do Artigo</h3>
-                <ul>
-                    <li><a href="#objetivos">🎯 Objetivos do Estudo</a></li>
-                    <li><a href="#etapas">📝 Etapas da Viabilidade</a></li>
-                    <li><a href="#analise-financeira">💰 Análise Financeira</a></li>
-                    <li><a href="#indicadores">📊 Indicadores</a></li>
-                    <li><a href="#riscos">⚠️ Análise de Riscos</a></li>
-                    <li><a href="#conclusao">🎯 Conclusão</a></li>
+                <ul id="article-index-list">
+                    <!-- Preenchido automaticamente pelo JavaScript -->
                 </ul>
             </div>
 
             <!-- Posts Populares -->
             <div class="popular-posts">
                 <h3>Posts Populares</h3>
-
-                <div class="popular-post">
-                    <div class="popular-post-image">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
-                            alt="NCM" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <div class="popular-post-content">
-                        <h4>Guia Completo: Como Classificar NCM Corretamente</h4>
-                        <div class="popular-post-meta">📅 10 Abr, 2025</div>
-                    </div>
-                </div>
-
-                <div class="popular-post">
-                    <div class="popular-post-image">
-                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=150&h=150&fit=crop"
-                            alt="RADAR" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <div class="popular-post-content">
-                        <h4>Passo a Passo: Como Obter o RADAR Siscomex</h4>
-                        <div class="popular-post-meta">📅 20 Abr, 2025</div>
-                    </div>
-                </div>
-
-                <div class="popular-post">
-                    <div class="popular-post-image">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=150&h=150&fit=crop"
-                            alt="Impostos" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <div class="popular-post-content">
-                        <h4>Cálculo de Impostos na Importação: Guia Prático</h4>
-                        <div class="popular-post-meta">📅 18 Abr, 2025</div>
-                    </div>
+                <div id="popular-posts-container">
+                    <!-- Preenchido automaticamente pelo JavaScript -->
                 </div>
             </div>
 
             <!-- Categorias -->
             <div class="categories">
                 <h3>Categorias</h3>
-
-                <div class="category-item">
-                    <span>Importação</span>
-                    <span class="category-count">(8)</span>
-                </div>
-                <div class="category-item">
-                    <span>Exportação</span>
-                    <span class="category-count">(6)</span>
-                </div>
-                <div class="category-item">
-                    <span>NCM</span>
-                    <span class="category-count">(5)</span>
-                </div>
-                <div class="category-item">
-                    <span>RADAR</span>
-                    <span class="category-count">(4)</span>
-                </div>
-                <div class="category-item">
-                    <span>Despacho Aduaneiro</span>
-                    <span class="category-count">(5)</span>
-                </div>
-                <div class="category-item">
-                    <span>Impostos</span>
-                    <span class="category-count">(7)</span>
+                <div id="categories-container">
+                    <!-- Preenchido automaticamente pelo JavaScript -->
                 </div>
             </div>
 
             <!-- Tags -->
             <div class="tags-section">
                 <h3>Tags</h3>
-                <a href="#" class="tag">Importação</a>
-                <a href="#" class="tag">Viabilidade</a>
-                <a href="#" class="tag">ROI</a>
-                <a href="#" class="tag">Análise Financeira</a>
-                <a href="#" class="tag">Planejamento</a>
-                <a href="#" class="tag">Riscos</a>
-                <a href="#" class="tag">NCM</a>
-                <a href="#" class="tag">RADAR</a>
-                <a href="#" class="tag">Impostos</a>
-                <a href="#" class="tag">Fornecedores</a>
-                <a href="#" class="tag">Logística</a>
-                <a href="#" class="tag">Mercado</a>
+                <div id="tags-container">
+                    <!-- Preenchido automaticamente pelo JavaScript -->
+                </div>
             </div>
 
             <!-- Call to Action -->
             <div class="cta-section">
-                <h3>🚀 Precisa de Ajuda Especializada?</h3>
-                <p>Nossa equipe pode elaborar um estudo completo de viabilidade para seu projeto de importação.</p>
-                <a href="#contact" class="cta-button">SOLICITAR CONSULTORIA</a>
+                <h3 id="cta-title">🚀 Precisa de Ajuda Especializada?</h3>
+                <p id="cta-description">Nossa equipe pode ajudar com seu projeto.</p>
+                <a href="#contact" class="cta-button" id="cta-button">SOLICITAR CONSULTORIA</a>
             </div>
         </aside>
     </div>
@@ -1148,130 +481,7 @@
     <!-- Botão Voltar ao Topo -->
     <a href="#" class="back-to-top" id="backToTop">↑</a>
 
-    <script>
-        // Initialize Overseas Components
-        document.addEventListener('DOMContentLoaded', function () {
-            // Remover qualquer botão back-to-top criado por outros scripts
-            const removeExistingButtons = () => {
-                const existingBtns = document.querySelectorAll('.overseas-scroll-top, .back-to-top:not(#backToTop)');
-                existingBtns.forEach(btn => btn.remove());
-            };
-            
-            // Inicializar componentes Overseas Trading
-            if (typeof OverseasComponents !== 'undefined') {
-                OverseasComponents.init({
-                    activePage: 'blog',
-                    title: 'Estudo de Viabilidade de Importação Eficaz',
-                    description: 'Aprenda a fazer um estudo completo de viabilidade antes de importar e tome decisões assertivas com análises financeiras precisas.',
-                    whatsappMessage: 'Olá! Li o artigo sobre estudo de viabilidade e gostaria de uma consultoria para meu projeto.',
-                    canonical: 'https://www.overseastrading.com.br/blog/estudo-viabilidade-importacao',
-                    scrollToTop: false // Desabilitar scroll to top dos componentes Overseas
-                });
-                
-                // Remover botões duplicados após inicialização
-                setTimeout(removeExistingButtons, 500);
-            }
-            
-            // Remover novamente após um tempo para garantir
-            setTimeout(removeExistingButtons, 1000);
-
-            console.log('✅ Artigo carregado: Estudo de Viabilidade de Importação');
-        });
-
-        // Scroll Progress
-        window.addEventListener('scroll', () => {
-            const article = document.querySelector('.article-content');
-            const progressBar = document.getElementById('scrollProgress');
-
-            if (!article || !progressBar) return;
-
-            const articleTop = article.offsetTop;
-            const articleHeight = article.offsetHeight;
-            const windowHeight = window.innerHeight;
-            const scrollTop = window.pageYOffset;
-
-            const articleBottom = articleTop + articleHeight;
-            const windowBottom = scrollTop + windowHeight;
-
-            let progress = 0;
-            if (scrollTop >= articleTop) {
-                const articleScrolled = Math.min(windowBottom - articleTop, articleHeight);
-                progress = (articleScrolled / articleHeight) * 100;
-            }
-
-            progress = Math.min(Math.max(progress, 0), 100);
-            progressBar.style.width = `${progress}%`;
-
-            // Back to top button
-            const backToTop = document.getElementById('backToTop');
-            if (backToTop) {
-                if (scrollTop > 300) {
-                    backToTop.classList.add('visible');
-                } else {
-                    backToTop.classList.remove('visible');
-                }
-            }
-        });
-
-        // Smooth scroll para links internos
-        document.addEventListener('click', (e) => {
-            if (e.target.tagName === 'A' && e.target.getAttribute('href')?.startsWith('#')) {
-                e.preventDefault();
-                const target = document.querySelector(e.target.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            }
-        });
-
-        // Back to top functionality
-        const backToTopBtn = document.getElementById('backToTop');
-        if (backToTopBtn) {
-            backToTopBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-        }
-
-        // Highlight active section in index
-        const observerOptions = {
-            root: null,
-            rootMargin: '-20% 0px -35% 0px',
-            threshold: 0
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                const id = entry.target.getAttribute('id');
-                const link = document.querySelector(`.article-index a[href="#${id}"]`);
-
-                if (entry.isIntersecting && link) {
-                    // Remove active class from all links
-                    document.querySelectorAll('.article-index a').forEach(l => {
-                        l.style.color = 'var(--text-secondary)';
-                        l.style.borderLeftColor = 'transparent';
-                    });
-
-                    // Add active class to current link
-                    link.style.color = 'var(--accent-cyan)';
-                    link.style.borderLeftColor = 'var(--accent-cyan)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe all sections with IDs
-        document.querySelectorAll('[id]').forEach(section => {
-            observer.observe(section);
-        });
-
-        console.log('🌊 Artigo Overseas Trading carregado com sucesso!');
-    </script>
+    <!-- JavaScript Global do Blog -->
+    <script src="/assets/js/blog-article.js"></script>
 </body>
-
 </html>

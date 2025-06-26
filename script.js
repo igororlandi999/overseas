@@ -641,3 +641,4 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Overseas Trading - All systems initialized! ✅');
     console.log('🎯 Seção de indicadores atualizada com 3 cards! 📊');
 });
+

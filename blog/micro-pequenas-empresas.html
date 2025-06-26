@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Micro ou Pequenas Empresas: Podem Importar e Exportar? | Blog Overseas Trading</title>
+    <meta name="description"
+        content="Descubra as possibilidades e requisitos para micro e pequenas empresas no comércio exterior. Guia completo com estratégias, vantagens e primeiros passos.">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Micro ou Pequenas Empresas: Podem Importar e Exportar?">
+    <meta property="og:description"
+        content="Guia completo sobre as possibilidades de micro e pequenas empresas no comércio exterior.">
+    <meta property="og:url" content="https://www.overseastrading.com.br/blog/micro-empresas-comercio-exterior">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Components System -->
+    <script src="/assets/js/overseas-components.js"></script>
+
+    <!-- CSS Global do Blog -->
+    <link rel="stylesheet" href="/assets/css/blog-article.css">
+
+    <style>
+        :root {
+            --primary-dark: #0a0a0a;
+            --secondary-dark: #1a1a1a;
+            --tertiary-dark: #2a2a2a;
+            --accent-blue: #00d4ff;
+            --accent-cyan: #00ffff;
+            --accent-green: #39ff14;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --text-muted: #888888;
+            --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #00ffff 100%);
+            --gradient-dark: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            --border-color: rgba(0, 212, 255, 0.1);
+            --card-hover: rgba(0, 212, 255, 0.05);
+            --font-family: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--primary-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 1rem;
+            padding: 1rem;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        * {
+            max-width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            body {
+                font-size: 1.1rem;
+                padding: 2rem;
+            }
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--gradient-primary);
+            z-index: 10001;
+            transition: width 0.3s ease;
+        }
+
+        .article-header {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 120px 1rem 2rem;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .article-header {
+                padding: 120px 2rem 2rem;
+            }
+        }
+
+        .article-category {
+            display: inline-block;
+            background: var(--accent-green);
+            color: var(--primary-dark);
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .article-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            letter-spacing: -0.025em;
+            max-width: 900px;
+            word-wrap: break-word;
+        }
+
+        @media (min-width: 768px) {
+            .article-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .article-title {
+                font-size: 2.8rem;
+            }
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        @media (min-width: 768px) {
+            .article-meta {
+                gap: 2rem;
+                flex-wrap: nowrap;
+            }
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .featured-image {
+            width: 100%;
+            height: 200px;
+            background: var(--tertiary-dark);
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        @media (min-width: 768px) {
+            .featured-image {
+                height: 350px;
+                margin-bottom: 3rem;
+            }
+        }
+
+        .featured-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .article-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            align-items: start;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .article-container {
+                padding: 0 2rem 4rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .article-container {
+                grid-template-columns: 1fr 350px;
+                gap: 4rem;
+            }
+        }
+
+        .article-content {
+            background: var(--secondary-dark);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            width: 100%;
+            min-width: 0;
+        }
+
+        @media (min-width: 768px) {
+            .article-content {
+                padding: 2rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .article-content {
+                padding: 3rem;
+            }
+        }
+
+        .article-content h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 2rem 0 1rem 0;
+            letter-spacing: -0.025em;
+            border-bottom: 2px solid var(--accent-cyan);
+            padding-bottom: 0.5rem;
+            word-wrap: break-word;
+        }
+
+        @media (min-width: 768px) {
+            .article-content h2 {
+                font-size: 1.8rem;
+                margin: 2.5rem 0 1.2rem 0;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .article-content h2 {
+                font-size: 2.2rem;
+                margin: 3rem 0 1.5rem 0;
+            }
+        }
+
+        .article-content h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin: 1.5rem 0 0.8rem 0;
+            word-wrap: break-word;
+        }
+
+        @media (min-width: 768px) {
+            .article-content h3 {
+                font-size: 1.5rem;
+                margin: 2rem 0 1rem 0;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .article-content h3 {
+                font-size: 1.7rem;
+                margin: 2.5rem 0 1rem 0;
+            }
+        }
+
+        .article-content h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin: 1.5rem 0 0.5rem 0;
+            word-wrap: break-word;
+        }
+
+        @media (min-width: 1024px) {
+            .article-content h4 {
+                font-size: 1.3rem;
+                margin: 2rem 0 0.75rem 0;
+            }
+        }
+
+        .article-content p {
+            margin-bottom: 1.2rem;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+            word-wrap: break-word;
+        }
+
+        @media (min-width: 1024px) {
+            .article-content p {
+                margin-bottom: 1.5rem;
+                font-size: 1.1rem;
+                line-height: 1.7;
+            }
+        }
+
+        .article-content ul,
+        .article-content ol {
+            margin: 1.2rem 0;
+            padding-left: 1.2rem;
+        }
+
+        @media (min-width: 1024px) {
+            .article-content ul,
+            .article-content ol {
+                margin: 1.5rem 0;
+                padding-left: 1.5rem;
+            }
+        }
+
+        .article-content li {
+            margin-bottom: 0.6rem;
+            color: var(--text-secondary);
+            word-wrap: break-word;
+        }
+
+        @media (min-width: 1024px) {
+            .article-content li {
+                margin-bottom: 0.75rem;
+            }
+        }
+
+        .article-content strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .highlight-box {
+            background: var(--tertiary-dark);
+            border-left: 4px solid var(--accent-blue);
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            position: relative;
+            width: 100%;
+        }
+
+        @media (min-width: 1024px) {
+            .highlight-box {
+                padding: 1.5rem;
+                margin: 2rem 0;
+            }
+        }
+
+        .highlight-box.important {
+            border-left-color: var(--accent-cyan);
+            background: rgba(0, 255, 255, 0.05);
+        }
+
+        .highlight-box.success {
+            border-left-color: var(--accent-green);
+            background: rgba(57, 255, 20, 0.05);
+        }
+
+        .highlight-box h4 {
+            color: var(--accent-cyan);
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+            word-wrap: break-word;
+        }
+
+        @media (min-width: 1024px) {
+            .highlight-box h4 {
+                margin-bottom: 1rem;
+                font-size: 1.1rem;
+            }
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: var(--tertiary-dark);
+            width: 100%;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        @media (min-width: 1024px) {
+            .table-container {
+                margin: 2rem 0;
+            }
+        }
+
+        table {
+            width: 100%;
+            min-width: 500px;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+        @media (min-width: 768px) {
+            th,
+            td {
+                padding: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            th,
+            td {
+                white-space: normal;
+            }
+        }
+
+        th {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        td {
+            color: var(--text-secondary);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background: var(--card-hover);
+        }
+
+        .sidebar {
+            position: static;
+            height: fit-content;
+            width: 100%;
+        }
+
+        @media (min-width: 1024px) {
+            .sidebar {
+                position: sticky;
+                top: 120px;
+            }
+        }
+
+        .article-index,
+        .popular-posts,
+        .categories,
+        .tags-section,
+        .cta-section {
+            background: var(--secondary-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+
+        @media (min-width: 1024px) {
+            .article-index,
+            .popular-posts,
+            .categories,
+            .tags-section,
+            .cta-section {
+                padding: 2rem;
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media (max-width: 1023px) {
+            .sidebar {
+                display: none;
+            }
+        }
+
+        .article-index h3,
+        .popular-posts h3,
+        .categories h3,
+        .tags-section h3 {
+            color: var(--accent-cyan);
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        @media (min-width: 1024px) {
+            .article-index h3,
+            .popular-posts h3,
+            .categories h3,
+            .tags-section h3 {
+                margin-bottom: 1.5rem;
+                font-size: 1.2rem;
+            }
+        }
+
+        .article-index ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .article-index li {
+            margin-bottom: 0.6rem;
+        }
+
+        @media (min-width: 1024px) {
+            .article-index li {
+                margin-bottom: 0.8rem;
+            }
+        }
+
+        .article-index a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            padding: 0.3rem 0;
+            display: block;
+            border-left: 2px solid transparent;
+            padding-left: 0.5rem;
+            word-wrap: break-word;
+        }
+
+        @media (min-width: 1024px) {
+            .article-index a {
+                font-size: 0.95rem;
+            }
+        }
+
+        .article-index a:hover {
+            color: var(--accent-cyan);
+            border-left-color: var(--accent-cyan);
+        }
+
+        .popular-post {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        @media (min-width: 1024px) {
+            .popular-post {
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        .popular-post:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .popular-post-image {
+            width: 50px;
+            height: 50px;
+            background: var(--tertiary-dark);
+            border-radius: 8px;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        @media (min-width: 1024px) {
+            .popular-post-image {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        .popular-post-content h4 {
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            margin-bottom: 0.4rem;
+            line-height: 1.3;
+            word-wrap: break-word;
+        }
+
+        @media (min-width: 1024px) {
+            .popular-post-content h4 {
+                font-size: 0.9rem;
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        .popular-post-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        @media (min-width: 1024px) {
+            .popular-post-meta {
+                font-size: 0.8rem;
+            }
+        }
+
+        .category-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 1024px) {
+            .category-item {
+                padding: 0.75rem 0;
+                font-size: 0.95rem;
+            }
+        }
+
+        .category-item:last-child {
+            border-bottom: none;
+        }
+
+        .category-item:hover {
+            color: var(--accent-cyan);
+            cursor: pointer;
+        }
+
+        .category-count {
+            background: var(--tertiary-dark);
+            color: var(--text-muted);
+            padding: 0.2rem 0.4rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+        }
+
+        @media (min-width: 1024px) {
+            .category-count {
+                padding: 0.25rem 0.5rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--tertiary-dark);
+            color: var(--text-secondary);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            margin: 0.2rem 0.4rem 0.2rem 0;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+            word-wrap: break-word;
+        }
+
+        @media (min-width: 1024px) {
+            .tag {
+                padding: 0.5rem 1rem;
+                margin: 0.25rem 0.5rem 0.25rem 0;
+                font-size: 0.85rem;
+            }
+        }
+
+        .tag:hover {
+            background: var(--accent-cyan);
+            color: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .cta-section {
+            text-align: center;
+        }
+
+        .cta-section h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            word-wrap: break-word;
+        }
+
+        @media (min-width: 1024px) {
+            .cta-section h3 {
+                font-size: 1.3rem;
+            }
+        }
+
+        .cta-section p {
+            color: var(--text-secondary);
+            margin-bottom: 1.2rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        @media (min-width: 1024px) {
+            .cta-section p {
+                margin-bottom: 1.5rem;
+                font-size: 0.95rem;
+            }
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: var(--primary-dark);
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        @media (min-width: 1024px) {
+            .cta-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 999;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        @media (max-width: 767px) {
+            .back-to-top {
+                bottom: 1.5rem;
+                left: 1.5rem;
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
+        }
+
+        .overseas-scroll-top {
+            display: none !important;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .article-container,
+        .article-content,
+        .sidebar {
+            overflow-x: hidden;
+        }
+
+        .article-content p,
+        .article-content li,
+        .article-content h1,
+        .article-content h2,
+        .article-content h3,
+        .article-content h4 {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+
+        .step-by-step {
+            background: var(--tertiary-dark);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-blue);
+        }
+
+        .step-number {
+            background: var(--accent-blue);
+            color: var(--primary-dark);
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .step-content p {
+            color: var(--text-secondary);
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Header Overseas Trading -->
+     <header class="navbar-header">
+        <nav class="navbar-nav">
+            <!-- Logo Container -->
+            <div class="navbar-logo">
+                <a href="index.html" class="logo-link">
+                    <img src="/assets/images/logo.png" alt="Overseas Trading" class="logo-img">
+                </a>
+            </div>
+
+            <!-- Navigation Menu -->
+            <ul class="navbar-menu">
+                <!-- Dropdown Sobre -->
+                <li class="dropdown">
+                    <a href="#sobre" class="dropdown-toggle">Sobre</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/sobre.html">Sobre Nós</a></li>
+                        <li><a href="/servicos.html">Serviços</a></li>
+                        <li><a href="/solucoes.html">Soluções</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="/blog.html" class="active">Blog</a></li>
+                
+                <!-- Dropdown Carreiras -->
+                <li class="dropdown">
+                    <a href="#carreiras" class="dropdown-toggle">Carreiras</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/trabalhe-conosco.html">Trabalhe Conosco</a></li>
+                        <li><a href="/talentos.html">Talentos</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="/index.html#contact" data-page="contact">Contato</a></li>
+            </ul>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="navbar-toggle" id="mobileToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Article Header -->
+    <header class="article-header">
+        <span class="article-category">Micro/Pequenas Empresas</span>
+        <h1 class="article-title">Micro ou Pequenas Empresas: Podem Importar e Exportar?</h1>
+        <div class="article-meta">
+            <div class="meta-item">
+                <span>📅</span>
+                <span>15 Jan 2025</span>
+            </div>
+            <div class="meta-item">
+                <span>⏱️</span>
+                <span>14 min de leitura</span>
+            </div>
+            <div class="meta-item">
+                <span>👨‍💼</span>
+                <span>Por Ricardo Oliveira</span>
+            </div>
+        </div>
+
+        <!-- Featured Image -->
+        <div class="featured-image">
+            <img src="/assets/images/micro-pequenas-empresas.png" alt="Micro e pequenas empresas no comércio exterior" loading="lazy">
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="article-container">
+        <!-- Article Content -->
+        <main class="article-content">
+            <p>Uma das maiores dúvidas de empreendedores brasileiros é se micro e pequenas empresas podem participar do comércio exterior. A resposta é <strong>sim, não apenas podem, como têm vantagens específicas</strong> que facilitam o acesso aos mercados internacionais.</p>
+
+            <p>Neste guia completo, você vai descobrir todas as possibilidades, requisitos legais, benefícios exclusivos e estratégias práticas para micro e pequenas empresas iniciarem suas operações de importação e exportação com segurança e eficiência.</p>
+
+            <div class="highlight-box important">
+                <h4>Dados Relevantes:</h4>
+                <p>Segundo o SEBRAE, <strong>apenas 1,2% das micro e pequenas empresas brasileiras</strong> participam do comércio exterior, mas aquelas que exportam têm <strong>faturamento 70% maior</strong> que as focadas apenas no mercado interno.</p>
+            </div>
+
+            <h2 id="base-legal">⚖️ Base Legal e Regulamentação</h2>
+
+            <p>A legislação brasileira não apenas permite, mas incentiva a participação de micro e pequenas empresas no comércio exterior através de diversos mecanismos legais:</p>
+
+            <h3>Marco Legal das Micro e Pequenas Empresas</h3>
+
+            <ul>
+                <li><strong>🏢 Lei Geral das MPE (LC 123/2006):</strong> Estabelece tratamento diferenciado e favorecido</li>
+                <li><strong>📋 Simples Nacional:</strong> Regime tributário simplificado que abrange operações de comércio exterior</li>
+                <li><strong>🎯 MEI (Microempreendedor Individual):</strong> Também pode exportar, com algumas limitações</li>
+                <li><strong>⚡ Regulamento Aduaneiro:</strong> Procedimentos específicos para facilitação</li>
+            </ul>
+
+            <h3>Classificação por Faturamento (2024)</h3>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Categoria</th>
+                            <th>Faturamento Anual</th>
+                            <th>Pode Importar?</th>
+                            <th>Pode Exportar?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>MEI</td>
+                            <td>Até R$ 81.000</td>
+                            <td>❌ Não</td>
+                            <td>✅ Sim*</td>
+                        </tr>
+                        <tr>
+                            <td>Microempresa</td>
+                            <td>Até R$ 360.000</td>
+                            <td>✅ Sim</td>
+                            <td>✅ Sim</td>
+                        </tr>
+                        <tr>
+                            <td>Pequena Empresa</td>
+                            <td>Até R$ 4.800.000</td>
+                            <td>✅ Sim</td>
+                            <td>✅ Sim</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p><small>*MEI pode exportar apenas produtos relacionados à sua atividade principal cadastrada na Receita Federal.</small></p>
+
+            <h2 id="requisitos">📋 Requisitos e Documentação</h2>
+
+            <p>Para iniciar operações de comércio exterior, micro e pequenas empresas precisam cumprir alguns requisitos básicos:</p>
+
+            <h3>1. Habilitação no RADAR</h3>
+
+            <p>O RADAR (Registro e Rastreamento da Atuação dos Intervenientes Aduaneiros) é obrigatório para todas as empresas que desejam importar ou exportar:</p>
+
+            <div class="step-by-step">
+                <h4>Processo de Habilitação RADAR para MPE:</h4>
+                
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Modalidade Simplificada</h4>
+                        <p>MPE têm direito à modalidade RADAR simplificada, com processo mais ágil e menos burocrático. Limite de até US$ 150.000 por semestre.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Documentação Reduzida</h4>
+                        <p>Menos documentos exigidos em comparação com empresas de grande porte. Processo totalmente digital através do Portal Siscomex.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Prazo Acelerado</h4>
+                        <p>Análise prioritária com prazo médio de 10 dias úteis, contra 20-30 dias para empresas convencionais.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>2. Documentos Necessários</h3>
+
+            <ul>
+                <li><strong>📄 Contrato Social atualizado:</strong> Com objeto social compatível com comércio exterior</li>
+                <li><strong>🏛️ Inscrições fiscais:</strong> CNPJ, Inscrição Estadual (se aplicável)</li>
+                <li><strong>💰 Demonstrações financeiras:</strong> Balanço patrimonial simplificado</li>
+                <li><strong>✅ Certidões negativas:</strong> Receita Federal, FGTS, Trabalhista</li>
+                <li><strong>👤 Documentos do representante legal:</strong> CPF, RG e comprovante de residência</li>
+            </ul>
+
+            <h2 id="vantagens">🚀 Vantagens Exclusivas para MPE</h2>
+
+            <p>Micro e pequenas empresas possuem benefícios específicos que as tornam mais competitivas no comércio exterior:</p>
+
+            <h3>Benefícios Tributários</h3>
+
+            <div class="highlight-box success">
+                <h4>💰 Principais Vantagens Fiscais:</h4>
+                <ul>
+                    <li><strong>Simples Nacional nas Exportações:</strong> Isenção de PIS, COFINS, IPI e ICMS</li>
+                    <li><strong>Drawback Simplificado:</strong> Processo mais ágil para suspensão de tributos</li>
+                    <li><strong>Reintegra:</strong> Ressarcimento de resíduos tributários nas exportações</li>
+                    <li><strong>Crédito Presumido de IPI:</strong> Para exportação de produtos industrializados</li>
+                </ul>
+            </div>
+
+            <h3>Facilidades Operacionais</h3>
+
+            <ul>
+                <li><strong>🏃‍♂️ Despacho Prioritário:</strong> Análise acelerada de documentos aduaneiros</li>
+                <li><strong>📋 Procedimentos Simplificados:</strong> Menos exigências documentais</li>
+                <li><strong>💻 Portal do Exportador:</strong> Interface simplificada no Siscomex</li>
+                <li><strong>🎓 Capacitação Gratuita:</strong> Cursos do SEBRAE e APEX-Brasil</li>
+                <li><strong>💳 Linhas de Crédito Especiais:</strong> Financiamento facilitado via BNDES e bancos</li>
+            </ul>
+
+            <h2 id="modalidades">📦 Modalidades de Operação</h2>
+
+            <p>Micro e pequenas empresas podem escolher entre diferentes modalidades conforme sua capacidade e objetivos:</p>
+
+            <h3>1. Exportação Direta</h3>
+
+            <p>A empresa assume toda a responsabilidade pela operação de exportação:</p>
+
+            <ul>
+                <li><strong>✅ Vantagens:</strong> Maior margem de lucro, controle total da operação, relacionamento direto com cliente</li>
+                <li><strong>❌ Desvantagens:</strong> Maior complexidade, necessidade de expertise, maior investimento inicial</li>
+                <li><strong>🎯 Ideal para:</strong> Empresas com produtos diferenciados e capacidade de investimento</li>
+            </ul>
+
+            <h3>2. Exportação Indireta</h3>
+
+            <p>Utilização de intermediários especializados:</p>
+
+            <ul>
+                <li><strong>🏢 Trading Companies:</strong> Empresas especializadas que compram e revendem</li>
+                <li><strong>📈 Consórcios de Exportação:</strong> União de empresas para exportar em conjunto</li>
+                <li><strong>🤝 Agentes de Exportação:</strong> Representantes que atuam em nome da empresa</li>
+                <li><strong>🌐 Plataformas Digitais:</strong> Marketplaces internacionais como Alibaba, Amazon Global</li>
+            </ul>
+
+            <h3>3. Importação Estratégica</h3>
+
+            <p>Micro e pequenas empresas podem importar para:</p>
+
+            <ul>
+                <li><strong>🔧 Insumos e Matérias-primas:</strong> Reduzir custos de produção</li>
+                <li><strong>🛒 Revenda:</strong> Produtos acabados para comercialização</li>
+                <li><strong>⚙️ Equipamentos:</strong> Máquinas e tecnologia não disponíveis no Brasil</li>
+                <li><strong>🎯 Produtos Específicos:</strong> Itens de nicho com alta margem</li>
+            </ul>
+
+            <h2 id="primeiros-passos">👣 Primeiros Passos Práticos</h2>
+
+            <p>Roadmap estruturado para micro e pequenas empresas iniciarem no comércio exterior:</p>
+
+            <div class="step-by-step">
+                <h4>Fase 1: Preparação (30-60 dias)</h4>
+                
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Análise Interna</h4>
+                        <p>Avalie capacidade produtiva, qualidade dos produtos, documentação da empresa e situação financeira.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Pesquisa de Mercado</h4>
+                        <p>Identifique mercados potenciais, analise concorrência, preços praticados e barreiras comerciais.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Adequação Legal</h4>
+                        <p>Altere contrato social se necessário, obtenha certidões e organize documentação corporativa.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-by-step">
+                <h4>Fase 2: Habilitação (15-30 dias)</h4>
+                
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Solicitar RADAR</h4>
+                        <p>Protocole pedido de habilitação no Portal Siscomex com documentação completa.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Capacitação</h4>
+                        <p>Faça cursos de comércio exterior, participe de workshops e busque mentoria especializada.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h4>Rede de Apoio</h4>
+                        <p>Estabeleça parcerias com despachante, banco, seguradora e empresa de logística.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-by-step">
+                <h4>Fase 3: Operação (Ongoing)</h4>
+                
+                <div class="step-item">
+                    <div class="step-number">7</div>
+                    <div class="step-content">
+                        <h4>Primeira Operação</h4>
+                        <p>Inicie com operação piloto de baixo valor para testar processos e identificar melhorias.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">8</div>
+                    <div class="step-content">
+                        <h4>Expansão Gradual</h4>
+                        <p>Aumente volumes progressivamente, diversifique mercados e aprimore operações.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 id="custos-investimentos">💰 Custos e Investimentos</h2>
+
+            <p>Entenda os investimentos necessários para micro e pequenas empresas entrarem no comércio exterior:</p>
+
+            <h3>Custos Iniciais Estimados</h3>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Microempresa</th>
+                            <th>Pequena Empresa</th>
+                            <th>Observações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RADAR Siscomex</td>
+                            <td>Gratuito</td>
+                            <td>Gratuito</td>
+                            <td>Processo digital</td>
+                        </tr>
+                        <tr>
+                            <td>Adequação Documental</td>
+                            <td>R$ 1.000 - 3.000</td>
+                            <td>R$ 2.000 - 5.000</td>
+                            <td>Contrato social, certidões</td>
+                        </tr>
+                        <tr>
+                            <td>Capacitação/Consultoria</td>
+                            <td>R$ 2.000 - 8.000</td>
+                            <td>R$ 5.000 - 15.000</td>
+                            <td>Cursos, mentoria, assessoria</td>
+                        </tr>
+                        <tr>
+                            <td>Marketing Internacional</td>
+                            <td>R$ 3.000 - 10.000</td>
+                            <td>R$ 8.000 - 25.000</td>
+                            <td>Site, materiais, feiras</td>
+                        </tr>
+                        <tr>
+                            <td>Capital de Giro</td>
+                            <td>R$ 20.000 - 50.000</td>
+                            <td>R$ 50.000 - 200.000</td>
+                            <td>Primeiras operações</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total Estimado</strong></td>
+                            <td><strong>R$ 26.000 - 71.000</strong></td>
+                            <td><strong>R$ 65.000 - 245.000</strong></td>
+                            <td>Varia conforme setor</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Fontes de Financiamento</h3>
+
+            <ul>
+                <li><strong>🏦 BNDES Exim:</strong> Financiamento à exportação com taxas subsidiadas</li>
+                <li><strong>💳 PROEX:</strong> Programa de financiamento às exportações</li>
+                <li><strong>🤝 SEBRAE:</strong> Linhas de microcrédito e capital de giro</li>
+                <li><strong>🌱 Fintechs:</strong> Soluções de crédito digital especializadas</li>
+                <li><strong>👥 Investidores Anjo:</strong> Capital privado para empresas inovadoras</li>
+            </ul>
+
+            <h2 id="casos-sucesso">🏆 Casos de Sucesso</h2>
+
+            <p>Exemplos reais de micro e pequenas empresas que prosperaram no comércio exterior:</p>
+
+            <div class="highlight-box">
+                <h4>📱 Empresa de Acessórios Eletrônicos - SC</h4>
+                <p><strong>Microempresa</strong> que começou exportando capas de celular para Argentina. Em 2 anos, expandiu para 8 países e aumentou faturamento em 300%. Chave do sucesso: foco em qualidade e design diferenciado.</p>
+            </div>
+
+            <div class="highlight-box">
+                <h4>☕ Torrefação de Café - MG</h4>
+                <p><strong>Pequena empresa familiar</strong> que iniciou exportando cafés especiais para Japão. Hoje atende 15 países e tem 40% da receita vinda do exterior. Diferencial: certificação orgânica e rastreabilidade.</p>
+            </div>
+
+            <div class="highlight-box">
+                <h4>👗 Confecção de Moda Praia - CE</h4>
+                <p><strong>Microempresa</strong> que aproveitou o made in Brazil para exportar biquínis para Europa. Crescimento de 250% em 18 meses. Estratégia: marketing digital e parcerias com influencers internacionais.</p>
+            </div>
+
+            <h2 id="desafios-solucoes">⚠️ Principais Desafios e Soluções</h2>
+
+            <p>Obstáculos comuns enfrentados por MPE no comércio exterior e como superá-los:</p>
+
+            <h3>1. Falta de Conhecimento Técnico</h3>
+
+            <ul>
+                <li><strong>🎯 Problema:</strong> Desconhecimento de procedimentos, documentação e regulamentações</li>
+                <li><strong>✅ Solução:</strong> Investir em capacitação através de cursos SEBRAE, APEX-Brasil e consultoria especializada</li>
+                <li><strong>💡 Dica:</strong> Formar parcerias com empresas experientes ou contratar despachante qualificado</li>
+            </ul>
+
+            <h3>2. Limitações Financeiras</h3>
+
+            <ul>
+                <li><strong>🎯 Problema:</strong> Capital de giro insuficiente para primeiras operações</li>
+                <li><strong>✅ Solução:</strong> Buscar linhas de crédito específicas para exportação e começar com operações pequenas</li>
+                <li><strong>💡 Dica:</strong> Considerar consórcios de exportação para diluir custos e riscos</li>
+            </ul>
+
+            <h3>3. Barreiras Logísticas</h3>
+
+            <ul>
+                <li><strong>🎯 Problema:</strong> Complexidade dos processos logísticos internacionais</li>
+                <li><strong>✅ Solução:</strong> Estabelecer parcerias sólidas com operadores logísticos especializados</li>
+                <li><strong>💡 Dica:</strong> Utilizar plataformas digitais que integram toda a cadeia logística</li>
+            </ul>
+
+            <h2 id="tendencias-futuro">🔮 Tendências e Futuro</h2>
+
+            <p>O mercado de comércio exterior para MPE está em transformação acelerada:</p>
+
+            <h3>Digitalização dos Processos</h3>
+
+            <ul>
+                <li><strong>🤖 Automação:</strong> Sistemas que automatizam documentação e compliance</li>
+                <li><strong>🌐 Marketplaces:</strong> Expansão de plataformas B2B internacionais</li>
+                <li><strong>📱 Aplicativos:</strong> Soluções mobile para gestão de operações</li>
+                <li><strong>🔗 Blockchain:</strong> Rastreabilidade e segurança em transações</li>
+            </ul>
+
+            <h3>Novos Modelos de Negócio</h3>
+
+            <ul>
+                <li><strong>🛒 E-commerce Internacional:</strong> Venda direta para consumidores globais</li>
+                <li><strong>📦 Dropshipping Internacional:</strong> Modelos sem estoque físico</li>
+                <li><strong>🎯 Micro-niching:</strong> Especialização em mercados muito específicos</li>
+                <li><strong>🌱 Sustentabilidade:</strong> Produtos eco-friendly com demanda crescente</li>
+            </ul>
+
+            <h2 id="conclusao">🎯 Conclusão</h2>
+
+            <p>Micro e pequenas empresas não apenas podem participar do comércio exterior, como têm <strong>vantagens competitivas únicas</strong> que podem ser decisivas para o sucesso internacional. A legislação brasileira oferece incentivos específicos, procedimentos simplificados e apoio institucional robusto.</p>
+
+            <p>O segredo está em <strong>começar gradualmente</strong>, investir em conhecimento e estabelecer parcerias estratégicas. As empresas que se prepararem adequadamente e aproveitarem os benefícios disponíveis têm excelentes chances de prosperarem nos mercados internacionais.</p>
+
+            <div class="highlight-box important">
+                <h4>🚀 Próximos Passos Recomendados:</h4>
+                <ol>
+                    <li>Avalie a viabilidade do seu produto/serviço no mercado internacional</li>
+                    <li>Participe de cursos e workshops sobre comércio exterior</li>
+                    <li>Faça networking com outras empresas exportadoras</li>
+                    <li>Inicie o processo de habilitação RADAR</li>
+                    <li>Desenvolva um plano de negócios internacional</li>
+                </ol>
+            </div>
+
+            <p>O comércio exterior não é privilégio de grandes corporações. Com planejamento adequado, conhecimento técnico e aproveitamento dos benefícios legais disponíveis, sua micro ou pequena empresa pode conquistar mercados globais e alcançar um novo patamar de crescimento.</p>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Índice do Artigo -->
+            <div class="article-index">
+                <h3>Índice do Artigo</h3>
+                <ul>
+                    <li><a href="#base-legal">⚖️ Base Legal</a></li>
+                    <li><a href="#requisitos">📋 Requisitos</a></li>
+                    <li><a href="#vantagens">🚀 Vantagens Exclusivas</a></li>
+                    <li><a href="#modalidades">📦 Modalidades</a></li>
+                    <li><a href="#primeiros-passos">👣 Primeiros Passos</a></li>
+                    <li><a href="#custos-investimentos">💰 Custos</a></li>
+                    <li><a href="#casos-sucesso">🏆 Casos de Sucesso</a></li>
+                    <li><a href="#desafios-solucoes">⚠️ Desafios</a></li>
+                    <li><a href="#tendencias-futuro">🔮 Tendências</a></li>
+                    <li><a href="#conclusao">🎯 Conclusão</a></li>
+                </ul>
+            </div>
+
+            <!-- Posts Populares -->
+            <div class="popular-posts">
+                <h3>Posts Populares</h3>
+
+                <div class="popular-post">
+                    <div class="popular-post-image">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+                            alt="RADAR" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="popular-post-content">
+                        <h4>Passo a Passo: Como Obter o RADAR Siscomex</h4>
+                        <div class="popular-post-meta">📅 20 Abr, 2025</div>
+                    </div>
+                </div>
+
+                <div class="popular-post">
+                    <div class="popular-post-image">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=150&h=150&fit=crop"
+                            alt="Viabilidade" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="popular-post-content">
+                        <h4>Estudo de Viabilidade de Importação Eficaz</h4>
+                        <div class="popular-post-meta">📅 08 Jan, 2025</div>
+                    </div>
+                </div>
+
+                <div class="popular-post">
+                    <div class="popular-post-image">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=150&h=150&fit=crop"
+                            alt="NCM" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="popular-post-content">
+                        <h4>Guia Completo: Como Classificar NCM Corretamente</h4>
+                        <div class="popular-post-meta">📅 10 Abr, 2025</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categorias -->
+            <div class="categories">
+                <h3>Categorias</h3>
+
+                <div class="category-item">
+                    <span>Micro/Pequenas Empresas</span>
+                    <span class="category-count">(4)</span>
+                </div>
+                <div class="category-item">
+                    <span>Importação</span>
+                    <span class="category-count">(8)</span>
+                </div>
+                <div class="category-item">
+                    <span>Exportação</span>
+                    <span class="category-count">(6)</span>
+                </div>
+                <div class="category-item">
+                    <span>RADAR</span>
+                    <span class="category-count">(4)</span>
+                </div>
+                <div class="category-item">
+                    <span>Legislação</span>
+                    <span class="category-count">(3)</span>
+                </div>
+                <div class="category-item">
+                    <span>Financiamento</span>
+                    <span class="category-count">(5)</span>
+                </div>
+            </div>
+
+            <!-- Tags -->
+            <div class="tags-section">
+                <h3>Tags</h3>
+                <a href="#" class="tag">Microempresa</a>
+                <a href="#" class="tag">Pequena Empresa</a>
+                <a href="#" class="tag">MEI</a>
+                <a href="#" class="tag">RADAR</a>
+                <a href="#" class="tag">Simples Nacional</a>
+                <a href="#" class="tag">Exportação</a>
+                <a href="#" class="tag">Importação</a>
+                <a href="#" class="tag">SEBRAE</a>
+                <a href="#" class="tag">BNDES</a>
+                <a href="#" class="tag">Financiamento</a>
+                <a href="#" class="tag">Legislação</a>
+                <a href="#" class="tag">Tributação</a>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="cta-section">
+                <h3>🎯 Consultoria Especializada para MPE</h3>
+                <p>Nossa equipe tem experiência específica em auxiliar micro e pequenas empresas no comércio exterior.</p>
+                <a href="#contact" class="cta-button">FALAR COM ESPECIALISTA</a>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer Overseas Trading -->
+    <div id="overseas-footer"></div>
+
+    <!-- Botão Voltar ao Topo -->
+    <a href="#" class="back-to-top" id="backToTop">↑</a>
+
+    <script>
+        // Initialize Overseas Components
+        document.addEventListener('DOMContentLoaded', function () {
+            // Remover qualquer botão back-to-top criado por outros scripts
+            const removeExistingButtons = () => {
+                const existingBtns = document.querySelectorAll('.overseas-scroll-top, .back-to-top:not(#backToTop)');
+                existingBtns.forEach(btn => btn.remove());
+            };
+            
+            // Inicializar componentes Overseas Trading
+            if (typeof OverseasComponents !== 'undefined') {
+                OverseasComponents.init({
+                    activePage: 'blog',
+                    title: 'Micro ou Pequenas Empresas: Podem Importar e Exportar?',
+                    description: 'Descubra as possibilidades e requisitos para micro e pequenas empresas no comércio exterior.',
+                    whatsappMessage: 'Olá! Li o artigo sobre MPE no comércio exterior e gostaria de uma consultoria especializada.',
+                    canonical: 'https://www.overseastrading.com.br/blog/micro-empresas-comercio-exterior',
+                    scrollToTop: false
+                });
+                
+                setTimeout(removeExistingButtons, 500);
+            }
+            
+            setTimeout(removeExistingButtons, 1000);
+
+            console.log('✅ Artigo carregado: Micro e Pequenas Empresas no Comércio Exterior');
+        });
+
+        // Scroll Progress
+        window.addEventListener('scroll', () => {
+            const article = document.querySelector('.article-content');
+            const progressBar = document.getElementById('scrollProgress');
+
+            if (!article || !progressBar) return;
+
+            const articleTop = article.offsetTop;
+            const articleHeight = article.offsetHeight;
+            const windowHeight = window.innerHeight;
+            const scrollTop = window.pageYOffset;
+
+            const articleBottom = articleTop + articleHeight;
+            const windowBottom = scrollTop + windowHeight;
+
+            let progress = 0;
+            if (scrollTop >= articleTop) {
+                const articleScrolled = Math.min(windowBottom - articleTop, articleHeight);
+                progress = (articleScrolled / articleHeight) * 100;
+            }
+
+            progress = Math.min(Math.max(progress, 0), 100);
+            progressBar.style.width = `${progress}%`;
+
+            // Back to top button
+            const backToTop = document.getElementById('backToTop');
+            if (backToTop) {
+                if (scrollTop > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            }
+        });
+
+        // Smooth scroll para links internos
+        document.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A' && e.target.getAttribute('href')?.startsWith('#')) {
+                e.preventDefault();
+                const target = document.querySelector(e.target.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        });
+
+        // Back to top functionality
+        const backToTopBtn = document.getElementById('backToTop');
+        if (backToTopBtn) {
+            backToTopBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        // Highlight active section in index
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -35% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const id = entry.target.getAttribute('id');
+                const link = document.querySelector(`.article-index a[href="#${id}"]`);
+
+                if (entry.isIntersecting && link) {
+                    // Remove active class from all links
+                    document.querySelectorAll('.article-index a').forEach(l => {
+                        l.style.color = 'var(--text-secondary)';
+                        l.style.borderLeftColor = 'transparent';
+                    });
+
+                    // Add active class to current link
+                    link.style.color = 'var(--accent-cyan)';
+                    link.style.borderLeftColor = 'var(--accent-cyan)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections with IDs
+        document.querySelectorAll('[id]').forEach(section => {
+            observer.observe(section);
+        });
+
+        console.log('🌊 Artigo Overseas Trading carregado com sucesso!');
+    </script>
+
+    <!-- JavaScript Global do Blog -->
+    <script src="/assets/js/blog-article.js"></script>
+</body>
+
+</html>
