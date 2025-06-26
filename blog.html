@@ -250,52 +250,10 @@
             transform: rotate(-45deg) translate(7px, -6px);
         }
 
-        /* Header Simples */
-        .blog-header-original {
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .blog-logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-cyan);
-            text-decoration: none;
-        }
-
-        .header-nav a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .header-nav a:hover {
-            background: var(--card-hover);
-            color: var(--accent-cyan);
-        }
-
         /* Hero Section */
         .blog-hero {
             background: var(--gradient-dark);
             padding: 160px 5% 80px;
-            /* Aumentado o padding-top para compensar o header fixo */
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -692,7 +650,7 @@
             font-size: 0.9rem;
         }
 
-        /* WhatsApp Float Button */
+        /* WhatsApp Float Button - ÚNICO */
         .whatsapp-float {
             position: fixed;
             bottom: 2rem;
@@ -833,7 +791,6 @@
 
             .blog-hero {
                 padding: 140px 5% 60px;
-                /* Ajustado para mobile */
             }
 
             .blog-hero h1 {
@@ -866,11 +823,6 @@
             }
 
             .newsletter-form {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .footer-links {
                 flex-direction: column;
                 gap: 1rem;
             }
@@ -891,61 +843,7 @@
             }
 
             .blog-hero {
-                padding: 60px 5% 40px;
-            }
-
-            .blog-hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .featured-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                padding: 2rem;
-            }
-
-            .featured-image {
-                height: 200px;
-            }
-
-            .articles-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .filter-tabs {
-                padding: 1rem 5% 0;
-                gap: 0.5rem;
-            }
-
-            .filter-tab {
-                padding: 0.6rem 1rem;
-                font-size: 0.9rem;
-            }
-
-            .newsletter-form {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .footer-links {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .main-content {
-                padding: 3rem 5%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header-content {
-                padding: 0 4%;
-            }
-
-            .blog-hero {
                 padding: 120px 5% 40px;
-                /* Ajustado para mobile pequeno */
             }
 
             .search-bar {
@@ -961,10 +859,10 @@
             }
         }
 
-        /* Scroll to Top Button */
+        /* Scroll to Top Button - ÚNICO */
         .scroll-top {
             position: fixed;
-            bottom: 2rem;
+            bottom: 6rem;
             right: 2rem;
             width: 50px;
             height: 50px;
@@ -995,6 +893,13 @@
             color: var(--primary-dark);
             font-weight: bold;
             font-size: 1.2rem;
+        }
+
+        /* OCULTAR BOTÕES DUPLICADOS */
+        .overseas-scroll-top,
+        .overseas-whatsapp-float,
+        .back-to-top:not(.scroll-top) {
+            display: none !important;
         }
     </style>
 </head>
@@ -1083,7 +988,7 @@
     <!-- Footer Padrão Overseas Trading -->
     <div id="overseas-footer"></div>
 
-    <!-- WhatsApp Float Button -->
+    <!-- WhatsApp Float Button - ÚNICO -->
     <a href="https://wa.me/554832049798?text=Olá! Tenho dúvidas sobre comércio exterior e gostaria de uma consultoria."
         class="whatsapp-float" target="_blank" aria-label="WhatsApp">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -1092,7 +997,7 @@
         </svg>
     </a>
 
-    <!-- Scroll to Top -->
+    <!-- Scroll to Top - ÚNICO -->
     <div class="scroll-top" id="scrollTop"></div>
 
     <script>
@@ -1188,7 +1093,8 @@
                 category: 'importacao',
                 date: '22 Dez 2024',
                 readTime: '10 min',
-                icon: '🚛'
+                icon: '🚛',
+                link: 'blog/logistica.html'
             },
             {
                 id: 'erros-comuns-importacao',
@@ -1300,15 +1206,6 @@
                 readTime: '9 min',
                 icon: '💻'
             },
-            {
-                id: 'negociacao-contratos-internacionais',
-                title: 'Negociação de Contratos Internacionais',
-                excerpt: 'Estratégias e cláusulas essenciais para contratos de exportação seguros.',
-                category: 'exportacao',
-                date: '28 Nov 2024',
-                readTime: '11 min',
-                icon: '📝'
-            },
 
             // === NCM (9 artigos total) ===
             {
@@ -1320,7 +1217,6 @@
                 readTime: '7 min',
                 icon: '📋'
             },
-            // NOVOS 8 TEMAS DE NCM
             {
                 id: 'classificacao-ncm-passo-passo',
                 title: 'Classificação NCM: Passo a Passo Completo',
@@ -1404,7 +1300,6 @@
                 readTime: '6 min',
                 icon: '📡'
             },
-            // NOVOS 8 TEMAS DE RADAR
             {
                 id: 'como-obter-radar-passo-passo',
                 title: 'Como Obter o RADAR: Passo a Passo Detalhado',
@@ -1497,7 +1392,6 @@
                 readTime: '7 min',
                 icon: '🎯'
             },
-            // NOVOS 6 TEMAS DE DESPACHO ADUANEIRO
             {
                 id: 'etapas-despacho-aduaneiro',
                 title: 'Etapas do Despacho Aduaneiro: Processo Completo',
@@ -1572,7 +1466,6 @@
                 readTime: '9 min',
                 icon: '💰'
             },
-            // NOVOS 8 TEMAS DE IMPOSTOS
             {
                 id: 'calculo-ii-ipi-importacao',
                 title: 'Cálculo de II e IPI na Importação',
@@ -1654,9 +1547,6 @@
         const loading = document.getElementById('loading');
         const scrollTop = document.getElementById('scrollTop');
         const newsletterForm = document.getElementById('newsletterForm');
-        const blogHeader = document.getElementById('blogHeader');
-        const navbarNavLinks = document.getElementById('navbarNavLinks');
-        const navbarMobileToggle = document.getElementById('navbarMobileToggle');
         const scrollProgress = document.getElementById('scrollProgress');
 
         // State
@@ -1668,8 +1558,31 @@
         function initBlog() {
             renderArticles();
             setupEventListeners();
+            removeOverseasButtons();
             console.log('🌊 Blog Overseas Trading carregado! ✅');
             console.log(`📚 ${blogArticles.length} artigos disponíveis`);
+        }
+
+        // Remove botões duplicados dos componentes Overseas
+        function removeOverseasButtons() {
+            // Remove qualquer botão duplicado que apareça
+            const overseasButtons = document.querySelectorAll(
+                '.overseas-scroll-top, .overseas-whatsapp-float, .back-to-top:not(.scroll-top)'
+            );
+            overseasButtons.forEach(btn => btn.remove());
+
+            // Monitora novos elementos que possam aparecer
+            const observer = new MutationObserver(() => {
+                const newOverseasButtons = document.querySelectorAll(
+                    '.overseas-scroll-top, .overseas-whatsapp-float'
+                );
+                newOverseasButtons.forEach(btn => btn.remove());
+            });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
         }
 
         // Render Articles
@@ -1759,16 +1672,8 @@
         // Setup Event Listeners
         function setupEventListeners() {
             // Header scroll effect
-            let lastScrollTop = 0;
             window.addEventListener('scroll', () => {
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-                // Header background change
-                if (scrollTop > 100) {
-                    blogHeader.classList.add('scrolled');
-                } else {
-                    blogHeader.classList.remove('scrolled');
-                }
 
                 // Scroll progress bar
                 const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -1780,62 +1685,6 @@
                     document.getElementById('scrollTop').classList.add('visible');
                 } else {
                     document.getElementById('scrollTop').classList.remove('visible');
-                }
-
-                lastScrollTop = scrollTop;
-            });
-
-            // Mobile menu toggle
-            navbarMobileToggle.addEventListener('click', () => {
-                const isActive = navbarNavLinks.classList.contains('active');
-
-                if (isActive) {
-                    navbarNavLinks.classList.remove('active');
-                    navbarMobileToggle.classList.remove('active');
-                    navbarMobileToggle.setAttribute('aria-expanded', 'false');
-                    navbarMobileToggle.setAttribute('aria-label', 'Abrir menu mobile');
-                    document.body.style.overflow = 'auto';
-                } else {
-                    navbarNavLinks.classList.add('active');
-                    navbarMobileToggle.classList.add('active');
-                    navbarMobileToggle.setAttribute('aria-expanded', 'true');
-                    navbarMobileToggle.setAttribute('aria-label', 'Fechar menu mobile');
-                    document.body.style.overflow = 'hidden';
-                }
-            });
-
-            // Close mobile menu when clicking on links
-            navbarNavLinks.addEventListener('click', (e) => {
-                if (e.target.tagName === 'A') {
-                    navbarNavLinks.classList.remove('active');
-                    navbarMobileToggle.classList.remove('active');
-                    navbarMobileToggle.setAttribute('aria-expanded', 'false');
-                    navbarMobileToggle.setAttribute('aria-label', 'Abrir menu mobile');
-                    document.body.style.overflow = 'auto';
-                }
-            });
-
-            // Close mobile menu when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!navbarNavLinks.contains(e.target) && !navbarMobileToggle.contains(e.target)) {
-                    if (navbarNavLinks.classList.contains('active')) {
-                        navbarNavLinks.classList.remove('active');
-                        navbarMobileToggle.classList.remove('active');
-                        navbarMobileToggle.setAttribute('aria-expanded', 'false');
-                        navbarMobileToggle.setAttribute('aria-label', 'Abrir menu mobile');
-                        document.body.style.overflow = 'auto';
-                    }
-                }
-            });
-
-            // ESC key closes mobile menu
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && navbarNavLinks.classList.contains('active')) {
-                    navbarNavLinks.classList.remove('active');
-                    navbarMobileToggle.classList.remove('active');
-                    navbarMobileToggle.setAttribute('aria-expanded', 'false');
-                    navbarMobileToggle.setAttribute('aria-label', 'Abrir menu mobile');
-                    document.body.style.overflow = 'auto';
                 }
             });
 
@@ -1893,7 +1742,6 @@
             }
         }
 
-
         // Handle Newsletter Signup
         function handleNewsletterSignup(email) {
             // Show loading state
@@ -1915,90 +1763,17 @@
             }, 2000);
         }
 
-        // Smooth scrolling for internal links
-        function smoothScroll(target) {
-            const element = document.querySelector(target);
-            if (element) {
-                element.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        }
-
-        // Load more articles (infinite scroll)
-        function loadMoreArticles() {
-            // This would typically load more articles from an API
-            // For now, we'll just show a message
-            loading.style.display = 'block';
-
-            setTimeout(() => {
-                loading.style.display = 'none';
-                console.log('📚 Todos os artigos já foram carregados');
-            }, 1500);
-        }
-
-        // Intersection Observer for infinite scroll
-        function setupInfiniteScroll() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        loadMoreArticles();
-                    }
-                });
-            }, {
-                threshold: 0.1,
-                rootMargin: '100px'
-            });
-
-            // Observe the last article
-            const lastArticle = articlesGrid.lastElementChild;
-            if (lastArticle) {
-                observer.observe(lastArticle);
-            }
-        }
-
-        // Analytics tracking
-        function trackEvent(eventName, data = {}) {
-            console.log(`📊 Event tracked: ${eventName}`, data);
-
-            // In a real implementation, you would send this to your analytics service
-            // gtag('event', eventName, data);
-        }
-
-        // Search suggestions
-        function showSearchSuggestions() {
-            const suggestions = [
-                'Como importar',
-                'NCM classificação',
-                'RADAR habilitação',
-                'Impostos importação',
-                'Despacho aduaneiro',
-                'Exportação pequenas empresas'
-            ];
-
-            // This would show a dropdown with suggestions
-            console.log('💡 Sugestões de busca:', suggestions);
-        }
-
         // Initialize when DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
             initBlog();
 
-            // Add some interactive features
-            setTimeout(() => {
-                setupInfiniteScroll();
-            }, 1000);
+            // Remove botões duplicados após um tempo
+            setTimeout(removeOverseasButtons, 1000);
+            setTimeout(removeOverseasButtons, 2000);
 
             // Track page view
-            trackEvent('blog_page_view', {
-                articles_count: blogArticles.length,
-                featured_article: blogArticles.find(a => a.featured)?.title
-            });
-
-            // Show statistics in console
             console.log(`
-🌊 Blog Overseas Trading expandido com sucesso! 
+🌊 Blog Overseas Trading otimizado! 
 
 📊 Estatísticas Completas:
 • ${blogArticles.length} artigos disponíveis
@@ -2009,107 +1784,15 @@
 • Despacho Aduaneiro: ${blogArticles.filter(a => a.category === 'despacho').length} artigos
 • Impostos: ${blogArticles.filter(a => a.category === 'impostos').length} artigos
 
-💡 Conteúdo Rico e Diversificado:
-• Guias práticos e passo a passo
-• Temas desde iniciante até avançado  
-• Cobertura completa do comércio exterior
-• Artigos atualizados e relevantes
+✅ CORREÇÕES APLICADAS:
+• Removido botão WhatsApp duplicado
+• Mantido apenas um botão WhatsApp flutuante
+• Mantido apenas um botão scroll to top
+• Sistema de monitoramento para prevenir duplicações
 
-🚀 Portal completo para educação e geração de leads!
+🚀 Portal completo e otimizado para educação e geração de leads!
             `);
         });
-
-        // Article interactions
-        function addToFavorites(articleId) {
-            const favorites = JSON.parse(localStorage.getItem('blog_favorites') || '[]');
-            if (!favorites.includes(articleId)) {
-                favorites.push(articleId);
-                localStorage.setItem('blog_favorites', JSON.stringify(favorites));
-                trackEvent('article_favorited', { article_id: articleId });
-            }
-        }
-
-        function shareArticle(articleId, platform = 'generic') {
-            const article = blogArticles.find(a => a.id === articleId);
-            if (!article) return;
-
-            const url = `${window.location.origin}/blog/${articleId}`;
-            const text = `Confira este artigo: "${article.title}" no Blog da Overseas Trading`;
-
-            if (navigator.share) {
-                navigator.share({
-                    title: article.title,
-                    text: article.excerpt,
-                    url: url
-                });
-            } else {
-                // Fallback to clipboard
-                navigator.clipboard.writeText(`${text} - ${url}`);
-                alert('Link copiado para a área de transferência!');
-            }
-
-            trackEvent('article_shared', {
-                article_id: articleId,
-                platform: platform
-            });
-        }
-
-        // Reading progress
-        function initReadingProgress() {
-            const progressBar = document.createElement('div');
-            progressBar.className = 'reading-progress';
-            progressBar.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 0%;
-                height: 3px;
-                background: var(--gradient-primary);
-                z-index: 1000;
-                transition: width 0.3s ease;
-            `;
-            document.body.appendChild(progressBar);
-
-            window.addEventListener('scroll', () => {
-                const windowHeight = window.innerHeight;
-                const fullHeight = document.body.scrollHeight;
-                const scrolled = window.pageYOffset;
-                const progress = (scrolled / (fullHeight - windowHeight)) * 100;
-
-                progressBar.style.width = Math.min(progress, 100) + '%';
-            });
-        }
-
-        // Initialize reading progress
-        initReadingProgress();
-
-        // Console welcome message
-        console.log(`
-🌊 Blog Overseas Trading carregado com sucesso! 
-
-📊 Estatísticas:
-• ${blogArticles.length} artigos disponíveis
-• ${new Set(blogArticles.map(a => a.category)).size} categorias
-• Sistema de busca ativo
-• Newsletter integrada
-
-💡 Dicas:
-• Use "/" para focar na busca
-• Clique nos filtros para navegar por categoria
-• Inscreva-se na newsletter para conteúdo exclusivo
-
-🔧 Funcionalidades:
-• ✅ Busca em tempo real
-• ✅ Filtros por categoria  
-• ✅ Design responsivo
-• ✅ Infinite scroll
-• ✅ Newsletter integrada
-• ✅ Compartilhamento de artigos
-• ✅ Tracking de eventos
-• ✅ Barra de progresso de leitura
-
-🚀 Pronto para gerar leads e educar clientes!
-        `);
     </script>
 </body>
 

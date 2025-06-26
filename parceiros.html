@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parceiros | Overseas Trading - Rede Global de Especialistas</title>
+    <meta name="description"
+        content="Conheça nossos parceiros estratégicos: Overwine, Overcel e Egang. Uma rede global de especialistas para maximizar seus resultados no comércio exterior.">
+    <meta name="keywords"
+        content="parceiros overseas trading, overwine, overcel, egang, rede global, especialistas comércio exterior">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Parceiros | Overseas Trading">
+    <meta property="og:description"
+        content="Rede global de parceiros estratégicos especializados em diferentes segmentos do comércio internacional.">
+    <meta property="og:image" content="assets/images/og-parceiros.jpg">
+    <meta property="og:url" content="https://www.overseastrading.com.br/parceiros">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <style>
+        /* Reset e Variáveis */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #0a0a0a;
+            --secondary-dark: #1a1a1a;
+            --accent-blue: #00d4ff;
+            --accent-cyan: #00ffff;
+            --accent-green: #39ff14;
+            --accent-orange: #ff8c00;
+            --accent-purple: #8a2be2;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --text-muted: #888888;
+            --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #00ffff 100%);
+            --gradient-dark: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            --gradient-card: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, rgba(0, 255, 255, 0.05) 100%);
+            --border-color: rgba(0, 212, 255, 0.1);
+            --card-hover: rgba(0, 212, 255, 0.05);
+            --font-family: 'Inter', sans-serif;
+            --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 20px 40px rgba(0, 212, 255, 0.2);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--primary-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
+            width: 100%;
+        }
+
+        /* Header Placeholder */
+        #overseas-header {
+            height: 80px;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding-top: 80px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.03) 0%, transparent 70%);
+            width: 100%;
+            overflow: hidden;
+            padding: 60px 0;
+        }
+
+        .hero-content {
+            text-align: center;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: var(--primary-dark);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+        }
+
+        .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: var(--text-secondary);
+            margin-bottom: 3.5rem;
+            line-height: 1.7;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Parceiros Section */
+        .parceiros-section {
+            padding: 8rem 0;
+            background: var(--secondary-dark);
+            width: 100%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .parceiros-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .parceiro-card {
+            background: var(--gradient-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .parceiro-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .parceiro-card:hover::before {
+            left: 100%;
+        }
+
+        .parceiro-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent-cyan);
+        }
+
+        .parceiro-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem;
+            background: var(--gradient-primary);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+            padding: 15px;
+        }
+
+        .logo-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .parceiro-logo.placeholder {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+        }
+
+        .parceiro-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .parceiro-name {
+            font-size: clamp(1.6rem, 3vw, 2rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .parceiro-description {
+            color: var(--text-secondary);
+            font-size: clamp(0.95rem, 2vw, 1rem);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .parceiro-specialties {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .parceiro-specialties li {
+            color: var(--text-secondary);
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: clamp(0.9rem, 2vw, 0.95rem);
+        }
+
+        .parceiro-specialties li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        .parceiro-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 2rem;
+            background: var(--gradient-primary);
+            color: var(--primary-dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            margin-top: auto;
+            align-self: center;
+        }
+
+        .parceiro-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.4);
+        }
+
+        .parceiro-link svg {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .parceiro-link:hover svg {
+            transform: translateX(5px);
+        }
+
+        /* Overwine */
+        .overwine-card {
+            background: linear-gradient(135deg, #3B1E1E 0%, #4A2C2A 100%);
+        }
+
+        .overwine-card .parceiro-logo {
+            background: linear-gradient(135deg, #5C2A2A 0%, #3B1E1E 100%);
+        }
+
+        /* Overcel */
+        .overcel-card {
+            background: linear-gradient(135deg, #14213D 0%, #1F2A40 100%);
+        }
+
+        .overcel-card .parceiro-logo {
+            background: linear-gradient(135deg, #1B2D4F 0%, #14213D 100%);
+        }
+
+        /* Egang */
+        .egang-card {
+            background: linear-gradient(135deg, #0D1F1E 0%, #1E3D3A 100%);
+        }
+
+        .egang-card .parceiro-logo {
+            background: linear-gradient(135deg, #173732 0%, #0D1F1E 100%);
+        }
+
+        /* Call to Action */
+        .cta-section {
+            padding: 8rem 0;
+            background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.05) 0%, transparent 70%);
+            width: 100%;
+        }
+
+        .cta-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.3;
+        }
+
+        .cta-content p {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 3rem;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1.2rem 2.5rem;
+            background: var(--gradient-primary);
+            color: var(--primary-dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .parceiros-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                min-height: 80vh;
+                padding: 40px 0;
+            }
+
+            .parceiros-section {
+                padding: 4rem 0;
+            }
+
+            .parceiros-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .parceiro-card {
+                padding: 2rem;
+                min-height: 350px;
+            }
+
+            .cta-section {
+                padding: 4rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                padding: 30px 0;
+            }
+
+            .parceiro-card {
+                padding: 1.5rem;
+                min-height: 320px;
+            }
+
+            .parceiro-logo {
+                width: 100px;
+                height: 100px;
+                margin-bottom: 1.5rem;
+                padding: 12px;
+            }
+
+            .logo-image {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        /* Performance optimizations */
+        .parceiro-card {
+            will-change: transform;
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        .parceiro-link:focus {
+            outline: 2px solid var(--accent-cyan);
+            outline-offset: 2px;
+        }
+
+        /* Print styles */
+        @media print {
+            .hero-section,
+            .cta-section {
+                background: white !important;
+                color: black !important;
+            }
+
+            .gradient-text {
+                color: black !important;
+                -webkit-text-fill-color: black !important;
+            }
+        }
+    </style>
+
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/favicon.ico">
+</head>
+
+<body>
+    <!-- Header Container -->
+    <div id="overseas-header"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-content fade-in-up">
+                    <span class="hero-badge">NOSSOS PARCEIROS</span>
+                    <h1 class="hero-title">
+                        Rede Global de
+                        <span class="gradient-text">Especialistas</span>
+                    </h1>
+                    <p class="hero-description">
+                        Conectamos você aos melhores especialistas em diferentes segmentos do comércio internacional.
+                        Nossos parceiros estratégicos ampliam nossas capacidades e garantem soluções completas para seu
+                        negócio.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Parceiros Section -->
+        <section class="parceiros-section">
+            <div class="container">
+                <div class="section-header fade-in-up">
+                    <h2 class="section-title">Nossos Parceiros Estratégicos</h2>
+                    <p class="section-subtitle">Especialistas reconhecidos que complementam nossa expertise e expandem
+                        nossas possibilidades</p>
+                </div>
+
+                <div class="parceiros-grid">
+                    <!-- Overwine -->
+                    <div class="parceiro-card overwine-card fade-in-up">
+                        <div class="parceiro-logo">
+                            <img src="assets/images/overwine.png" alt="Overwine Logo" class="logo-image">
+                        </div>
+                        <div class="parceiro-content">
+                            <h3 class="parceiro-name">Overwine</h3>
+                            <p class="parceiro-description">
+                                Especialista em importação e distribuição de vinhos e bebidas premium.
+                                Expertise em legislação específica do setor e relacionamento com principais
+                                produtores internacionais.
+                            </p>
+                            <ul class="parceiro-specialties">
+                                <li>Importação de vinhos e bebidas</li>
+                                <li>Análise de qualidade e certificação</li>
+                                <li>Distribuição especializada</li>
+                                <li>Compliance regulatório do setor</li>
+                            </ul>
+                            <a href="https://overwine.com.br/" class="parceiro-link" target="_blank" rel="noopener">
+                                <span>Visite o Site</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M7 17L17 7" />
+                                    <path d="M7 7h10v10" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Overcel -->
+                    <div class="parceiro-card overcel-card fade-in-up">
+                        <div class="parceiro-logo">
+                            <img src="assets/images/overcel-logo.png" alt="Overcel Logo" class="logo-image">
+                        </div>
+                        <div class="parceiro-content">
+                            <h3 class="parceiro-name">Overcel</h3>
+                            <p class="parceiro-description">
+                                Importadora e distribuidora de células de bateria 18650, com operação direta via
+                                WhatsApp para B2C e revendas. Oferece importação direta da Ásia, garantia de qualidade,
+                                preços competitivos e suporte técnico especializado.
+                            </p>
+                            <ul class="parceiro-specialties">
+                                <li>Células de bateria modelo 18650</li>
+                                <li>Importação direta com preço competitivo</li>
+                                <li>Suporte técnico para revendas</li>
+                                <li>Atendimento via WhatsApp</li>
+                            </ul>
+                            <a href="https://www.overcel.com.br/" class="parceiro-link" target="_blank" rel="noopener">
+                                <span>Visite o Site</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M7 17L17 7" />
+                                    <path d="M7 7h10v10" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Egang -->
+                    <div class="parceiro-card egang-card fade-in-up">
+                        <div class="parceiro-logo">
+                            <img src="assets/images/overcel.png" alt="Egang Logo" class="logo-image">
+                        </div>
+                        <div class="parceiro-content">
+                            <h3 class="parceiro-name">Egang</h3>
+                            <p class="parceiro-description">
+                                Marca de mobilidade elétrica, focada em patinetes e scooters elétricos urbanos. Oferece
+                                soluções sustentáveis de micromobilidade, com design moderno, autonomia inteligente e
+                                atendimento nacional.
+                            </p>
+                            <ul class="parceiro-specialties">
+                                <li>Scooters e patinetes elétricos</li>
+                                <li>Micromobilidade urbana sustentável</li>
+                                <li>Design moderno e autonomia inteligente</li>
+                                <li>Atendimento e suporte nacional</li>
+                            </ul>
+                            <a href="https://egang.com.br/" class="parceiro-link" target="_blank" rel="noopener">
+                                <span>Visite o Site</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M7 17L17 7" />
+                                    <path d="M7 7h10v10" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content fade-in-up">
+                    <h2>Interessado em conhecer nossos parceiros?</h2>
+                    <p>
+                        Nossa rede de parceiros estratégicos está pronta para oferecer soluções
+                        especializadas para seu negócio. Vamos conectá-lo aos especialistas certos
+                        para maximizar seus resultados.
+                    </p>
+                    <a href="https://wa.me/554832049798?text=Olá! Gostaria de conhecer mais sobre os parceiros da Overseas Trading."
+                        class="cta-button" target="_blank" rel="noopener">
+                        <span>Falar com Nossa Equipe</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M7 17L17 7" />
+                            <path d="M7 7h10v10" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Container -->
+    <div id="overseas-footer"></div>
+
+    <!-- Scripts -->
+    <script>
+        // Simple animations and interactions
+        document.addEventListener('DOMContentLoaded', function () {
+            // Smooth scroll for internal links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Card hover effects
+            const cards = document.querySelectorAll('.parceiro-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function () {
+                    this.style.transform = 'translateY(-10px)';
+
+                    // Animar logo
+                    const logoImg = this.querySelector('.logo-image');
+                    if (logoImg) {
+                        logoImg.style.transform = 'scale(1.1) rotate(5deg)';
+                    }
+                });
+
+                card.addEventListener('mouseleave', function () {
+                    this.style.transform = 'translateY(0)';
+
+                    // Resetar logo
+                    const logoImg = this.querySelector('.logo-image');
+                    if (logoImg) {
+                        logoImg.style.transform = 'scale(1) rotate(0deg)';
+                    }
+                });
+            });
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for animation
+            document.querySelectorAll('.fade-in-up').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.8s ease';
+                observer.observe(el);
+            });
+
+            // Button hover effects
+            const buttons = document.querySelectorAll('.parceiro-link, .cta-button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function () {
+                    this.style.transform = 'translateY(-3px)';
+                });
+
+                button.addEventListener('mouseleave', function () {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            console.log('🌊 Página Parceiros da Overseas Trading carregada com sucesso!');
+            console.log('🤝 Parceiros: Overwine, Overcel e Egang');
+        });
+    </script>
+
+    <!-- Load Overseas Components if available -->
+    <script>
+        // Try to load overseas components
+        if (typeof OverseasComponents !== 'undefined') {
+            OverseasComponents.init({
+                activePage: 'parceiros',
+                title: 'Parceiros - Rede Global de Especialistas',
+                description: 'Conheça nossos parceiros estratégicos: Overwine, Overcel e Egang. Uma rede global de especialistas para maximizar seus resultados.',
+                whatsappMessage: 'Olá! Gostaria de conhecer mais sobre os parceiros da Overseas Trading.',
+                canonical: 'https://www.overseastrading.com.br/parceiros'
+            });
+        }
+    </script>
+
+    <!-- Scripts -->
+    <script src="assets/js/overseas-components.js"></script>
+</body>
+
+</html>
