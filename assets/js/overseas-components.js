@@ -17,10 +17,10 @@
             whatsapp: '554832049798',
             email: 'comercial@overseastrading.com.br',
             socialLinks: {
-                linkedin: 'https://linkedin.com/company/overseas-trading',
-                instagram: 'https://instagram.com/overseastrading',
-                whatsapp: 'https://wa.me/5548999999999',
-                email: 'mailto:comercial@overseastrading.com.br'
+                linkedin: 'https://www.linkedin.com/company/overseastrading/',
+                instagram: 'https://www.instagram.com/overseas_negocios/',
+                whatsapp: 'https://api.whatsapp.com/send/?phone=554832049798&text=Ol%C3%A1%21+Tenho+d%C3%BAvidas+sobre+com%C3%A9rcio+exterior+e+gostaria+de+uma+consultoria.&type=phone_number&app_absent=0',
+                email: 'mailto:contato@overseastrading.com.br'
             }
         },
 
@@ -52,14 +52,8 @@
                                     <a href="solucoes.html">Soluções</a>
                                 </div>
                             </li>
+                            <li><a href="trabalhe-conosco.html" data-page="trabalhe-conosco">Trabalhe Conosco</a></li>
                             <li><a href="blog.html" data-page="blog">Blog</a></li>
-                            <li class="overseas-dropdown">
-                                <a href="#carreiras">Carreiras</a>
-                                <div class="overseas-dropdown-content">
-                                    <a href="trabalhe-conosco.html">Trabalhe Conosco</a>
-                                    <a href="talentos.html">Talentos</a>
-                                </div>
-                            </li>
                             <li><a href="index.html#contact" data-page="contact">Contato</a></li>
                         </ul>
                         <button class="overseas-mobile-toggle" id="overseasMobileToggle" aria-label="Abrir menu mobile" aria-expanded="false">
@@ -92,11 +86,7 @@
                                 </div>
                                 
                                 <div class="footer-column">
-                                    <h4>Carreiras</h4>
-                                    <ul>
-                                        <li><a href="trabalhe-conosco.html">Trabalhe Conosco</a></li>
-                                        <li><a href="talentos.html">Talentos</a></li>
-                                    </ul>
+                                    <h4><a href="trabalhe-conosco.html">Trabalhe Conosco</a></h4>
                                 </div>
                                 
                                 <div class="footer-column">
@@ -243,7 +233,12 @@
                     position: relative;
                 }
 
-                .overseas-nav-links a {
+                /* CORREÇÃO: Estilo unificado para todos os links do menu */
+                .overseas-nav-links a,
+                .overseas-nav-links a:link,
+                .overseas-nav-links a:visited,
+                .overseas-nav-links a:hover,
+                .overseas-nav-links a:active {
                     color: var(--text-secondary);
                     text-decoration: none;
                     font-weight: 500;
@@ -255,7 +250,7 @@
 
                 .overseas-nav-links a:hover,
                 .overseas-nav-links a.active {
-                    color: var(--accent-cyan);
+                    color: var(--accent-cyan) !important;
                 }
 
                 .overseas-nav-links a::after {
@@ -294,6 +289,7 @@
                     transform: translateY(-10px);
                     transition: all 0.3s ease;
                     z-index: 1001;
+                    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.15);
                 }
 
                 .overseas-dropdown:hover .overseas-dropdown-content {
@@ -302,12 +298,17 @@
                     transform: translateY(0);
                 }
 
-                .overseas-dropdown-content a {
+                .overseas-dropdown-content a,
+                .overseas-dropdown-content a:link,
+                .overseas-dropdown-content a:visited,
+                .overseas-dropdown-content a:hover,
+                .overseas-dropdown-content a:active {
                     display: block;
                     padding: 0.8rem 1.5rem;
-                    color: var(--text-secondary);
+                    color: var(--text-secondary) !important;
                     font-size: 0.9rem;
                     border-bottom: none;
+                    transition: all 0.3s ease;
                 }
 
                 .overseas-dropdown-content a::after {
@@ -316,7 +317,8 @@
 
                 .overseas-dropdown-content a:hover {
                     background: rgba(0, 212, 255, 0.1);
-                    color: var(--accent-cyan);
+                    color: var(--accent-cyan) !important;
+                    transform: translateX(5px);
                 }
 
                 .overseas-mobile-toggle {
@@ -430,6 +432,21 @@
                     border-radius: 1px;
                 }
 
+                /* CORREÇÃO: Links do footer também normalizados */
+                .footer-column h4 a,
+                .footer-column h4 a:link,
+                .footer-column h4 a:visited,
+                .footer-column h4 a:hover,
+                .footer-column h4 a:active {
+                    color: var(--text-primary) !important;
+                    text-decoration: none;
+                    transition: all 0.3s ease;
+                }
+
+                .footer-column h4 a:hover {
+                    color: var(--accent-cyan) !important;
+                }
+
                 .footer-column ul {
                     list-style: none;
                     padding: 0;
@@ -440,8 +457,12 @@
                     margin-bottom: 0.8rem;
                 }
 
-                .footer-column ul li a {
-                    color: var(--text-secondary);
+                .footer-column ul li a,
+                .footer-column ul li a:link,
+                .footer-column ul li a:visited,
+                .footer-column ul li a:hover,
+                .footer-column ul li a:active {
+                    color: var(--text-secondary) !important;
                     text-decoration: none;
                     font-size: 0.95rem;
                     transition: all 0.3s ease;
@@ -449,7 +470,7 @@
                 }
 
                 .footer-column ul li a:hover {
-                    color: var(--accent-cyan);
+                    color: var(--accent-cyan) !important;
                     transform: translateX(5px);
                 }
 
@@ -525,15 +546,19 @@
                     gap: 1rem;
                 }
 
-                .footer-legal a {
-                    color: var(--text-muted);
+                .footer-legal a,
+                .footer-legal a:link,
+                .footer-legal a:visited,
+                .footer-legal a:hover,
+                .footer-legal a:active {
+                    color: var(--text-muted) !important;
                     text-decoration: none;
                     font-size: 0.9rem;
                     transition: color 0.3s ease;
                 }
 
                 .footer-legal a:hover {
-                    color: var(--accent-cyan);
+                    color: var(--accent-cyan) !important;
                 }
 
                 .footer-legal span {
@@ -617,32 +642,26 @@
                     }
 
                     .overseas-nav-links li {
-                        margin: 0.5rem 0;
+                        margin: 0.8rem 0;
                         width: 100%;
                         text-align: center;
                     }
 
-                    .overseas-nav-links a {
-                        font-size: 1.1rem;
-                        padding: 0.8rem 2rem;
+                    /* CORREÇÃO: Links mobile também normalizados */
+                    .overseas-nav-links a,
+                    .overseas-nav-links a:link,
+                    .overseas-nav-links a:visited,
+                    .overseas-nav-links a:hover,
+                    .overseas-nav-links a:active {
+                        font-size: 1.2rem;
+                        padding: 1rem 2rem;
                         display: block;
+                        color: var(--text-secondary) !important;
                     }
 
-                    .overseas-dropdown-content {
-                        position: static;
-                        opacity: 1;
-                        visibility: visible;
-                        transform: none;
-                        background: none;
-                        border: none;
-                        padding: 0;
-                        margin-top: 0.5rem;
-                    }
-
-                    .overseas-dropdown-content a {
-                        font-size: 1rem;
-                        padding: 0.6rem 2rem;
-                        color: var(--text-muted);
+                    .overseas-nav-links a:hover,
+                    .overseas-nav-links a.active {
+                        color: var(--accent-cyan) !important;
                     }
 
                     .overseas-logo-img {
@@ -1011,7 +1030,7 @@
 💡 Uso:
 // Carregar componentes
 OverseasComponents.init({
-    activePage: 'blog',
+    activePage: 'trabalhe-conosco',
     title: 'Título da Página',
     whatsappMessage: 'Mensagem personalizada'
 });
@@ -1079,7 +1098,9 @@ OverseasComponents.updateMetaTags({
             const currentPage = window.location.pathname;
             let activePage = '';
             
-            if (currentPage.includes('blog.html') || currentPage.includes('blog')) {
+            if (currentPage.includes('trabalhe-conosco.html') || currentPage.includes('trabalhe-conosco')) {
+                activePage = 'trabalhe-conosco';
+            } else if (currentPage.includes('blog.html') || currentPage.includes('blog')) {
                 activePage = 'blog';
             } else if (currentPage.includes('contact') || window.location.hash.includes('contact')) {
                 activePage = 'contact';

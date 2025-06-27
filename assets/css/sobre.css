@@ -356,47 +356,101 @@ body * {
     font-weight: bold;
 }
 
-/* Timeline Section */
+/* ===================================
+   SEÇÃO TIMELINE "NOSSA JORNADA" - CENTRALIZADA E OTIMIZADA
+   Design responsivo com layout centralizado para todas as telas
+=================================== */
+
+/* Timeline Section - Base */
 .timeline-section {
     padding: 8rem 0;
     width: 100%;
     overflow: hidden;
+    background: var(--primary-dark);
+    position: relative;
 }
 
+.timeline-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 4%;
+    width: 100%;
+}
+
+/* Section Header Centralizado */
+.timeline-section .section-header {
+    text-align: center;
+    margin-bottom: 5rem;
+    width: 100%;
+}
+
+.timeline-section .section-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+}
+
+.timeline-section .section-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Timeline Container - Centralizado */
 .timeline {
     position: relative;
     max-width: 1000px;
     margin: 0 auto;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+/* Linha Central - Desktop */
 .timeline::before {
     content: '';
     position: absolute;
     left: 50%;
     top: 0;
     bottom: 0;
-    width: 2px;
+    width: 3px;
     background: var(--gradient-primary);
     transform: translateX(-50%);
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
 }
 
+/* Timeline Item - Centralizado */
 .timeline-item {
     position: relative;
     margin-bottom: 4rem;
     display: flex;
     align-items: center;
     width: 100%;
+    max-width: 100%;
+    justify-content: center;
 }
 
+/* Alternar lados - Esquerda/Direita */
 .timeline-item:nth-child(odd) {
     flex-direction: row;
+    justify-content: flex-end;
 }
 
 .timeline-item:nth-child(even) {
     flex-direction: row-reverse;
+    justify-content: flex-end;
 }
 
+/* Ano - Posição original mantida */
 .timeline-year {
     background: var(--gradient-primary);
     color: var(--primary-dark);
@@ -407,31 +461,443 @@ body * {
     z-index: 2;
     position: relative;
     white-space: nowrap;
+    display: inline-block;
+    
+    /* Efeitos visuais */
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+    transition: all 0.3s ease;
 }
 
+/* Hover simples */
+.timeline-year:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+}
+
+/* Conteúdo - Cards laterais */
 .timeline-content {
-    background: var(--gradient-card);
+    background: linear-gradient(135deg, 
+        rgba(0, 212, 255, 0.08) 0%, 
+        rgba(0, 255, 255, 0.05) 100%);
     border: 1px solid var(--border-color);
     border-radius: 20px;
-    padding: 2rem;
-    margin: 0 2rem;
+    padding: 2.5rem;
+    backdrop-filter: blur(20px);
+    
+    /* Posicionamento */
+    margin: 0 2.5rem;
     flex: 1;
     max-width: 400px;
-    backdrop-filter: blur(20px);
     width: 100%;
+    
+    /* Centralização do conteúdo */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    /* Efeitos */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
+/* Hover no content */
+.timeline-content:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-cyan);
+    box-shadow: 
+        0 20px 50px rgba(0, 212, 255, 0.2),
+        0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Efeito shimmer no content */
+.timeline-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(0, 212, 255, 0.1), 
+        transparent);
+    transition: left 0.6s ease;
+    z-index: 1;
+}
+
+.timeline-content:hover::before {
+    left: 100%;
+}
+
+/* Títulos e texto do content - centralizados */
 .timeline-content h3 {
-    font-size: clamp(1.3rem, 2.5vw, 1.5rem);
-    font-weight: 600;
-    margin-bottom: 1rem;
+    font-size: clamp(1.4rem, 2.8vw, 1.7rem);
+    font-weight: 700;
+    margin-bottom: 1.2rem;
     color: var(--accent-cyan);
+    line-height: 1.3;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    width: 100%;
 }
 
 .timeline-content p {
     color: var(--text-secondary);
-    line-height: 1.6;
-    font-size: clamp(0.9rem, 2vw, 1rem);
+    line-height: 1.7;
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    text-align: center;
+    width: 100%;
+}
+
+/* Remover conectores e pontos que causam sobreposição */
+.timeline-item::after {
+    display: none;
+}
+
+/* Remover pontos na linha central */
+.timeline-year::after {
+    display: none;
+}
+
+/* ===================================
+   MOBILE RESPONSIVO - LAYOUT VERTICAL CENTRALIZADO
+=================================== */
+
+@media (max-width: 768px) {
+    /* Timeline Section */
+    .timeline-section {
+        padding: 4rem 0;
+    }
+    
+    .timeline-section .container {
+        padding: 0 3%;
+    }
+    
+    .timeline-section .section-header {
+        margin-bottom: 3rem;
+    }
+    
+    /* Timeline Container Mobile */
+    .timeline {
+        position: relative;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+    }
+    
+    /* Linha lateral simples no mobile */
+    .timeline::before {
+        display: none;
+    }
+    
+    /* Timeline Item Mobile - layout simples */
+    .timeline-item {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 3rem;
+        padding: 0;
+        position: relative;
+    }
+    
+    /* Remover alternância de lados no mobile */
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+    
+    /* Ano mobile - mantém posição original */
+    .timeline-year {
+        position: relative;
+        z-index: 2;
+        
+        /* Tamanho mobile */
+        padding: 0.8rem 1.5rem;
+        font-size: clamp(0.9rem, 2.5vw, 1rem);
+        
+        /* Estilo mobile mantido */
+        background: var(--gradient-primary);
+        color: var(--primary-dark);
+        border-radius: 25px;
+        font-weight: 700;
+        white-space: nowrap;
+        display: inline-block;
+        margin-bottom: 1rem;
+        
+        /* Efeitos mobile */
+        box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
+    }
+    
+    /* Content mobile - espaçamento correto e centralizado */
+    .timeline-content {
+        margin: 0;
+        padding: 2rem;
+        width: 100%;
+        max-width: 100%;
+        
+        /* Centralização mobile */
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        
+        /* Visual mobile */
+        background: linear-gradient(135deg, 
+            rgba(0, 212, 255, 0.1) 0%, 
+            rgba(0, 255, 255, 0.06) 100%);
+        border: 1px solid rgba(0, 212, 255, 0.2);
+        border-radius: 18px;
+        backdrop-filter: blur(20px);
+        
+        /* Sombra mobile */
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    }
+    
+    /* Títulos mobile - centralizados */
+    .timeline-content h3 {
+        font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+        margin-bottom: 1rem;
+        line-height: 1.3;
+        text-align: center;
+        width: 100%;
+    }
+    
+    .timeline-content p {
+        font-size: clamp(0.9rem, 2.5vw, 1rem);
+        line-height: 1.6;
+        text-align: center;
+        width: 100%;
+    }
+    
+    /* Remover conectores no mobile */
+    .timeline-item::after {
+        display: none;
+    }
+    
+    /* Ponto de conexão mobile */
+    .timeline-year::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 8px;
+        height: 8px;
+        background: var(--accent-cyan);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+        z-index: 1;
+    }
+    
+    /* Remover ::after do ano no mobile */
+    .timeline-year::after {
+        display: none;
+    }
+}
+
+/* Mobile muito pequeno */
+@media (max-width: 480px) {
+    .timeline-section {
+        padding: 3rem 0;
+    }
+    
+    .timeline-section .container {
+        padding: 0 2%;
+    }
+    
+    .timeline::before {
+        left: 25px;
+    }
+    
+    .timeline-item {
+        padding-left: 70px;
+        margin-bottom: 2.5rem;
+    }
+    
+    .timeline-year {
+        left: -18px;
+        padding: 0.7rem 1.2rem;
+        font-size: clamp(0.8rem, 2.8vw, 0.9rem);
+    }
+    
+    .timeline-content {
+        padding: 1.5rem;
+        border-radius: 15px;
+        margin-top: 0.3rem;
+    }
+    
+    .timeline-content h3 {
+        font-size: clamp(1.1rem, 4vw, 1.3rem);
+        margin-bottom: 0.8rem;
+        text-align: center;
+        width: 100%;
+    }
+    
+    .timeline-content p {
+        font-size: clamp(0.85rem, 2.8vw, 0.95rem);
+        line-height: 1.5;
+        text-align: center;
+        width: 100%;
+    }
+}
+
+/* Landscape mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .timeline-section {
+        padding: 2rem 0;
+    }
+    
+    .timeline-section .section-header {
+        margin-bottom: 2rem;
+    }
+    
+    .timeline-item {
+        margin-bottom: 2rem;
+    }
+    
+    .timeline-content {
+        padding: 1.5rem;
+    }
+}
+
+/* ===================================
+   ANIMAÇÕES E EFEITOS INTERATIVOS
+=================================== */
+
+/* Animação de entrada dos itens */
+.timeline-item {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: timelineSlideIn 0.8s ease forwards;
+}
+
+.timeline-item:nth-child(1) { animation-delay: 0.2s; }
+.timeline-item:nth-child(2) { animation-delay: 0.4s; }
+.timeline-item:nth-child(3) { animation-delay: 0.6s; }
+.timeline-item:nth-child(4) { animation-delay: 0.8s; }
+.timeline-item:nth-child(5) { animation-delay: 1.0s; }
+.timeline-item:nth-child(6) { animation-delay: 1.2s; }
+
+@keyframes timelineSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Efeito de pulso na linha central */
+.timeline::before {
+    animation: timelinePulse 3s ease-in-out infinite;
+}
+
+@keyframes timelinePulse {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+    }
+}
+
+/* Hover interativo no item completo */
+.timeline-item:hover .timeline-year {
+    transform: scale(1.1);
+    box-shadow: 
+        0 15px 40px rgba(0, 212, 255, 0.6),
+        0 0 0 4px var(--primary-dark);
+}
+
+.timeline-item:hover .timeline-content {
+    transform: translateY(-8px);
+    border-color: var(--accent-cyan);
+}
+
+/* ===================================
+   ACESSIBILIDADE E PERFORMANCE
+=================================== */
+
+/* Redução de movimento */
+@media (prefers-reduced-motion: reduce) {
+    .timeline-item {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+    
+    .timeline::before {
+        animation: none;
+    }
+    
+    .timeline-content:hover,
+    .timeline-year:hover {
+        transform: none;
+    }
+    
+    .timeline-content::before {
+        display: none;
+    }
+}
+
+/* Focus states para acessibilidade */
+.timeline-year:focus,
+.timeline-content:focus {
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: 2px;
+}
+
+/* Touch targets para mobile */
+@media (max-width: 768px) {
+    .timeline-year,
+    .timeline-content {
+        min-height: 44px;
+        cursor: pointer;
+        -webkit-tap-highlight-color: rgba(0, 212, 255, 0.2);
+    }
+}
+
+/* Performance optimizations */
+.timeline-content,
+.timeline-year {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+/* Print styles */
+@media print {
+    .timeline-section {
+        page-break-inside: avoid;
+    }
+    
+    .timeline-item {
+        page-break-inside: avoid;
+        margin-bottom: 2rem;
+    }
+    
+    .timeline::before,
+    .timeline-content::before {
+        display: none;
+    }
 }
 
 /* Team Section */

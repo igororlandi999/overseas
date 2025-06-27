@@ -206,8 +206,8 @@
             const counters = [
                 { selector: '.stat-number', configs: [
                     { end: 25, suffix: '+' },
-                    { end: 1000, suffix: '+' },
-                    { end: 50, suffix: '+' }
+                    { end: 300, suffix: '+' },
+                    { end: 10, suffix: '+' }
                 ]},
                 { selector: '.metric-value', configs: [
                     { end: 387, suffix: 'M' },
