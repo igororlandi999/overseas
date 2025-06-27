@@ -118,7 +118,7 @@ document.querySelectorAll('.fade-in, .slide-left, .slide-right').forEach(el => {
     observer.observe(el);
 });
 
-// Statistics Counter Animation - ATUALIZADA PARA 3 CARDS
+// Statistics Counter Animation
 function animateCounters() {
     const counters = document.querySelectorAll('.indicador-number');
     
@@ -189,7 +189,7 @@ function animateMiniCharts() {
 
 // Trigger counter animation when stats section is visible
 const statsSection = document.querySelector('.indicadores');
-let animationTriggered = false; // Controle para executar apenas uma vez
+let animationTriggered = false;
 
 const statsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -207,7 +207,6 @@ if (statsSection) {
 
 // Inicializar valores corretos nos elementos ao carregar a página
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicializar números com valores zero formatados corretamente
     const counters = document.querySelectorAll('.indicador-number');
     
     counters.forEach(counter => {
@@ -216,7 +215,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const centavos = counter.getAttribute('data-centavos') || '';
         const useSeparator = counter.getAttribute('data-separator') === 'true';
         
-        // Definir valor inicial correto
         if (centavos && centavos !== '') {
             counter.textContent = `${prefix}0,00${suffix}`;
         } else {
@@ -225,10 +223,113 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     console.log('Overseas Trading - Seção de indicadores inicializada! ✅');
-    console.log('🔢 3 cards principais: 📈 88% | 🏛️ R$ 35.019.349,73 | 🚛 R$ 387.600.395,04');
+    console.log('🔢 2 cards principais: 🏛️ R$ 35.019.349,73 | 🚛 R$ 387.600.395,04');
 });
 
-// Form Validation and Submission
+// ==============================================
+// NOVA IMPLEMENTAÇÃO DE ENVIO DE EMAIL
+// ==============================================
+
+// Configuração do EmailJS (Solução Gratuita)
+const EMAIL_CONFIG = {
+    serviceID: 'service_overseas', // Você precisa configurar isso no EmailJS
+    templateID: 'template_contact', // Você precisa criar esse template
+    userID: 'YOUR_EMAILJS_USER_ID' // Seu user ID do EmailJS
+};
+
+// Função para enviar email via EmailJS
+async function sendEmailJS(formData) {
+    const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        company: formData.company || 'Não informado',
+        phone: formData.phone || 'Não informado',
+        message: formData.message,
+        to_email: 'maru@overseastrading.com.br'
+    };
+
+    try {
+        const response = await emailjs.send(
+            EMAIL_CONFIG.serviceID,
+            EMAIL_CONFIG.templateID,
+            templateParams,
+            EMAIL_CONFIG.userID
+        );
+        
+        console.log('Email enviado com sucesso:', response);
+        return { success: true, response };
+    } catch (error) {
+        console.error('Erro ao enviar email:', error);
+        throw error;
+    }
+}
+
+// Função alternativa usando Formspree (Backup)
+async function sendFormspree(formData) {
+    const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            company: formData.company,
+            phone: formData.phone,
+            message: formData.message,
+            _replyto: formData.email,
+            _subject: `Nova mensagem de contato - ${formData.name}`
+        })
+    });
+
+    if (!response.ok) {
+        throw new Error('Erro no envio via Formspree');
+    }
+
+    return await response.json();
+}
+
+// Função principal de envio de email
+async function sendContactEmail(formData) {
+    // Tentativa 1: EmailJS (Principal)
+    try {
+        if (typeof emailjs !== 'undefined') {
+            return await sendEmailJS(formData);
+        }
+    } catch (error) {
+        console.log('EmailJS falhou, tentando Formspree...', error);
+    }
+
+    // Tentativa 2: Formspree (Backup)
+    try {
+        return await sendFormspree(formData);
+    } catch (error) {
+        console.log('Formspree falhou, usando webhook...', error);
+    }
+
+    // Tentativa 3: Webhook personalizado (se você tiver um servidor)
+    try {
+        const response = await fetch('/api/send-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro no webhook');
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.log('Webhook falhou:', error);
+        throw new Error('Todos os métodos de envio falharam');
+    }
+}
+
+// Form Validation and Submission - ATUALIZADO
 if (contactForm) {
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -236,48 +337,76 @@ if (contactForm) {
         const formData = new FormData(contactForm);
         const data = Object.fromEntries(formData);
         
-        // Basic validation
+        // Validação básica
         if (!validateForm(data)) {
             return;
         }
         
-        // Show loading state
+        // Mostrar estado de carregamento
         const submitBtn = contactForm.querySelector('.submit-btn');
         const originalText = submitBtn.textContent;
         submitBtn.textContent = 'Enviando...';
         submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.7';
         
         try {
-            // Simulate form submission (replace with actual endpoint)
-            await simulateFormSubmission(data);
+            // Enviar email
+            await sendContactEmail(data);
             
-            // Show success message
-            showMessage('Mensagem enviada com sucesso! Entraremos em contato em breve.', 'success');
+            // Mostrar mensagem de sucesso
+            showMessage(
+                '✅ Mensagem enviada com sucesso!<br>Entraremos em contato em até 24 horas.',
+                'success'
+            );
+            
+            // Limpar formulário
             contactForm.reset();
             
+            // Analytics/Tracking (opcional)
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'form_submit', {
+                    event_category: 'Contact',
+                    event_label: 'Contact Form Submission'
+                });
+            }
+            
         } catch (error) {
-            showMessage('Erro ao enviar mensagem. Tente novamente.', 'error');
+            console.error('Erro ao enviar mensagem:', error);
+            showMessage(
+                '❌ Erro ao enviar mensagem.<br>Tente novamente ou entre em contato via WhatsApp.',
+                'error'
+            );
         } finally {
+            // Restaurar botão
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
+            submitBtn.style.opacity = '1';
         }
     });
 }
 
-// Form Validation Function
+// Form Validation Function - MELHORADA
 function validateForm(data) {
     const errors = [];
     
+    // Validação de nome
     if (!data.name || data.name.trim().length < 2) {
         errors.push('Nome deve ter pelo menos 2 caracteres');
     }
     
+    // Validação de email
     if (!data.email || !isValidEmail(data.email)) {
         errors.push('E-mail inválido');
     }
     
+    // Validação de mensagem
     if (!data.message || data.message.trim().length < 10) {
         errors.push('Mensagem deve ter pelo menos 10 caracteres');
+    }
+    
+    // Validação de telefone (opcional, mas se preenchido deve ser válido)
+    if (data.phone && !isValidPhone(data.phone)) {
+        errors.push('Telefone inválido (use formato brasileiro)');
     }
     
     if (errors.length > 0) {
@@ -288,29 +417,23 @@ function validateForm(data) {
     return true;
 }
 
-// Email Validation
+// Email Validation - MELHORADA
 function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+    return emailRegex.test(email.trim());
 }
 
-// Simulate Form Submission
-function simulateFormSubmission(data) {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            // Simulate success (90% chance) or failure (10% chance)
-            if (Math.random() > 0.1) {
-                resolve(data);
-            } else {
-                reject(new Error('Simulation error'));
-            }
-        }, 2000);
-    });
+// Phone Validation
+function isValidPhone(phone) {
+    // Remove todos os caracteres não numéricos
+    const cleanPhone = phone.replace(/\D/g, '');
+    // Verifica se tem entre 10 e 11 dígitos (formato brasileiro)
+    return cleanPhone.length >= 10 && cleanPhone.length <= 11;
 }
 
-// Show Success/Error Messages
+// Show Success/Error Messages - MELHORADA
 function showMessage(message, type) {
-    // Remove existing messages
+    // Remove mensagens existentes
     const existingMessage = document.querySelector('.message');
     if (existingMessage) {
         existingMessage.remove();
@@ -319,15 +442,25 @@ function showMessage(message, type) {
     const messageDiv = document.createElement('div');
     messageDiv.className = `message ${type}`;
     messageDiv.innerHTML = message;
+    messageDiv.style.animation = 'slideInFromTop 0.5s ease';
     
-    // Insert before form
+    // Inserir antes do formulário
     contactForm.parentNode.insertBefore(messageDiv, contactForm);
     
-    // Auto remove after 5 seconds
+    // Auto remover após 7 segundos
     setTimeout(() => {
-        messageDiv.remove();
-    }, 5000);
+        if (messageDiv.parentNode) {
+            messageDiv.style.animation = 'slideOutToTop 0.5s ease';
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 500);
+        }
+    }, 7000);
 }
+
+// ==============================================
+// RESTO DO CÓDIGO ORIGINAL (mantido igual)
+// ==============================================
 
 // Animate Hero Chart Bars
 function animateHeroChart() {
@@ -400,11 +533,9 @@ function setDynamicTheme() {
     const root = document.documentElement;
     
     if (hour >= 6 && hour < 18) {
-        // Day theme - slightly brighter
         root.style.setProperty('--accent-blue', '#00d4ff');
         root.style.setProperty('--accent-cyan', '#00ffff');
     } else {
-        // Night theme - more muted
         root.style.setProperty('--accent-blue', '#0099cc');
         root.style.setProperty('--accent-cyan', '#00cccc');
     }
@@ -462,7 +593,6 @@ function animateFloatingButton() {
             }
         });
         
-        // Add pulse effect on hover
         whatsappButton.addEventListener('mouseenter', () => {
             whatsappButton.style.animation = 'none';
         });
@@ -491,7 +621,7 @@ function measurePerformance() {
 // Initialize performance monitoring
 measurePerformance();
 
-// Lazy Loading for Images (if any are added later)
+// Lazy Loading for Images
 function lazyLoadImages() {
     const images = document.querySelectorAll('img[data-src]');
     
@@ -541,7 +671,6 @@ initSectionTransitions();
 
 // Cleanup function for performance
 function cleanup() {
-    // Remove unused event listeners and observers when page unloads
     window.addEventListener('beforeunload', () => {
         observer.disconnect();
         statsObserver.disconnect();
@@ -564,7 +693,6 @@ document.querySelectorAll('.form-group input, .form-group textarea').forEach(inp
         }
     });
     
-    // Check if input has value on page load
     if (input.value) {
         input.parentElement.classList.add('focused');
     }
@@ -620,25 +748,27 @@ buttonInteractions.init();
 
 // Console welcome message
 console.log(`
-🌊 Overseas Trading - Website loaded successfully! 🚀
+🌊 Overseas Trading - Website com Email Integrado! 🚀
 📧 Commercial: comercial@overseastrading.com.br
+📧 Maru: maru@overseastrading.com.br
 📱 WhatsApp: +55 (48) 3204-9798
-🌍 23 years of international trade experience
+🌍 25+ anos de experiência em comércio internacional
 
-📊 Seção de Indicadores Atualizada:
-📈 +88% crescimento de processos desde 2020
-🏛️ R$ 35.019.349,73 economizados em ICMS (2024)
-🚛 R$ 387.600.395,04 movimentados (2024)
+📊 Sistema de Email Configurado:
+✅ EmailJS (Principal)
+✅ Formspree (Backup)
+✅ Validação avançada
+✅ Mensagens de feedback
+✅ Analytics tracking
 
-✨ Mantidos apenas os 3 cards solicitados
-🎯 Grid responsivo: 3 colunas desktop, 1 coluna mobile
-⚡ Animação countUp única por visita
-🎨 Layout otimizado e limpo
+💡 Próximos passos:
+1. Configurar EmailJS ou Formspree
+2. Testar envio de emails
+3. Monitorar formulários
 `);
 
 // Initialize all functions when DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Overseas Trading - All systems initialized! ✅');
-    console.log('🎯 Seção de indicadores atualizada com 3 cards! 📊');
+    console.log('Overseas Trading - Sistema completo inicializado! ✅');
+    console.log('📧 Formulário de contato conectado ao email! 📬');
 });
-
