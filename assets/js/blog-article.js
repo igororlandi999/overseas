@@ -9,7 +9,7 @@ const BlogConfig = {
         {
             title: "Passo a Passo: Como Obter o RADAR Siscomex",
             date: "20 Abr, 2025",
-            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+            image: "https://www.purestorage.com/content/dam/purestorage/knowledge/containers.jpg.imgo.jpg",
             alt: "RADAR"
         },
         {
