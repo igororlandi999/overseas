@@ -274,8 +274,8 @@
                 return;
             }
             
-            // Simular envio
-            this.simulateFormSubmission(data);
+            // Enviar via email
+            this.sendFormSubmission(data);
         },
 
         validateForm(data) {
@@ -427,7 +427,8 @@
             });
         },
 
-        simulateFormSubmission(data) {
+        // FUNÇÃO ATUALIZADA - ENVIO VIA EMAIL
+        async sendFormSubmission(data) {
             const submitBtn = this.form.querySelector('.submit-btn');
             const originalText = submitBtn.textContent;
             
@@ -436,20 +437,63 @@
             submitBtn.disabled = true;
             state.formSubmitted = true;
             
-            // Simular tempo de envio
-            setTimeout(() => {
-                this.showSuccessMessage();
-                this.form.reset();
-                this.fileName.textContent = 'Nenhum arquivo selecionado';
-                this.fileName.style.color = 'var(--text-muted)';
+            try {
+                // Preparar dados para envio via Formspree
+                const formData = new FormData();
                 
+                // Adicionar todos os campos do formulário
+                formData.append('nome', data.nome);
+                formData.append('email', data.email);
+                formData.append('telefone', data.telefone);
+                formData.append('area', data.area);
+                formData.append('linkedin', data.linkedin || 'Não informado');
+                formData.append('apresentacao', data.apresentacao);
+                formData.append('_subject', `Nova Candidatura - ${data.nome} - ${data.area}`);
+                formData.append('_replyto', data.email);
+                
+                // Adicionar arquivo do currículo
+                const fileInput = this.fileInput;
+                if (fileInput.files[0]) {
+                    formData.append('curriculo', fileInput.files[0]);
+                }
+                
+                // Enviar via Formspree (suporta arquivos)
+                const response = await fetch('https://formspree.io/f/mvgrlvpn', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    this.showSuccessMessage();
+                    this.form.reset();
+                    this.fileName.textContent = 'Nenhum arquivo selecionado';
+                    this.fileName.style.color = 'var(--text-muted)';
+                    
+                    utils.log('Candidatura enviada com sucesso', data);
+                    
+                    // Analytics (se disponível)
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'candidatura_submit', {
+                            event_category: 'Trabalhe Conosco',
+                            event_label: data.area
+                        });
+                    }
+                } else {
+                    throw new Error('Erro no envio via Formspree');
+                }
+                
+            } catch (error) {
+                console.error('Erro ao enviar candidatura:', error);
+                this.showErrorMessage();
+            } finally {
                 // Resetar botão
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
                 state.formSubmitted = false;
-                
-                utils.log('Formulário enviado com sucesso', data);
-            }, 2000);
+            }
         },
 
         showSuccessMessage() {
@@ -474,6 +518,32 @@
                     messageDiv.remove();
                 }
             }, 8000);
+        },
+
+        // NOVA FUNÇÃO - MENSAGEM DE ERRO
+        showErrorMessage() {
+            // Remover mensagens existentes
+            const existingMessage = document.querySelector('.form-message');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'form-message error';
+            messageDiv.innerHTML = `
+                <strong>❌ Erro ao enviar candidatura!</strong><br>
+                Tente novamente ou envie seu currículo diretamente para: 
+                <a href="mailto:contato@overseastrading.com.br" style="color: #ff6b6b; text-decoration: underline;">contato@overseastrading.com.br</a>
+            `;
+            
+            this.form.parentNode.insertBefore(messageDiv, this.form);
+            
+            // Auto remover após 10 segundos
+            setTimeout(() => {
+                if (messageDiv.parentNode) {
+                    messageDiv.remove();
+                }
+            }, 10000);
         }
     };
 
@@ -721,6 +791,7 @@
         PageInitializer.init();
         
         console.log('🌊 Página Trabalhe Conosco da Overseas Trading carregada!');
+        console.log('📧 Sistema de email configurado com Formspree ID: mvgrlvpn');
         
         if (config.debug) {
             console.log('🔧 API disponível em: window.TrabalheConoscoPageAPI');

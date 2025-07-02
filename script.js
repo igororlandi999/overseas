@@ -9,26 +9,26 @@ const contactForm = document.getElementById('contactForm');
 let lastScrollTop = 0;
 window.addEventListener('scroll', () => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
+
     // Header background change
     if (scrollTop > 100) {
         header.classList.add('header-scrolled');
     } else {
         header.classList.remove('header-scrolled');
     }
-    
+
     // Scroll progress bar
     const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
     const scrollPercentage = (scrollTop / documentHeight) * 100;
     scrollProgress.style.width = `${scrollPercentage}%`;
-    
+
     lastScrollTop = scrollTop;
 });
 
 // Mobile Menu Toggle
 mobileToggle.addEventListener('click', () => {
     const isActive = navLinks.classList.contains('active');
-    
+
     if (isActive) {
         // Fechar menu
         navLinks.classList.remove('active');
@@ -89,7 +89,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         if (target) {
             const headerHeight = header.offsetHeight;
             const targetPosition = target.offsetTop - headerHeight;
-            
+
             window.scrollTo({
                 top: targetPosition,
                 behavior: 'smooth'
@@ -121,7 +121,7 @@ document.querySelectorAll('.fade-in, .slide-left, .slide-right').forEach(el => {
 // Statistics Counter Animation
 function animateCounters() {
     const counters = document.querySelectorAll('.indicador-number');
-    
+
     counters.forEach(counter => {
         const target = parseInt(counter.getAttribute('data-target'));
         const prefix = counter.getAttribute('data-prefix') || '';
@@ -133,32 +133,32 @@ function animateCounters() {
         const increment = target / steps;
         let current = 0;
         let step = 0;
-        
+
         const timer = setInterval(() => {
             step++;
             current = Math.min(increment * step, target);
-            
+
             counter.textContent = formatNumberComplete(
-                Math.floor(current), 
-                prefix, 
-                suffix, 
-                centavos, 
+                Math.floor(current),
+                prefix,
+                suffix,
+                centavos,
                 useSeparator
             );
-            
+
             if (step >= steps) {
                 clearInterval(timer);
                 counter.textContent = formatNumberComplete(
-                    target, 
-                    prefix, 
-                    suffix, 
-                    centavos, 
+                    target,
+                    prefix,
+                    suffix,
+                    centavos,
                     useSeparator
                 );
             }
         }, duration / steps);
     });
-    
+
     // Animate mini charts
     setTimeout(() => {
         animateMiniCharts();
@@ -168,11 +168,11 @@ function animateCounters() {
 // Improved formatNumberComplete function
 function formatNumberComplete(value, prefix, suffix, centavos, useSeparator) {
     let formattedValue = useSeparator ? value.toLocaleString('pt-BR') : value;
-    
+
     if (centavos && prefix.includes('R')) {
         formattedValue = formattedValue + ',' + centavos;
     }
-    
+
     return `${prefix}${formattedValue}${suffix}`;
 }
 
@@ -208,20 +208,20 @@ if (statsSection) {
 // Inicializar valores corretos nos elementos ao carregar a página
 document.addEventListener('DOMContentLoaded', () => {
     const counters = document.querySelectorAll('.indicador-number');
-    
+
     counters.forEach(counter => {
         const prefix = counter.getAttribute('data-prefix') || '';
         const suffix = counter.getAttribute('data-suffix') || '';
         const centavos = counter.getAttribute('data-centavos') || '';
         const useSeparator = counter.getAttribute('data-separator') === 'true';
-        
+
         if (centavos && centavos !== '') {
             counter.textContent = `${prefix}0,00${suffix}`;
         } else {
             counter.textContent = `${prefix}0${suffix}`;
         }
     });
-    
+
     console.log('Overseas Trading - Seção de indicadores inicializada! ✅');
     console.log('🔢 2 cards principais: 🏛️ R$ 35.019.349,73 | 🚛 R$ 387.600.395,04');
 });
@@ -255,7 +255,7 @@ async function sendEmailJS(formData) {
             templateParams,
             EMAIL_CONFIG.userID
         );
-        
+
         console.log('Email enviado com sucesso:', response);
         return { success: true, response };
     } catch (error) {
@@ -266,7 +266,7 @@ async function sendEmailJS(formData) {
 
 // Função alternativa usando Formspree (Backup)
 async function sendFormspree(formData) {
-    const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+    const response = await fetch('https://formspree.io/f/mldnzorw', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -333,35 +333,35 @@ async function sendContactEmail(formData) {
 if (contactForm) {
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
         const formData = new FormData(contactForm);
         const data = Object.fromEntries(formData);
-        
+
         // Validação básica
         if (!validateForm(data)) {
             return;
         }
-        
+
         // Mostrar estado de carregamento
         const submitBtn = contactForm.querySelector('.submit-btn');
         const originalText = submitBtn.textContent;
         submitBtn.textContent = 'Enviando...';
         submitBtn.disabled = true;
         submitBtn.style.opacity = '0.7';
-        
+
         try {
             // Enviar email
             await sendContactEmail(data);
-            
+
             // Mostrar mensagem de sucesso
             showMessage(
                 '✅ Mensagem enviada com sucesso!<br>Entraremos em contato em até 24 horas.',
                 'success'
             );
-            
+
             // Limpar formulário
             contactForm.reset();
-            
+
             // Analytics/Tracking (opcional)
             if (typeof gtag !== 'undefined') {
                 gtag('event', 'form_submit', {
@@ -369,7 +369,7 @@ if (contactForm) {
                     event_label: 'Contact Form Submission'
                 });
             }
-            
+
         } catch (error) {
             console.error('Erro ao enviar mensagem:', error);
             showMessage(
@@ -388,32 +388,32 @@ if (contactForm) {
 // Form Validation Function - MELHORADA
 function validateForm(data) {
     const errors = [];
-    
+
     // Validação de nome
     if (!data.name || data.name.trim().length < 2) {
         errors.push('Nome deve ter pelo menos 2 caracteres');
     }
-    
+
     // Validação de email
     if (!data.email || !isValidEmail(data.email)) {
         errors.push('E-mail inválido');
     }
-    
+
     // Validação de mensagem
     if (!data.message || data.message.trim().length < 10) {
         errors.push('Mensagem deve ter pelo menos 10 caracteres');
     }
-    
+
     // Validação de telefone (opcional, mas se preenchido deve ser válido)
     if (data.phone && !isValidPhone(data.phone)) {
         errors.push('Telefone inválido (use formato brasileiro)');
     }
-    
+
     if (errors.length > 0) {
         showMessage(errors.join('<br>'), 'error');
         return false;
     }
-    
+
     return true;
 }
 
@@ -438,15 +438,15 @@ function showMessage(message, type) {
     if (existingMessage) {
         existingMessage.remove();
     }
-    
+
     const messageDiv = document.createElement('div');
     messageDiv.className = `message ${type}`;
     messageDiv.innerHTML = message;
     messageDiv.style.animation = 'slideInFromTop 0.5s ease';
-    
+
     // Inserir antes do formulário
     contactForm.parentNode.insertBefore(messageDiv, contactForm);
-    
+
     // Auto remover após 7 segundos
     setTimeout(() => {
         if (messageDiv.parentNode) {
@@ -465,14 +465,14 @@ function showMessage(message, type) {
 // Animate Hero Chart Bars
 function animateHeroChart() {
     const chartBars = document.querySelectorAll('.chart-bar');
-    
+
     chartBars.forEach((bar, index) => {
         const height = bar.style.height;
         const fill = bar.querySelector('.bar-fill');
-        
+
         // Reset height
         fill.style.height = '0';
-        
+
         // Animate with delay
         setTimeout(() => {
             fill.style.height = height;
@@ -500,7 +500,7 @@ document.querySelectorAll('.diferencial-item').forEach(card => {
     card.addEventListener('mouseenter', () => {
         card.style.transform = 'translateY(-10px)';
     });
-    
+
     card.addEventListener('mouseleave', () => {
         card.style.transform = 'translateY(0)';
     });
@@ -510,7 +510,7 @@ document.querySelectorAll('.solucao-card').forEach(card => {
     card.addEventListener('mouseenter', () => {
         card.style.transform = 'translateY(-8px)';
     });
-    
+
     card.addEventListener('mouseleave', () => {
         card.style.transform = 'translateY(0)';
     });
@@ -521,7 +521,7 @@ document.querySelectorAll('.indicador-card').forEach(card => {
     card.addEventListener('mouseenter', () => {
         card.style.transform = 'translateY(-8px) scale(1.02)';
     });
-    
+
     card.addEventListener('mouseleave', () => {
         card.style.transform = 'translateY(0) scale(1)';
     });
@@ -531,7 +531,7 @@ document.querySelectorAll('.indicador-card').forEach(card => {
 function setDynamicTheme() {
     const hour = new Date().getHours();
     const root = document.documentElement;
-    
+
     if (hour >= 6 && hour < 18) {
         root.style.setProperty('--accent-blue', '#00d4ff');
         root.style.setProperty('--accent-cyan', '#00ffff');
@@ -547,14 +547,14 @@ setDynamicTheme();
 // Add scroll-based reveal animation for elements
 function addScrollReveal() {
     const revealElements = document.querySelectorAll('.diferencial-item, .indicador-card, .solucao-card');
-    
+
     revealElements.forEach((element, index) => {
         element.style.opacity = '0';
         element.style.transform = 'translateY(30px)';
         element.style.transition = 'all 0.6s ease';
         element.style.transitionDelay = `${index * 0.1}s`;
     });
-    
+
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -563,7 +563,7 @@ function addScrollReveal() {
             }
         });
     }, { threshold: 0.1 });
-    
+
     revealElements.forEach(element => {
         revealObserver.observe(element);
     });
@@ -575,13 +575,13 @@ addScrollReveal();
 // Add floating action button animation
 function animateFloatingButton() {
     const whatsappButton = document.querySelector('.whatsapp-float');
-    
+
     if (whatsappButton) {
         let isVisible = false;
-        
+
         window.addEventListener('scroll', () => {
             const scrollTop = window.pageYOffset;
-            
+
             if (scrollTop > 300 && !isVisible) {
                 whatsappButton.style.opacity = '1';
                 whatsappButton.style.transform = 'scale(1)';
@@ -592,11 +592,11 @@ function animateFloatingButton() {
                 isVisible = false;
             }
         });
-        
+
         whatsappButton.addEventListener('mouseenter', () => {
             whatsappButton.style.animation = 'none';
         });
-        
+
         whatsappButton.addEventListener('mouseleave', () => {
             whatsappButton.style.animation = 'pulse-whatsapp 2s infinite';
         });
@@ -624,7 +624,7 @@ measurePerformance();
 // Lazy Loading for Images
 function lazyLoadImages() {
     const images = document.querySelectorAll('img[data-src]');
-    
+
     const imageObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -635,7 +635,7 @@ function lazyLoadImages() {
             }
         });
     });
-    
+
     images.forEach(img => imageObserver.observe(img));
 }
 
@@ -645,13 +645,13 @@ lazyLoadImages();
 // Add smooth transitions to section appearances
 function initSectionTransitions() {
     const sections = document.querySelectorAll('section');
-    
+
     sections.forEach(section => {
         section.style.opacity = '0';
         section.style.transform = 'translateY(20px)';
         section.style.transition = 'all 0.8s ease';
     });
-    
+
     const sectionObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -660,7 +660,7 @@ function initSectionTransitions() {
             }
         });
     }, { threshold: 0.1 });
-    
+
     sections.forEach(section => {
         sectionObserver.observe(section);
     });
@@ -686,13 +686,13 @@ document.querySelectorAll('.form-group input, .form-group textarea').forEach(inp
     input.addEventListener('focus', () => {
         input.parentElement.classList.add('focused');
     });
-    
+
     input.addEventListener('blur', () => {
         if (!input.value) {
             input.parentElement.classList.remove('focused');
         }
     });
-    
+
     if (input.value) {
         input.parentElement.classList.add('focused');
     }
@@ -705,20 +705,20 @@ const buttonInteractions = {
             button.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
             this.addButtonListeners(button);
         });
-        
+
         document.querySelectorAll('.social-link').forEach(link => {
             link.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
             this.addLinkListeners(link);
         });
     },
-    
+
     addButtonListeners(button) {
         const states = {
             default: 'translateY(0) scale(1)',
             hover: 'translateY(-3px) scale(1.02)',
             active: 'translateY(-1px) scale(0.98)'
         };
-        
+
         button.addEventListener('mouseenter', () => {
             button.style.transform = states.hover;
         });
@@ -732,7 +732,7 @@ const buttonInteractions = {
             button.style.transform = states.hover;
         });
     },
-    
+
     addLinkListeners(link) {
         link.addEventListener('mouseenter', () => {
             link.style.transform = 'translateY(-5px) scale(1.1)';
