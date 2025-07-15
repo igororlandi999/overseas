@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Importação - Overseas Trading</title>
+    <meta name="description" content="Simule e compare custos de importação com e sem intermediação. Calcule II, IPI, PIS, COFINS, ICMS e descubra sua economia.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- ==========================================
+             CABEÇALHO
+        ========================================== -->
+        <header class="header">
+            <h1>🧮 Calculadora de Importação</h1>
+            <p>
+                Simule e compare custos de importação com e sem a intermediação da Overseas Trading.
+                Calcule tributos federais (II, IPI, PIS, COFINS), ICMS, custos operacionais e descubra sua economia potencial com nosso regime CO3.
+            </p>
+        </header>
+
+        <!-- ==========================================
+             FORMULÁRIO PRINCIPAL
+        ========================================== -->
+        <main class="calculator-card">
+            <h2>📋 Dados da Importação</h2>
+            
+            <form id="calculatorForm">
+                <!-- Dados Básicos -->
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="cliente">👤 Cliente</label>
+                        <input type="text" id="cliente" value="Empresa Teste Ltda" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="regimeTributario">🏛️ Regime Tributário</label>
+                        <select id="regimeTributario" required>
+                            <option value="SIMPLES NACIONAL">Simples Nacional</option>
+                            <option value="LUCRO PRESUMIDO">Lucro Presumido</option>
+                            <option value="LUCRO REAL">Lucro Real</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="unidade">📏 Unidade</label>
+                        <select id="unidade" required>
+                            <option value="Quilograma">Quilograma</option>
+                            <option value="Tonelada">Tonelada</option>
+                            <option value="Unidade">Unidade</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="moeda">💱 Moeda</label>
+                        <select id="moeda" required>
+                            <option value="DOLAR">Dólar (USD)</option>
+                            <option value="EURO">Euro (EUR)</option>
+                            <option value="LIBRA">Libra (GBP)</option>
+                            <option value="REAL">Real (BRL)</option>
+                            <option value="RENMIBI">Renminbi (CNY)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="taxaMoeda">📈 Taxa da Moeda (PTAX)</label>
+                        <input type="number" id="taxaMoeda" value="5.50" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="destino">🎯 Destino</label>
+                        <select id="destino" required>
+                            <option value="INDUSTRIALIZAÇÃO">Industrialização</option>
+                            <option value="REVENDA">Revenda</option>
+                            <option value="ATIVO/IMOBILIZADO">Ativo Imobilizado</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mudaNcm">🔄 Muda NCM</label>
+                        <select id="mudaNcm" required>
+                            <option value="SIM">Sim</option>
+                            <option value="NÃO">Não</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="valorFrete">🚢 Valor do Frete (USD)</label>
+                        <input type="number" id="valorFrete" value="1000" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="modalImportacao">🚛 Modal de Importação</label>
+                        <select id="modalImportacao" required>
+                            <option value="Marítimo">Marítimo</option>
+                            <option value="Aéreo">Aéreo</option>
+                            <option value="Rodoviário">Rodoviário</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="estado">📍 Estado de Destino</label>
+                        <select id="estado" required>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="PR">Paraná</option>
+                            <option value="BA">Bahia</option>
+                            <option value="GO">Goiás</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="CE">Ceará</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="PI">Piauí</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="TO">Tocantins</option>
+                            <option value="AC">Acre</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="AP">Amapá</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Seção de NCMs -->
+                <section class="ncm-section">
+                    <h3>🏷️ NCMs da Importação</h3>
+                    <div id="ncmContainer">
+                        <!-- NCMs serão adicionados dinamicamente -->
+                    </div>
+                    <button type="button" class="add-ncm-btn" id="addNCMBtn">
+                        ➕ Adicionar NCM
+                    </button>
+                </section>
+
+                <!-- Botão de Cálculo -->
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button type="submit" class="btn" id="calculateBtn">
+                        🧮 Calcular Simulação
+                    </button>
+                </div>
+            </form>
+
+            <!-- Mensagem de Erro -->
+            <div id="errorMessage" class="error-message"></div>
+        </main>
+
+        <!-- ==========================================
+             SEÇÃO DE RESULTADOS
+        ========================================== -->
+        <section id="resultsSection" class="results-section">
+            <div class="results-grid">
+                <!-- Tabela de Comparação Principal -->
+                <div class="result-card full-width-card">
+                    <h3>💰 Comparação de Custos - Importação Direta vs Overseas CO3</h3>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th class="item-name">Item</th>
+                                <th>Imp. Direta</th>
+                                <th>Overseas CO3</th>
+                            </tr>
+                        </thead>
+                        <tbody id="comparisonTableBody">
+                            <!-- Dados preenchidos dinamicamente -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Card de Economia -->
+                <div class="result-card">
+                    <h3>📈 Economia Gerada</h3>
+                    <div class="economy-card">
+                        <div class="economy-value">
+                            <span id="percentualEconomia" class="highlight">0,00%</span>
+                        </div>
+                        <div class="economy-money">
+                            <span id="valorEconomia" class="highlight">R$ 0,00</span>
+                        </div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                            Economia total estimada
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Breakdown Tributário -->
+                <div class="result-card">
+                    <h3>📊 Breakdown Tributário</h3>
+                    <div id="tributosDetails">
+                        <!-- Detalhes dos tributos -->
+                    </div>
+                </div>
+
+                <!-- Dados da Operação -->
+                <div class="result-card">
+                    <h3>📋 Dados da Operação</h3>
+                    <div id="operationDetails">
+                        <!-- Dados da operação -->
+                    </div>
+                </div>
+
+                <!-- Custos Operacionais -->
+                <div class="result-card">
+                    <h3>💼 Custos Operacionais</h3>
+                    <div id="custosDetails">
+                        <!-- Custos operacionais -->
+                    </div>
+                </div>
+
+                <!-- NCMs Calculados -->
+                <div class="result-card">
+                    <h3>🏷️ NCMs Calculados</h3>
+                    <div id="ncmsDetails">
+                        <!-- Detalhes dos NCMs -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aviso Legal -->
+            <div class="warning-box">
+                <p>
+                    ⚠️ Os valores utilizados acima representam uma estimativa e estão sujeitos a alterações.
+                    Cálculos baseados na legislação tributária vigente e na planilha oficial Overseas Trading.
+                </p>
+            </div>
+
+            <!-- Seção de Contato -->
+            <div class="contact-section">
+                <h3>🤝 Precisa de uma Consultoria Especializada?</h3>
+                <p>Nossa equipe está pronta para analisar sua operação em detalhes e encontrar a melhor estratégia de importação.</p>
+                <a href="#" class="contact-btn" id="contactBtn">
+                    💬 Falar com Especialista
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="js/utils.js"></script>
+    <script type="module" src="js/storage.js"></script>
+    <script type="module" src="js/ui.js"></script>
+    <script type="module" src="js/ncm.js"></script>
+    <script type="module" src="js/calculadora.js"></script>
+    <script type="module" src="js/app.js"></script>
+    <script type="module" src="js/integracao-overseas.js"></script>
+</body>
+</html>
