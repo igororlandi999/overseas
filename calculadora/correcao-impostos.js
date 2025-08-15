@@ -79,9 +79,14 @@ function calcularDemaisDespesasExcel(parametros) {
     const expediente = 150.00;
     console.log(`   📋 EXPEDIENTE: R$ ${expediente.toFixed(2)}`);
     
-    // 7. DESPESAS DESTINO: Zerado conforme planilha (fórmula =ESTIMATIVA!$G$12*B15 resulta em 0)
-    const despesasDestino = 0.00; // Sempre 0 conforme observado na planilha
-    console.log(`   🚛 DESPESAS DESTINO: R$ 0,00 (conforme planilha)`);
+    // 7. DESPESAS DESTINO: =SE(D14="Aéreo";1550;2300)
+    let despesasDestino = 2300.00; // Padrão (marítimo/rodoviário)
+    if (modalTransporte && modalTransporte.toUpperCase() === 'AEREO') {
+        despesasDestino = 1550.00;
+        console.log(`   ✈️ DESPESAS DESTINO (Aéreo): R$ 1.550,00`);
+    } else {
+        console.log(`   🚛 DESPESAS DESTINO (${modalTransporte}): R$ 2.300,00`);
+    }
     
     // 8. TOTAL (AP47)
     const total = seguro + afrmm + armazenagem + tch + honorarioDespachante + expediente + despesasDestino;
@@ -451,7 +456,8 @@ function calcularNotaFiscalSaida(parametros) {
     const icmsST = 0;   // A implementar se necessário
     
     // 6. TOTAL DA NOTA FISCAL SAÍDA
-    const totalNotaFiscalSaida = valorProdutos + icmsSaida + ipiSaida + icmsST;
+    // CORREÇÃO: Total = Valor Produtos + IPI (sem ICMS, conforme planilha)
+    const totalNotaFiscalSaida = valorProdutos + ipiSaida; // ✅ CORRIGIDO: sem ICMS e ICMS ST
     
     const resultado = {
         valorProdutos: parseFloat(valorProdutos.toFixed(2)),
@@ -460,16 +466,16 @@ function calcularNotaFiscalSaida(parametros) {
         icmsST: parseFloat(icmsST.toFixed(2)),
         total: parseFloat(totalNotaFiscalSaida.toFixed(2)),
         porcentagemICMS: porcentagemICMS,
-        porcentagemIPI: porcentagemIPI // ✅ ADICIONADO
+        porcentagemIPI: porcentagemIPI
     };
     
     console.log('📋 ===== RESUMO NOTA FISCAL SAÍDA =====');
     console.log(`   Valor Produtos (ICMS): R$ ${resultado.valorProdutos.toFixed(2)}`);
     console.log(`   ICMS (${porcentagemICMS}%): R$ ${resultado.icms.toFixed(2)}`);
-    console.log(`   IPI (${porcentagemIPI}%): R$ ${resultado.ipi.toFixed(2)}`); // ✅ ATUALIZADO
+    console.log(`   IPI (${porcentagemIPI}%): R$ ${resultado.ipi.toFixed(2)}`);
     console.log(`   ICMS ST: R$ ${resultado.icmsST.toFixed(2)}`);
-    console.log(`   🎯 TOTAL: R$ ${resultado.total.toFixed(2)}`);
-    console.log(`   🎯 ESPERADO TOTAL: R$ 469.737,68`);
+    console.log(`   🎯 TOTAL (Produtos + IPI): R$ ${resultado.total.toFixed(2)}`);
+    console.log(`   🎯 ESPERADO: R$ 472.521,21 (443.681,88 + 28.839,32)`);
     console.log('==========================================');
     
     return resultado;
@@ -715,7 +721,41 @@ function executarSimulacaoCorrigida(parametros) {
             aliquotaIPI: aliquotasConsolidadas.ipi // ✅ ADICIONADO: passar alíquota do NCM
         });
 
-        console.log('✅ Nota Fiscal de Saída calculada!');
+        // ✅ CALCULAR OUTROS ITENS (Serviços Trading e Descontos)
+        const outrosItens = {
+            servicosTrading: 300.00, // Valor fixo
+            descontoICMS: 0.00,      // Calcular abaixo
+            freteTerestre: 0.00      // Zero por enquanto
+        };
+        
+        // Calcular Desconto ICMS: -(C54-C80)
+        const valorProdutos = notaFiscalSaida.valorProdutos;
+        const porcentagemICMS = notaFiscalSaida.porcentagemICMS;
+        
+        // C54 = ICMS NF Saída (já calculado)
+        const icmsNFSaida = notaFiscalSaida.icms;
+        
+        // Calcular % ICMS Prestação de Contas (B80)
+        let porcentagemICMSPrestacao = 8.0; // Padrão 8% para Simples Nacional
+        if (porcentagemICMS === 12.0) {
+            porcentagemICMSPrestacao = 8.0; // Se 12%, usar 8%
+        } else if (porcentagemICMS === 17.0) {
+            porcentagemICMSPrestacao = 12.0; // Se 17%, usar 12%
+        }
+        
+        // C80 = ICMS Prestação de Contas
+        const icmsPrestacaoContas = valorProdutos * (porcentagemICMSPrestacao / 100);
+        
+        // Desconto: -(C54-C80)
+        outrosItens.descontoICMS = -(icmsNFSaida - icmsPrestacaoContas);
+        
+        console.log('💰 OUTROS ITENS CALCULADOS:');
+        console.log(`   Serviços Trading: R$ ${outrosItens.servicosTrading.toFixed(2)}`);
+        console.log(`   ICMS NF Saída: R$ ${icmsNFSaida.toFixed(2)}`);
+        console.log(`   ICMS Prestação (${porcentagemICMSPrestacao}%): R$ ${icmsPrestacaoContas.toFixed(2)}`);
+        console.log(`   Desconto ICMS: -(${icmsNFSaida.toFixed(2)} - ${icmsPrestacaoContas.toFixed(2)}) = R$ ${outrosItens.descontoICMS.toFixed(2)}`);
+
+        console.log('✅ Outros Itens calculados!');
 
         // Calcular créditos conforme regime tributário
         let creditosImportacaoDireta, desembolsoImportacaoDireta;
@@ -743,7 +783,7 @@ function executarSimulacaoCorrigida(parametros) {
             demaisDespesas: demaisDespesas,
             totalNotaFiscalEntrada: totalNotaFiscalEntradaDirecto,
             custoTotal: totalNotaFiscalEntradaDirecto,
-            desembolsoTotal: valorAduaneiro + desembolsoImportacaoDireta.total + impostos.custosAdicionais.armazenagem + demaisDespesas.total
+            desembolsoTotal: totalNotaFiscalEntradaDirecto // ✅ CORRIGIDO: igual ao custo total
         };
 
         // ✅ CENÁRIO 2: Trading (sem ICMS, COM DEMAIS DESPESAS)
@@ -770,12 +810,22 @@ function executarSimulacaoCorrigida(parametros) {
             creditos: creditosTrading,
             desembolso: desembolsoTrading,
             demaisDespesas: demaisDespesas,
-            notaFiscalSaida: notaFiscalSaida, // ✅ ADICIONADO
+            notaFiscalSaida: notaFiscalSaida,
+            outrosItens: outrosItens,
             totalNotaFiscalEntrada: totalNotaFiscalEntradaTrading,
-            custoTotal: totalNotaFiscalEntradaTrading,
-            desembolsoTotal: valorAduaneiro + desembolsoTrading.total + impostos.custosAdicionais.armazenagem + demaisDespesas.total,
+            // ✅ CORRIGIDO: Custo = NF Saída + Serviços Trading + Desconto ICMS + Total Impostos a Recuperar (0)
+            custoTotal: notaFiscalSaida.total + outrosItens.servicosTrading + outrosItens.descontoICMS + 0, // +0 = impostos a recuperar
+            desembolsoTotal: notaFiscalSaida.total + outrosItens.servicosTrading + outrosItens.descontoICMS + 0, // igual ao custo
             economiaICMS: impostos.impostos.icms
         };
+        
+        console.log('💰 CUSTOS TRADING CALCULADOS:');
+        console.log(`   Total NF Saída: R$ ${notaFiscalSaida.total.toFixed(2)}`);
+        console.log(`   Serviços Trading: R$ ${outrosItens.servicosTrading.toFixed(2)}`);
+        console.log(`   Desconto ICMS: R$ ${outrosItens.descontoICMS.toFixed(2)}`);
+        console.log(`   Impostos a Recuperar: R$ 0,00`);
+        console.log(`   🎯 CUSTO TOTAL: R$ ${cenarioTrading.custoTotal.toFixed(2)}`);
+        console.log(`   🎯 ESPERADO: R$ 455.073,93`);
 
         // Comparação
         const comparacao = calcularComparacaoSimples(cenarioImportacaoDireta, cenarioTrading);
@@ -808,7 +858,45 @@ function executarSimulacaoCorrigida(parametros) {
         setTimeout(() => {
             preencherDemaisDespesasInterface(demaisDespesas);
             preencherTotalNotaFiscalEntrada(resultado);
-            preencherNotaFiscalSaidaInterface(notaFiscalSaida); // ✅ ADICIONADO
+            preencherNotaFiscalSaidaInterface(notaFiscalSaida);
+            
+            // Preencher Outros Itens de forma simples
+            try {
+                const secoes = document.querySelectorAll('.details-section .results-table');
+                secoes.forEach(secao => {
+                    const titulo = secao.querySelector('h3');
+                    if (titulo && titulo.textContent.includes('Outros Itens')) {
+                        const tabela = secao.querySelector('tbody');
+                        if (tabela) {
+                            const linhas = tabela.querySelectorAll('tr');
+                            linhas.forEach(linha => {
+                                const primeiraColuna = linha.querySelector('td:first-child');
+                                if (!primeiraColuna) return;
+                                
+                                const texto = primeiraColuna.textContent.trim();
+                                const colunaDirecto = linha.querySelector('td:nth-child(2)');
+                                const colunaTrading = linha.querySelector('td:nth-child(3)');
+                                
+                                if (!colunaDirecto || !colunaTrading) return;
+                                
+                                if (texto.includes('Serviços Trading')) {
+                                    colunaDirecto.textContent = formatarMoedaSimples(0);
+                                    colunaTrading.textContent = formatarMoedaSimples(outrosItens.servicosTrading);
+                                } else if (texto.includes('Desconto ICMS')) {
+                                    colunaDirecto.textContent = formatarMoedaSimples(0);
+                                    colunaTrading.textContent = formatarMoedaSimples(outrosItens.descontoICMS);
+                                } else if (texto.includes('Frete Terrestre')) {
+                                    colunaDirecto.textContent = formatarMoedaSimples(0);
+                                    colunaTrading.textContent = formatarMoedaSimples(0);
+                                }
+                            });
+                        }
+                    }
+                });
+                console.log('✅ Outros Itens preenchidos na interface!');
+            } catch (error) {
+                console.error('❌ Erro ao preencher Outros Itens:', error);
+            }
         }, 200);
 
         console.log('🎉 Simulação com Demais Despesas concluída com sucesso!');
@@ -858,8 +946,8 @@ function aplicarCorrecoes() {
         window.CalculoService.calcularDemaisDespesasExcel = calcularDemaisDespesasExcel;
         window.CalculoService.preencherDemaisDespesasInterface = preencherDemaisDespesasInterface;
         window.CalculoService.preencherTotalNotaFiscalEntrada = preencherTotalNotaFiscalEntrada;
-        window.CalculoService.calcularNotaFiscalSaida = calcularNotaFiscalSaida; // ✅ ADICIONADO
-        window.CalculoService.preencherNotaFiscalSaidaInterface = preencherNotaFiscalSaidaInterface; // ✅ ADICIONADO
+        window.CalculoService.calcularNotaFiscalSaida = calcularNotaFiscalSaida;
+        window.CalculoService.preencherNotaFiscalSaidaInterface = preencherNotaFiscalSaidaInterface;
 
         console.log('✅ Correções aplicadas com sucesso!');
     } else {
