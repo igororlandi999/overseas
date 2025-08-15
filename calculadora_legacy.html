@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Calculadora de Importação - Overseas Trading | Simule Custos de Importação</title>
+    <meta name="description" content="Calculadora gratuita de importação. Compare custos entre importação direta vs Overseas CO3. Simule impostos, ICMS, IPI e economize em suas operações.">
+    <meta name="keywords" content="calculadora importação, custos importação, ICMS, IPI, despacho aduaneiro, overseas trading, simulação tributária">
+    <meta name="author" content="Overseas Trading">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Calculadora de Importação - Overseas Trading">
+    <meta property="og:description" content="Simule e compare custos de importação. Ferramenta gratuita para otimizar suas operações de comércio exterior.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.overseastrading.com.br/calculadora">
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="calculadora/calculadora.css">
+</head>
+
+<body>
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="Progresso da página"></div>
+
+    <!-- Header -->
+    <header id="header" role="banner">
+        <nav role="navigation" aria-label="Menu principal">
+            <a href="index.html" class="logo" aria-label="Overseas Trading - Página inicial">
+                <img src="assets/images/logo.png" alt="Overseas Trading - Especialistas em Comércio Exterior"
+                    class="logo-img" width="200" height="80" loading="eager">
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li class="dropdown">
+                    <a href="#sobre" aria-haspopup="true" aria-expanded="false">Sobre</a>
+                    <div class="dropdown-content" role="menu">
+                        <a href="sobre.html" role="menuitem">Sobre Nós</a>
+                        <a href="servicos.html" role="menuitem">Serviços</a>
+                        <a href="solucoes.html" role="menuitem">Soluções</a>
+                    </div>
+                </li>
+                <li><a href="trabalhe-conosco.html">Trabalhe Conosco</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="index.html#contact">Contato</a></li>
+            </ul>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menu mobile" aria-expanded="false"
+                aria-controls="navLinks">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Hero Section -->
+        <section class="hero-calculator">
+            <h1>Calculadora de Importação</h1>
+            <p>Simule e compare custos: Importação Direta vs Overseas CO3<br>
+               Otimize suas operações e economize em impostos</p>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <span class="feature-icon">🧮</span>
+                    <h3>Cálculo Preciso</h3>
+                    <p>Impostos, taxas e custos detalhados</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">⚖️</span>
+                    <h3>Comparação</h3>
+                    <p>Importação Direta vs Trading</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">💰</span>
+                    <h3>Economia Real</h3>
+                    <p>Identifique oportunidades de redução</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📊</span>
+                    <h3>Relatório Completo</h3>
+                    <p>Análise detalhada dos resultados</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calculator Form -->
+        <main class="calculator-section">
+            <!-- Dados Iniciais -->
+            <div class="form-section">
+                <h2>📋 Dados Iniciais</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="cliente">Cliente *</label>
+                        <input type="text" id="cliente" name="cliente" placeholder="Nome do cliente" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="regime_tributario">Regime Tributário *</label>
+                        <select id="regime_tributario" name="regime_tributario" required>
+                            <option value="">Selecione...</option>
+                            <option value="lucro_real">Lucro Real</option>
+                            <option value="presumido">Presumido</option>
+                            <option value="simples_nacional">Simples Nacional</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="unidade">Unidade</label>
+                        <select id="unidade" name="unidade">
+                            <option value="">Selecione...</option>
+                            <option value="quilograma">Quilograma</option>
+                            <option value="tonelada">Tonelada</option>
+                            <option value="unidade">Unidade</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="moeda">Moeda *</label>
+                        <select id="moeda" name="moeda" required>
+                            <option value="">Selecione...</option>
+                            <option value="dolar">Dólar</option>
+                            <option value="euro">Euro</option>
+                            <option value="libra">Libra</option>
+                            <option value="real">Real</option>
+                            <option value="renminbi">Renminbi</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="taxa_moeda">Taxa da Moeda (PTAX) *</label>
+                        <input type="number" id="taxa_moeda" name="taxa_moeda" step="0.0001" placeholder="0.0000" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="destino">Destino</label>
+                        <select id="destino" name="destino">
+                            <option value="">Selecione...</option>
+                            <option value="industrializacao">Industrialização</option>
+                            <option value="revenda">Revenda</option>
+                            <option value="ativo_imobilizado">Ativo/Imobilizado</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="muda_ncm">Muda NCM</label>
+                        <select id="muda_ncm" name="muda_ncm">
+                            <option value="">Selecione...</option>
+                            <option value="sim">Sim</option>
+                            <option value="nao">Não</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="valor_frete">Valor do Frete</label>
+                        <input type="number" id="valor_frete" name="valor_frete" step="0.01" placeholder="0.00">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="modal_importacao">Modal de Importação</label>
+                        <select id="modal_importacao" name="modal_importacao">
+                            <option value="">Selecione...</option>
+                            <option value="maritimo">Marítimo</option>
+                            <option value="aereo">Aéreo</option>
+                            <option value="rodoviario">Rodoviário</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="estado_destino">Estado de Destino</label>
+                        <select id="estado_destino" name="estado_destino">
+                            <option value="">Selecione...</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NCMs Section -->
+            <div class="ncm-section">
+                <h2>📦 NCMs e Produtos</h2>
+                <div id="ncm-container">
+                    <div class="ncm-item">
+                        <div class="ncm-grid">
+                            <div class="form-group">
+                                <label>NCM (8 dígitos) *</label>
+                                <input type="text" class="ncm-input" placeholder="12345678" maxlength="8" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Valor (USD) *</label>
+                                <input type="number" class="valor-input" step="0.01" placeholder="0.00" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Quantidade *</label>
+                                <input type="number" class="quantidade-input" step="0.01" placeholder="0" required>
+                            </div>
+                        </div>
+                        
+                        <div class="ncm-description">
+                            <h4>Descrição NCM</h4>
+                            <p class="descricao-text">Descrição será exibida aqui após inserir o NCM</p>
+                            
+                            <div class="aliquotas-grid">
+                                <div class="aliquota-item">
+                                    <strong>II:</strong> <span class="ii-value">0%</span>
+                                </div>
+                                <div class="aliquota-item">
+                                    <strong>IPI:</strong> <span class="ipi-value">0%</span>
+                                </div>
+                                <div class="aliquota-item">
+                                    <strong>PIS:</strong> <span class="pis-value">0%</span>
+                                </div>
+                                <div class="aliquota-item">
+                                    <strong>COFINS:</strong> <span class="cofins-value">0%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="btn-actions">
+                            <button type="button" class="btn-remove-ncm" onclick="removeNCM(this)">🗑️ Remover NCM</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="button" class="btn-add-ncm" onclick="addNCM()">➕ Adicionar NCM</button>
+            </div>
+
+            <!-- Calculate Button -->
+            <button type="button" class="calculate-btn" onclick="calcularSimulacao()">
+                🧮 CALCULAR SIMULAÇÃO
+            </button>
+
+            <!-- Results Section -->
+            <div class="results-section" id="results-section">
+                <!-- Totais Finais -->
+                <div class="results-table" id="totais-finais">
+                    <h3>📊 Totais Finais da Simulação</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Campo</th>
+                                    <th class="importacao-direta">Importação Direta</th>
+                                    <th class="overseas-co3">Overseas CO3</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="total-row">
+                                    <td><strong>Total do Custo da Importação</strong></td>
+                                    <td><strong>R$ 0,00</strong></td>
+                                    <td><strong>R$ 0,00</strong></td>
+                                </tr>
+                                <tr class="total-row">
+                                    <td><strong>Total Desembolso</strong></td>
+                                    <td><strong>R$ 0,00</strong></td>
+                                    <td><strong>R$ 0,00</strong></td>
+                                </tr>
+                                <tr class="economia-row">
+                                    <td><strong>Economia Gerada (%)</strong></td>
+                                    <td><strong>-</strong></td>
+                                    <td><strong>0%</strong></td>
+                                </tr>
+                                <tr class="economia-row">
+                                    <td><strong>Economia Gerada (R$)</strong></td>
+                                    <td><strong>-</strong></td>
+                                    <td><strong>R$ 0,00</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Details Button -->
+                <div class="details-button-container">
+                    <button type="button" class="details-btn" id="details-btn" onclick="toggleDetails()">
+                        🔽 Ver Detalhes da Simulação
+                    </button>
+                </div>
+
+                <!-- Details Section -->
+                <div class="details-section" id="details-section">
+                    <!-- 1. Impostos e Contribuições -->
+                    <div class="results-table">
+                        <h3>1️⃣ Impostos e Contribuições – Nota Fiscal de Entrada</h3>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Campo</th>
+                                        <th class="importacao-direta">Importação Direta</th>
+                                        <th class="overseas-co3">Overseas CO3</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Valor Aduaneiro</td>
+                                        <td>R$ 0,00</td>
+                                        <td>R$ 0,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Imposto de Importação</td>
+                                        <td>R$ 0,00</td>
+                                        <td>R$ 0,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IPI</td>
+                                        <td>R$ 0,00</td>
+                                        <td>R$ 0,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PIS</td>
+                                        <td>R$ 0,00</td>
+                                        <td>R$ 0,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>COFINS</td>
+                                        <td>R$ 0,00</td>
+                                        <td>R$ 0,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>SISCOMEX</td>
+                                        <td>R$ 0,00</td>
+                                        <td>R$ 0,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ICMS</td>
+                                        <td>R$ 0,00</td>
+                                        <td>R$ 0,00</td>
+                                    </tr>
+                                    <tr class="total-row">
+                                        <td><strong>Sub-total</strong></td>
+                                        <td><strong>R$ 0,00</strong></td>
+                                        <td><strong>R$ 0,00</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 2. Demais Despesas -->
+                    <div class="results-table">
+                        <h3>2️⃣ Demais Despesas</h3>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Campo</th>
+                                        <th class="importacao-direta">Importação Direta</th>
+                                        <th class="overseas-co3">Overseas CO3</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Total</td>
+                                        <td>R$ 0,00</td>
+                                        <td>R$ 0,00</td>
+                                    </tr>
+                                    <tr class="total-row">
+                                        <td><strong>Total Nota Fiscal de Entrada</strong></td>
+                                        <td><strong>R$ 0,00</strong></td>
+                                        <td><strong>R$ 0,00</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 3. Nota Fiscal de Saída -->
+                    <div class="results-table">
+                        <h3>3️⃣ Nota Fiscal de Saída – Remessa para Adquirente</h3>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Campo</th>
+                                        <th class="importacao-direta">Importação Direta</th>
+                                        <th class="overseas-co3">Overseas CO3</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Valor dos Produtos (ICMS)</td>
+                                        <td>R$ 0,00</td>
+                                        <td>R$ 0,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ICMS</td>
+                                        <td>R$ 0,00</td>
+                                        <td>R$ 0,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IPI</td>
+                                        <td>R$ 0,00</td>
+                                        <td>R$ 0,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ICMS ST</td>
+                                        <td>R$ 0,00</td>
+                                        <td>R$ 0,00</td>
+                                    </tr>
+                                    <tr class="total-row">
+                                        <td><strong>Total da Nota Fiscal Saída</strong></td>
+                                        <td><strong>R$ 0,00</strong></td>
+                                        <td><strong>R$ 0,00</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 4. Créditos dos Tributos -->
+                    <div class="results-table">
+                        <h3>4️⃣ Créditos dos Tributos</h3>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Campo</th>
+                                        <th class="importacao-direta">Importação Direta</th>
+                                        <th class="overseas-co3">Overseas CO3</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>ICMS</td>
+                                        <td>R$ 0,00</td>
+                                        <td>R$ 0,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IPI</td>
+                                        <td>R$ 0,00</td>
+                                        <td>R$ 0,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PIS</td>
+                                        <td>R$ 0,00</td>
+                                        <td>R$ 0,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>COFINS</td>
+                                        <td>R$ 0,00</td>
+                                        <td>R$ 0,00</td>
+                                    </tr>
+                                    <tr class="total-row">
+                                        <td><strong>Total a Recuperar</strong></td>
+                                        <td><strong>R$ 0,00</strong></td>
+                                        <td><strong>R$ 0,00</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 5. Outros Itens -->
+                    <div class="results-table">
+                        <h3>5️⃣ Outros Itens</h3>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Campo</th>
+                                        <th class="importacao-direta">Importação Direta</th>
+                                        <th class="overseas-co3">Overseas CO3</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Serviços Trading</td>
+                                        <td>R$ 0,00</td>
+                                        <td>R$ 0,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Desconto ICMS repassado pela Overseas Trading</td>
+                                        <td>R$ 0,00</td>
+                                        <td>R$ 0,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Frete Terrestre</td>
+                                        <td>R$ 0,00</td>
+                                        <td>R$ 0,00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Hide Details Button -->
+                    <div class="details-button-container">
+                        <button type="button" class="details-btn" onclick="toggleDetails()">
+                            🔼 Ocultar Detalhes
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <div id="overseas-footer"></div>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/554832049798?text=Olá! Gostaria de uma consultoria sobre comércio exterior."
+        class="whatsapp-float" target="_blank" rel="noopener noreferrer"
+        aria-label="Contato via WhatsApp - Calculadora de Importação">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+        </svg>
+    </a>
+    <script src="/assets/js/overseas-components.js"></script>
+    <script src="/calculadora/ncm-service.js"></script>
+    <script src="/calculadora/calculo-service.js"></script>
+    <script src="/calculadora/correcao-impostos.js"></script>
+    <script src="/calculadora/calculadora.js"></script>
+    
+</body>
+</html>
