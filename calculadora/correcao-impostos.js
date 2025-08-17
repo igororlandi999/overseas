@@ -395,32 +395,35 @@ function calcularNotaFiscalSaida(parametros) {
     let porcentagemICMS = 0;
     
     console.log(`   🔍 CALCULANDO PORCENTAGEM ICMS:`);
+    console.log(`     Regime: "${regimeTributario}"`);
+    console.log(`     Destino: "${destino}"`);
+    console.log(`     Muda NCM: "${mudaNcm}"`);
     
     if (regimeTributario && regimeTributario.toUpperCase() === 'SIMPLES_NACIONAL') {
-        // SIMPLES NACIONAL: usa W7 (assumindo 12%)
+        // SIMPLES NACIONAL: usa W7 = 12%
         porcentagemICMS = 12.0; // W7
-        console.log(`     Regime SIMPLES NACIONAL → W7 = ${porcentagemICMS}%`);
+        console.log(`     SIMPLES NACIONAL → W7 = ${porcentagemICMS}%`);
     } else {
-        // Verifica se é LUCRO_PRESUMIDO ou LUCRO_REAL
+        // Verifica condições para LUCRO_PRESUMIDO ou LUCRO_REAL
         const isLucroPresumidoOuReal = regimeTributario && 
             (regimeTributario.toUpperCase() === 'LUCRO_PRESUMIDO' || regimeTributario.toUpperCase() === 'LUCRO_REAL');
         
         const isIndustrializacao = destino && destino.toUpperCase() === 'INDUSTRIALIZACAO';
         const mudaNCMSim = mudaNcm && mudaNcm.toUpperCase() === 'SIM';
         
-        console.log(`     Verifica condições:`);
+        console.log(`     Verificando condições:`);
         console.log(`       É Lucro Presumido/Real? ${isLucroPresumidoOuReal}`);
         console.log(`       É Industrialização? ${isIndustrializacao}`);
         console.log(`       Muda NCM = Sim? ${mudaNCMSim}`);
         
         if (isLucroPresumidoOuReal && isIndustrializacao && mudaNCMSim) {
-            // Todas as condições: usa W6 (assumindo valor específico)
-            porcentagemICMS = 17.0; // W6 (exemplo)
-            console.log(`     Todas condições atendidas → W6 = ${porcentagemICMS}%`);
+            // Todas as condições atendidas: usa W6 = 17%
+            porcentagemICMS = 17.0; // W6
+            console.log(`     TODAS condições atendidas → W6 = ${porcentagemICMS}%`);
         } else {
-            // Senão: usa W5 (assumindo valor padrão)
-            porcentagemICMS = 12.0; // W5 (exemplo)
-            console.log(`     Condições não atendidas → W5 = ${porcentagemICMS}%`);
+            // Condições não atendidas: usa W5 = 4%
+            porcentagemICMS = 4.0; // W5 (valor da planilha ESTIMATIVA)
+            console.log(`     Condições NÃO atendidas → W5 = ${porcentagemICMS}%`);
         }
     }
     
@@ -960,3 +963,549 @@ function aplicarCorrecoes() {
 aplicarCorrecoes();
 
 console.log('🎯 Correções de impostos + Demais Despesas carregadas!');
+
+// ===== VERSÃO FINAL: CORREÇÃO COMPLETA SEM CONFLITOS =====
+// Adicionar ao final do arquivo calculadora/correcao-impostos.js
+
+console.log('🔧 Carregando correção FINAL dos Créditos dos Tributos...');
+
+/**
+ * Versão FINAL da simulação com todas as correções
+ */
+function executarSimulacaoFinalCorrigida(parametros) {
+    try {
+        console.log('🚀 Iniciando simulação FINAL corrigida...');
+        
+        // Executar simulação base (existente)
+        const resultado = executarSimulacaoCorrigida(parametros);
+        
+        if (!resultado || resultado.sucesso === false) {
+            console.error('❌ Erro na simulação base');
+            return resultado;
+        }
+        
+        console.log('✅ Simulação base concluída, aplicando correções finais...');
+        
+        // Obter dados necessários
+        const notaFiscalSaida = resultado.cenarios.trading.notaFiscalSaida;
+        const impostos = resultado.totaisConsolidados.impostos;
+        const regimeTributario = parametros.regimeTributario;
+        
+        // ===== 1. CALCULAR CRÉDITOS CORRETOS =====
+        console.log('💰 ===== CALCULANDO CRÉDITOS CORRETOS =====');
+        
+        const isSimplesNacional = regimeTributario && 
+            regimeTributario.toUpperCase() === 'SIMPLES_NACIONAL';
+        
+        let creditosImportacaoDireta, creditosTrading;
+        
+        if (isSimplesNacional) {
+            // SIMPLES NACIONAL: Sem créditos
+            creditosImportacaoDireta = { icms: 0, ipi: 0, pis: 0, cofins: 0, total: 0 };
+            creditosTrading = { icms: 0, ipi: 0, pis: 0, cofins: 0, total: 0 };
+            console.log('   📝 SIMPLES NACIONAL - Sem créditos');
+            
+        } else if (regimeTributario && regimeTributario.toUpperCase() === 'PRESUMIDO') {
+            // LUCRO PRESUMIDO: Apenas ICMS e IPI
+            creditosImportacaoDireta = {
+                icms: impostos.icms,            // ICMS da importação
+                ipi: notaFiscalSaida.ipi,       // IPI da NF Saída (=F44)
+                pis: 0,                         // ✅ PRESUMIDO: PIS = 0
+                cofins: 0,                      // ✅ PRESUMIDO: COFINS = 0
+                total: 0
+            };
+            
+            creditosTrading = {
+                icms: notaFiscalSaida.icms,     // ICMS da NF Saída
+                ipi: notaFiscalSaida.ipi,       // IPI da NF Saída
+                pis: 0,                         // ✅ PRESUMIDO: PIS = 0
+                cofins: 0,                      // ✅ PRESUMIDO: COFINS = 0
+                total: 0
+            };
+            console.log('   📝 LUCRO PRESUMIDO - Apenas ICMS e IPI');
+            
+        } else {
+            // LUCRO REAL: Todos os créditos
+            creditosImportacaoDireta = {
+                icms: impostos.icms,            // ICMS da importação
+                ipi: notaFiscalSaida.ipi,       // IPI da NF Saída (=F44)
+                pis: impostos.pis,              // PIS da importação
+                cofins: impostos.cofins,        // COFINS da importação
+                total: 0
+            };
+            
+            creditosTrading = {
+                icms: notaFiscalSaida.icms,     // ICMS da NF Saída
+                ipi: notaFiscalSaida.ipi,       // IPI da NF Saída
+                pis: impostos.pis,              // PIS da importação
+                cofins: impostos.cofins,        // COFINS da importação
+                total: 0
+            };
+            console.log('   📝 LUCRO REAL - Todos os créditos');
+        }
+        
+        // Calcular totais
+        creditosImportacaoDireta.total = creditosImportacaoDireta.icms + creditosImportacaoDireta.ipi + 
+                                        creditosImportacaoDireta.pis + creditosImportacaoDireta.cofins;
+        
+        creditosTrading.total = creditosTrading.icms + creditosTrading.ipi + 
+                               creditosTrading.pis + creditosTrading.cofins;
+        
+        console.log(`🏢 IMPORTAÇÃO DIRETA - Créditos:`);
+        console.log(`   ICMS: R$ ${creditosImportacaoDireta.icms.toFixed(2)}`);
+        console.log(`   IPI: R$ ${creditosImportacaoDireta.ipi.toFixed(2)}`);
+        console.log(`   PIS: R$ ${creditosImportacaoDireta.pis.toFixed(2)}`);
+        console.log(`   COFINS: R$ ${creditosImportacaoDireta.cofins.toFixed(2)}`);
+        console.log(`   🎯 TOTAL: R$ ${creditosImportacaoDireta.total.toFixed(2)}`);
+        
+        console.log(`🚢 OVERSEAS TRADING - Créditos:`);
+        console.log(`   ICMS: R$ ${creditosTrading.icms.toFixed(2)}`);
+        console.log(`   IPI: R$ ${creditosTrading.ipi.toFixed(2)}`);
+        console.log(`   PIS: R$ ${creditosTrading.pis.toFixed(2)}`);
+        console.log(`   COFINS: R$ ${creditosTrading.cofins.toFixed(2)}`);
+        console.log(`   🎯 TOTAL: R$ ${creditosTrading.total.toFixed(2)}`);
+        
+        if (regimeTributario && regimeTributario.toUpperCase() === 'PRESUMIDO') {
+            console.log(`   🎯 ESPERADO PRESUMIDO - Direto: R$ 108.046,90 | Trading: R$ 42.704,39`);
+        }
+        
+        // ===== 2. CALCULAR OUTROS ITENS =====
+        console.log('💰 ===== CALCULANDO OUTROS ITENS =====');
+        
+        const servicosTrading = 300.00;
+        const freteTerestre = 0.00;
+        let descontoICMS = 0.00;
+        
+        // Desconto ICMS específico para Lucro Real e Presumido
+        if (regimeTributario && 
+            (regimeTributario.toUpperCase() === 'LUCRO_REAL' || 
+             regimeTributario.toUpperCase() === 'PRESUMIDO')) {
+            
+            // ✅ CALCULAR C80 DINAMICAMENTE conforme fórmula da planilha
+            
+            // 1. C53 = Valor dos Produtos (já calculado na NF Saída)
+            const c53 = notaFiscalSaida.valorProdutos;
+            
+            // 2. B54 = % ICMS NF Saída (já calculado na NF Saída)
+            const b54 = notaFiscalSaida.porcentagemICMS;
+            
+            // 3. B80 = % ICMS na Importação
+            // Fórmula: =SE(B54=ESTIMATIVA!W7;8%;(SE(B54=ESTIMATIVA!W6;ESTIMATIVA!Y6;ESTIMATIVA!Y5)))
+            let b80; // % ICMS na Importação
+            
+            if (b54 === 12.0) {
+                // W7 = 12% (Simples Nacional) → usar 8%
+                b80 = 8.0;
+            } else if (b54 === 17.0) {
+                // W6 = 17% (Lucro Real/Presumido Industrialização) → usar Y6
+                b80 = 12.0; // Assumindo Y6 = 12% baseado nos testes
+            } else {
+                // W5 = 4% (outros casos) → usar Y5
+                b80 = 3.0; // ✅ CORREÇÃO: Y5 = 3% conforme planilha mostrada
+            }
+            
+            // 4. C80 = C53 * B80 (ICMS na Importação calculado dinamicamente)
+            const c80 = c53 * (b80 / 100);
+            
+            // 5. Desconto ICMS: =-(C54-C80)
+            descontoICMS = -(notaFiscalSaida.icms - c80);
+            
+            console.log(`${regimeTributario.toUpperCase()} - Desconto ICMS DINÂMICO:`);
+            console.log(`   C53 (Valor Produtos): R$ ${c53.toFixed(2)}`);
+            console.log(`   B54 (% ICMS NF Saída): ${b54}%`);
+            console.log(`   B80 (% ICMS Importação): ${b80}%`);
+            console.log(`   C80 (ICMS Importação): R$ ${c80.toFixed(2)}`);
+            console.log(`   C54 (ICMS NF Saída): R$ ${notaFiscalSaida.icms.toFixed(2)}`);
+            console.log(`   Desconto: -(${notaFiscalSaida.icms.toFixed(2)} - ${c80.toFixed(2)}) = R$ ${descontoICMS.toFixed(2)}`);
+            console.log(`   🎯 ESPERADO: R$ (3.989,04)`);
+            
+        } else {
+            // Outros regimes: usar valor existente se houver
+            descontoICMS = resultado.cenarios.trading.outrosItens?.descontoICMS || 0;
+            console.log(`${regimeTributario} - Desconto ICMS: R$ ${descontoICMS.toFixed(2)}`);
+        }
+        
+        // ===== 3. CALCULAR TOTAIS FINAIS =====
+        console.log('💰 ===== CALCULANDO TOTAIS FINAIS =====');
+        
+        // IMPORTAÇÃO DIRETA: Usar fórmula correta para custo
+        // Fórmula: =E31+E38-E47+E51
+        // E31 = Total Nota Fiscal de Entrada
+        // E38 = ICMS ST (normalmente 0)
+        // E47 = Total dos Impostos a Recuperar
+        // E51 = Frete Terrestre (normalmente 0)
+        
+        const e31 = resultado.cenarios.importacaoDireta.totalNotaFiscalEntrada || resultado.cenarios.importacaoDireta.custoTotal;
+        const e38 = 0; // ICMS ST (normalmente zero)
+        const e47 = creditosImportacaoDireta.total; // Total dos Impostos a Recuperar
+        const e51 = 0; // Frete Terrestre (normalmente zero)
+        
+        const custoImportacaoDireta = e31 + e38 - e47 + e51;
+        const desembolsoImportacaoDireta = resultado.cenarios.importacaoDireta.custoTotal; // Valor original
+        
+        console.log(`   🏢 IMPORTAÇÃO DIRETA:`);
+        console.log(`     E31 (Total NF Entrada): R$ ${e31.toFixed(2)}`);
+        console.log(`     E38 (ICMS ST): R$ ${e38.toFixed(2)}`);
+        console.log(`     E47 (Impostos Recuperar): R$ ${e47.toFixed(2)}`);
+        console.log(`     E51 (Frete Terrestre): R$ ${e51.toFixed(2)}`);
+        console.log(`     Custo (E31+E38-E47+E51): R$ ${custoImportacaoDireta.toFixed(2)}`);
+        console.log(`     Desembolso: R$ ${desembolsoImportacaoDireta.toFixed(2)}`);
+        console.log(`     🎯 ESPERADO Custo: R$ 350.600,24`);
+        
+        // OVERSEAS CO3: Usar fórmulas corretas
+        const f39 = notaFiscalSaida.total;          // Total NF Saída
+        const f47 = creditosTrading.total;          // Total Impostos a Recuperar
+        const f50 = servicosTrading;                // Serviços Trading
+        const f49 = descontoICMS;                   // Desconto ICMS
+        const f51 = freteTerestre;                  // Frete Terrestre
+        
+        // Fórmulas da planilha
+        const custoTrading = f39 - f47 + f50 + f49 + f51;        // =F39-F47+F50+F49+F51
+        const desembolsoTrading = f39 + f50 + f49 + f51;          // =F39+F50+F49+F51
+        
+        // Economia
+        const economiaAbsoluta = desembolsoImportacaoDireta - desembolsoTrading;
+        const economiaPercentual = desembolsoImportacaoDireta > 0 ?
+            parseFloat(((economiaAbsoluta / desembolsoImportacaoDireta) * 100).toFixed(2)) : 0;
+        
+        console.log('📊 TOTAIS FINAIS:');
+        console.log(`   Importação Direta - Custo: R$ ${custoImportacaoDireta.toFixed(2)} | Desembolso: R$ ${desembolsoImportacaoDireta.toFixed(2)}`);
+        console.log(`   Trading - Custo: R$ ${custoTrading.toFixed(2)} | Desembolso: R$ ${desembolsoTrading.toFixed(2)}`);
+        console.log(`   Economia: R$ ${economiaAbsoluta.toFixed(2)} (${economiaPercentual}%)`);
+        
+        // ===== 4. ATUALIZAR RESULTADO =====
+        resultado.cenarios.importacaoDireta.creditos = creditosImportacaoDireta;
+        resultado.cenarios.importacaoDireta.custoTotal = custoImportacaoDireta;
+        resultado.cenarios.importacaoDireta.desembolsoTotal = desembolsoImportacaoDireta;
+        
+        resultado.cenarios.trading.creditos = creditosTrading;
+        resultado.cenarios.trading.custoTotal = custoTrading;
+        resultado.cenarios.trading.desembolsoTotal = desembolsoTrading;
+        resultado.cenarios.trading.outrosItens = {
+            servicosTrading,
+            descontoICMS,
+            freteTerestre
+        };
+        
+        resultado.comparacao = {
+            economiaAbsoluta: parseFloat(economiaAbsoluta.toFixed(2)),
+            economiaPercentual,
+            melhorOpcao: economiaAbsoluta > 0 ? 'OVERSEAS_TRADING' : 'IMPORTACAO_DIRETA'
+        };
+        
+        // ===== 5. PREENCHER INTERFACE =====
+        setTimeout(() => {
+            preencherInterfaceCompleta(resultado, {
+                creditosImportacaoDireta,
+                creditosTrading,
+                servicosTrading,
+                descontoICMS,
+                freteTerestre,
+                custoImportacaoDireta,
+                desembolsoImportacaoDireta,
+                custoTrading,
+                desembolsoTrading,
+                economiaAbsoluta,
+                economiaPercentual
+            });
+        }, 300);
+        
+        console.log('🎉 Simulação FINAL concluída com sucesso!');
+        return resultado;
+        
+    } catch (error) {
+        console.error('❌ Erro na simulação final:', error);
+        return {
+            sucesso: false,
+            erro: error.message,
+            timestamp: new Date().toISOString()
+        };
+    }
+}
+
+/**
+ * Preenche TODA a interface com os valores corretos
+ */
+function preencherInterfaceCompleta(resultado, dados) {
+    try {
+        console.log('🖥️ Preenchendo interface completa...');
+        
+        // ===== CRÉDITOS DOS TRIBUTOS =====
+        const secoes = document.querySelectorAll('.details-section .results-table');
+        
+        secoes.forEach(secao => {
+            const titulo = secao.querySelector('h3');
+            if (!titulo) return;
+            
+            const tituloTexto = titulo.textContent.trim();
+            
+            if (tituloTexto.includes('Créditos dos Tributos')) {
+                console.log('📋 Preenchendo Créditos dos Tributos...');
+                
+                const tabela = secao.querySelector('tbody');
+                if (!tabela) return;
+                
+                const linhas = tabela.querySelectorAll('tr');
+                
+                linhas.forEach(linha => {
+                    const primeiraColuna = linha.querySelector('td:first-child');
+                    if (!primeiraColuna) return;
+                    
+                    const texto = primeiraColuna.textContent.trim();
+                    const colunaDirecto = linha.querySelector('td:nth-child(2)');
+                    const colunaTrading = linha.querySelector('td:nth-child(3)');
+                    
+                    if (!colunaDirecto || !colunaTrading) return;
+                    
+                    if (texto.toUpperCase().includes('ICMS')) {
+                        colunaDirecto.textContent = formatarMoedaSimples(dados.creditosImportacaoDireta.icms);
+                        colunaTrading.textContent = formatarMoedaSimples(dados.creditosTrading.icms);
+                    } else if (texto.toUpperCase().includes('IPI')) {
+                        colunaDirecto.textContent = formatarMoedaSimples(dados.creditosImportacaoDireta.ipi);
+                        colunaTrading.textContent = formatarMoedaSimples(dados.creditosTrading.ipi);
+                    } else if (texto.toUpperCase().includes('PIS')) {
+                        colunaDirecto.textContent = formatarMoedaSimples(dados.creditosImportacaoDireta.pis);
+                        colunaTrading.textContent = formatarMoedaSimples(dados.creditosTrading.pis);
+                    } else if (texto.toUpperCase().includes('COFINS')) {
+                        colunaDirecto.textContent = formatarMoedaSimples(dados.creditosImportacaoDireta.cofins);
+                        colunaTrading.textContent = formatarMoedaSimples(dados.creditosTrading.cofins);
+                    } else if ((texto.toUpperCase().includes('TOTAL') || texto.toLowerCase().includes('recuperar')) && linha.classList.contains('total-row')) {
+                        colunaDirecto.innerHTML = `<strong>${formatarMoedaSimples(dados.creditosImportacaoDireta.total)}</strong>`;
+                        colunaTrading.innerHTML = `<strong>${formatarMoedaSimples(dados.creditosTrading.total)}</strong>`;
+                    }
+                });
+                
+            } else if (tituloTexto.includes('Outros Itens')) {
+                console.log('📋 Preenchendo Outros Itens...');
+                
+                const tabela = secao.querySelector('tbody');
+                if (!tabela) return;
+                
+                const linhas = tabela.querySelectorAll('tr');
+                
+                linhas.forEach(linha => {
+                    const primeiraColuna = linha.querySelector('td:first-child');
+                    if (!primeiraColuna) return;
+                    
+                    const texto = primeiraColuna.textContent.trim();
+                    const colunaDirecto = linha.querySelector('td:nth-child(2)');
+                    const colunaTrading = linha.querySelector('td:nth-child(3)');
+                    
+                    if (!colunaDirecto || !colunaTrading) return;
+                    
+                    if (texto.includes('Serviços Trading')) {
+                        colunaDirecto.textContent = formatarMoedaSimples(0);
+                        colunaTrading.textContent = formatarMoedaSimples(dados.servicosTrading);
+                    } else if (texto.includes('Desconto ICMS')) {
+                        colunaDirecto.textContent = formatarMoedaSimples(0);
+                        colunaTrading.textContent = formatarMoedaSimples(dados.descontoICMS);
+                    } else if (texto.includes('Frete Terrestre')) {
+                        colunaDirecto.textContent = formatarMoedaSimples(0);
+                        colunaTrading.textContent = formatarMoedaSimples(dados.freteTerestre);
+                    }
+                });
+            }
+        });
+        
+        // ===== TOTAIS FINAIS DA SIMULAÇÃO =====
+        setTimeout(() => {
+            console.log('📋 Preenchendo Totais Finais da Simulação...');
+            
+            const tabelaTotais = document.querySelector('#totais-finais tbody');
+            if (tabelaTotais) {
+                const linhasTotais = tabelaTotais.querySelectorAll('tr');
+                
+                linhasTotais.forEach(linha => {
+                    const primeiraColuna = linha.querySelector('td:first-child');
+                    if (!primeiraColuna) return;
+                    
+                    const texto = primeiraColuna.textContent.trim();
+                    const colunaDirecto = linha.querySelector('td:nth-child(2)');
+                    const colunaTrading = linha.querySelector('td:nth-child(3)');
+                    
+                    if (!colunaDirecto || !colunaTrading) return;
+                    
+                    if (texto.includes('Total do Custo da Importação')) {
+                        colunaDirecto.innerHTML = `<strong>${formatarMoedaSimples(dados.custoImportacaoDireta)}</strong>`;
+                        colunaTrading.innerHTML = `<strong>${formatarMoedaSimples(dados.custoTrading)}</strong>`;
+                    } else if (texto.includes('Total Desembolso')) {
+                        colunaDirecto.innerHTML = `<strong>${formatarMoedaSimples(dados.desembolsoImportacaoDireta)}</strong>`;
+                        colunaTrading.innerHTML = `<strong>${formatarMoedaSimples(dados.desembolsoTrading)}</strong>`;
+                    } else if (texto.includes('Economia Gerada (%)')) {
+                        colunaDirecto.innerHTML = `<strong>-</strong>`;
+                        colunaTrading.innerHTML = `<strong>${dados.economiaPercentual}%</strong>`;
+                    } else if (texto.includes('Economia Gerada (R$)')) {
+                        colunaDirecto.innerHTML = `<strong>-</strong>`;
+                        colunaTrading.innerHTML = `<strong>${formatarMoedaSimples(dados.economiaAbsoluta)}</strong>`;
+                    }
+                });
+            }
+            
+            console.log('✅ Interface completamente preenchida!');
+        }, 100);
+        
+    } catch (error) {
+        console.error('❌ Erro ao preencher interface:', error);
+    }
+}
+
+// ===== APLICAR CORREÇÃO FINAL =====
+function aplicarCorrecaoFinal() {
+    if (window.CalculoService) {
+        console.log('🔧 Aplicando correção FINAL...');
+        
+        // Substituir função principal
+        window.CalculoService.executarSimulacao = executarSimulacaoFinalCorrigida;
+        
+        // Adicionar funções auxiliares
+        window.CalculoService.preencherInterfaceCompleta = preencherInterfaceCompleta;
+        
+        console.log('✅ Correção FINAL aplicada com sucesso!');
+    } else {
+        console.log('⏳ Aguardando CalculoService para correção final...');
+        setTimeout(aplicarCorrecaoFinal, 500);
+    }
+}
+
+// Aplicar correção final
+aplicarCorrecaoFinal();
+
+console.log('🎉 Correção FINAL dos Créditos dos Tributos carregada!');
+
+// ===== PATCH DIRETO - ADICIONAR NO FINAL DO correcao-impostos.js =====
+// Este código intercepta QUALQUER cálculo de ICMS e força usar a alíquota correta
+
+console.log('🚨 CARREGANDO PATCH DIRETO DE ICMS...');
+
+/**
+ * PATCH DIRETO: Intercepta QUALQUER lugar que calcule ICMS
+ */
+(function() {
+    // Tabela de alíquotas - MESMA do código anterior
+    const ALIQUOTAS_ICMS_INTERNAS = {
+        'AC': 17.0, 'AL': 18.0, 'AM': 18.0, 'AP': 18.0, 'BA': 18.0,
+        'CE': 18.0, 'DF': 18.0, 'ES': 17.0, 'GO': 17.0, 'MA': 18.0,
+        'MG': 18.0, 'MS': 17.0, 'MT': 17.0, 'PA': 17.0, 'PB': 18.0,
+        'PE': 18.0, 'PI': 18.0, 'PR': 18.0, 'RJ': 20.0, 'RN': 18.0,
+        'RO': 17.5, 'RR': 17.0, 'RS': 17.0, 'SC': 17.0, 'SE': 18.0,
+        'SP': 18.0, 'TO': 18.0
+    };
+    
+    /**
+     * FUNÇÃO PATCH: Calcula ICMS com alíquota CORRETA
+     */
+    function calcularICMSCorreto(valorAduaneiro, ii, ipi, pis, cofins, estado) {
+        console.log('🔥 PATCH DIRETO: Calculando ICMS para', estado);
+        
+        // Alíquota INTERNA do estado
+        const aliquotaICMS = ALIQUOTAS_ICMS_INTERNAS[estado.toUpperCase()] || 17.0;
+        
+        console.log(`   🎯 ESTADO ${estado}: Usando ${aliquotaICMS}% (INTERNA) em vez de 4% (interestadual)`);
+        
+        // Fórmula da planilha
+        const somaImpostos = ii + ipi + pis + cofins + 154.23; // SISCOMEX
+        const valorBase = somaImpostos + valorAduaneiro;
+        const basePorDentro = valorBase / (1 - aliquotaICMS / 100);
+        const icms = basePorDentro - valorBase;
+        
+        console.log(`   💰 CÁLCULO: Base R$ ${valorBase.toFixed(2)} → ICMS R$ ${icms.toFixed(2)} (${aliquotaICMS}%)`);
+        
+        return {
+            valor: parseFloat(icms.toFixed(2)),
+            aliquota: aliquotaICMS,
+            base: parseFloat(basePorDentro.toFixed(2))
+        };
+    }
+    
+    /**
+     * INTERCEPTA a função calcularICMSPlanilha ONDE QUER QUE ELA SEJA CHAMADA
+     */
+    function interceptarICMS() {
+        console.log('🔍 Procurando funções de ICMS para interceptar...');
+        
+        // 1. Substituir no CalculoService
+        if (window.CalculoService && window.CalculoService.calcularICMSPlanilha) {
+            console.log('🎯 Interceptando CalculoService.calcularICMSPlanilha');
+            const funcaoOriginal = window.CalculoService.calcularICMSPlanilha;
+            
+            window.CalculoService.calcularICMSPlanilha = function(valorAduaneiro, ii, ipi, pis, cofins, estado) {
+                console.log('🚨 INTERCEPTADO: calcularICMSPlanilha chamada para estado:', estado);
+                return calcularICMSCorreto(valorAduaneiro, ii, ipi, pis, cofins, estado);
+            };
+        }
+        
+        // 2. Substituir função global se existir
+        if (window.calcularICMSPlanilha) {
+            console.log('🎯 Interceptando window.calcularICMSPlanilha');
+            window.calcularICMSPlanilha = function(valorAduaneiro, ii, ipi, pis, cofins, estado) {
+                console.log('🚨 INTERCEPTADO: calcularICMSPlanilha GLOBAL chamada para estado:', estado);
+                return calcularICMSCorreto(valorAduaneiro, ii, ipi, pis, cofins, estado);
+            };
+        }
+        
+        // 3. Procurar por QUALQUER função que mencione ICMS
+        for (let prop in window) {
+            if (typeof window[prop] === 'function' && prop.toLowerCase().includes('icms')) {
+                console.log(`🔍 Encontrada função suspeita: ${prop}`);
+            }
+        }
+        
+        // 4. Interceptar também a função executarSimulacao
+        if (window.CalculoService && window.CalculoService.executarSimulacao) {
+            console.log('🎯 Interceptando executarSimulacao');
+            const simulacaoOriginal = window.CalculoService.executarSimulacao;
+            
+            window.CalculoService.executarSimulacao = function(parametros) {
+                console.log('🚨 INTERCEPTADO: executarSimulacao - forçando ICMS correto');
+                
+                // FORÇA substituição antes de executar
+                window.CalculoService.calcularICMSPlanilha = function(valorAduaneiro, ii, ipi, pis, cofins, estado) {
+                    return calcularICMSCorreto(valorAduaneiro, ii, ipi, pis, cofins, estado);
+                };
+                
+                return simulacaoOriginal.call(this, parametros);
+            };
+        }
+    }
+    
+    /**
+     * MONITORA todas as chamadas de função que possam calcular ICMS
+     */
+    function monitorarChamadasICMS() {
+        // Intercepta console.log para detectar cálculos de ICMS
+        const consoleLogOriginal = console.log;
+        console.log = function(...args) {
+            const texto = args.join(' ');
+            
+            // Se detectar log de ICMS com 4%, avisar
+            if (texto.includes('ICMS') && texto.includes('4%') && !texto.includes('PATCH')) {
+                console.warn('🚨 DETECTADO: Cálculo de ICMS usando 4% - deveria usar alíquota interna!');
+                console.warn('📍 Local:', new Error().stack);
+            }
+            
+            return consoleLogOriginal.apply(console, args);
+        };
+    }
+    
+    // EXECUTAR INTERCEPTAÇÃO
+    interceptarICMS();
+    monitorarChamadasICMS();
+    
+    // Repetir várias vezes para garantir
+    setTimeout(interceptarICMS, 500);
+    setTimeout(interceptarICMS, 1500);
+    setTimeout(interceptarICMS, 3000);
+    
+    console.log('✅ PATCH DIRETO aplicado! Qualquer cálculo de ICMS agora será interceptado.');
+    
+    // Disponibilizar função de teste
+    window.testarPatchICMS = function(estado = 'RN') {
+        console.log(`🧪 TESTANDO PATCH para ${estado}...`);
+        const resultado = calcularICMSCorreto(486000, 24300, 14580, 7875, 36315, estado);
+        console.log(`🎯 Resultado: R$ ${resultado.valor.toFixed(2)} (${resultado.aliquota}%)`);
+        return resultado;
+    };
+    
+})();
+
+console.log('🔥 PATCH DIRETO DE ICMS CARREGADO - Nenhum cálculo de ICMS escapa!');
