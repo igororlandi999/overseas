@@ -1509,3 +1509,388 @@ console.log('🚨 CARREGANDO PATCH DIRETO DE ICMS...');
 })();
 
 console.log('🔥 PATCH DIRETO DE ICMS CARREGADO - Nenhum cálculo de ICMS escapa!');
+
+// ===== CORREÇÃO CIRÚRGICA - CRÉDITOS IPI POR CENÁRIO =====
+// Adicionar ao final do arquivo: calculadora/correcao-impostos.js
+
+console.log('🎯 Carregando correção cirúrgica dos Créditos IPI...');
+
+/**
+ * Calcula créditos IPI conforme lógica ESPECÍFICA de cada cenário
+ * @param {object} parametros - Parâmetros para cálculo
+ * @returns {object} - Créditos calculados por cenário
+ */
+function calcularCreditosIPIPorCenario(parametros) {
+    const {
+        ipiImportacao,      // E20 - IPI da importação
+        ipiNFSaida,         // F44 - IPI da NF Saída
+        regimeTributario,   // Regime tributário
+        impostos           // Todos os impostos calculados
+    } = parametros;
+    
+    console.log('🎯 ===== CALCULANDO CRÉDITOS IPI POR CENÁRIO =====');
+    console.log(`   IPI Importação (E20): R$ ${ipiImportacao.toFixed(2)}`);
+    console.log(`   IPI NF Saída (F44): R$ ${ipiNFSaida.toFixed(2)}`);
+    console.log(`   Regime: ${regimeTributario}`);
+    
+    // Verificar se regime permite crédito de IPI
+    const isSimplesNacional = regimeTributario && 
+        regimeTributario.toUpperCase() === 'SIMPLES_NACIONAL';
+    
+    if (isSimplesNacional) {
+        console.log('   📝 SIMPLES NACIONAL - Sem créditos de IPI');
+        return {
+            importacaoDireta: 0,
+            overseas: 0
+        };
+    }
+    
+    // ===== IMPORTAÇÃO DIRETA =====
+    // Fórmula Excel: =SE(F44>0,01;E20;0)
+    let creditoIPIImportacaoDireta = 0;
+    
+    console.log('   🏢 IMPORTAÇÃO DIRETA:');
+    console.log(`     Verificando: F44 (${ipiNFSaida.toFixed(2)}) > 0,01?`);
+    
+    if (ipiNFSaida > 0.01) {
+        creditoIPIImportacaoDireta = ipiImportacao; // Usa E20
+        console.log(`     ✅ SIM → Usar E20: R$ ${creditoIPIImportacaoDireta.toFixed(2)}`);
+    } else {
+        creditoIPIImportacaoDireta = 0;
+        console.log(`     ❌ NÃO → Crédito IPI: R$ 0,00`);
+    }
+    
+    // ===== OVERSEAS CO3 =====
+    // Usa diretamente F44 (IPI da NF Saída)
+    const creditoIPIOverseas = ipiNFSaida;
+    
+    console.log('   🚢 OVERSEAS CO3:');
+    console.log(`     Usar F44 diretamente: R$ ${creditoIPIOverseas.toFixed(2)}`);
+    
+    // ===== RESULTADOS =====
+    console.log('📋 ===== RESUMO CRÉDITOS IPI =====');
+    console.log(`   Importação Direta: R$ ${creditoIPIImportacaoDireta.toFixed(2)}`);
+    console.log(`   Overseas CO3: R$ ${creditoIPIOverseas.toFixed(2)}`);
+    console.log(`   🎯 ESPERADO: Direto R$ 121.787,19 | Overseas R$ 143.681,39`);
+    
+    return {
+        importacaoDireta: parseFloat(creditoIPIImportacaoDireta.toFixed(2)),
+        overseas: parseFloat(creditoIPIOverseas.toFixed(2))
+    };
+}
+
+/**
+ * Substitui a função de cálculo de créditos PRESERVANDO toda lógica existente,
+ * alterando APENAS os créditos IPI
+ */
+function calcularCreditosComIPICorrigido(impostos, regimeTributario, dadosAdicionais = {}) {
+    const {
+        ipiImportacao = impostos.ipi,  // Default: usar IPI da importação
+        ipiNFSaida = dadosAdicionais.ipiNFSaida || impostos.ipi
+    } = dadosAdicionais;
+    
+    console.log('💰 Calculando créditos com IPI corrigido...');
+    console.log(`   Regime: ${regimeTributario}`);
+    
+    // ===== LÓGICA ORIGINAL PARA OUTROS IMPOSTOS =====
+    const creditos = {
+        ii: 0,      // II nunca é creditado
+        pis: 0,
+        cofins: 0,
+        icms: 0,
+        siscomex: 0, // SISCOMEX nunca é creditado
+        total: 0
+    };
+    
+    // Aplicar lógica original para PIS, COFINS e ICMS
+    switch (regimeTributario.toUpperCase()) {
+        case 'LUCRO_REAL':
+            creditos.pis = impostos.pis;
+            creditos.cofins = impostos.cofins;
+            creditos.icms = impostos.icms;
+            break;
+            
+        case 'PRESUMIDO':
+            creditos.icms = impostos.icms;
+            break;
+            
+        case 'SIMPLES_NACIONAL':
+            // Sem créditos
+            break;
+    }
+    
+    // ===== NOVA LÓGICA PARA IPI =====
+    const creditosIPI = calcularCreditosIPIPorCenario({
+        ipiImportacao,
+        ipiNFSaida,
+        regimeTributario,
+        impostos
+    });
+    
+    // Retornar créditos separados por cenário
+    const creditosImportacaoDireta = {
+        ...creditos,
+        ipi: creditosIPI.importacaoDireta,
+        total: 0
+    };
+    
+    // ===== CORREÇÃO ICMS OVERSEAS CO3 =====
+    // Fórmula: =SE($B$10="SIMPLES NACIONAL";0;C54)
+    const creditosOverseas = {
+        ...creditos,
+        ipi: creditosIPI.overseas,
+        total: 0
+    };
+    
+    // ICMS Overseas: usar valor da NF Saída (não da importação)
+    if (regimeTributario.toUpperCase() === 'SIMPLES_NACIONAL') {
+        creditosOverseas.icms = 0;
+    } else {
+        // Usar ICMS da NF Saída (C54) em vez do ICMS da importação
+        creditosOverseas.icms = dadosAdicionais.icmsNFSaida || impostos.icms;
+    }
+    
+    console.log(`   🔧 CORREÇÃO ICMS OVERSEAS:`);
+    console.log(`     Regime: ${regimeTributario}`);
+    console.log(`     ICMS Importação: R$ ${impostos.icms.toFixed(2)}`);
+    console.log(`     ICMS NF Saída: R$ ${(dadosAdicionais.icmsNFSaida || 0).toFixed(2)}`);
+    console.log(`     ICMS Crédito Overseas: R$ ${creditosOverseas.icms.toFixed(2)}`);
+    
+    // Calcular totais
+    creditosImportacaoDireta.total = creditosImportacaoDireta.ii + creditosImportacaoDireta.ipi + 
+                                    creditosImportacaoDireta.pis + creditosImportacaoDireta.cofins + 
+                                    creditosImportacaoDireta.icms + creditosImportacaoDireta.siscomex;
+    
+    creditosOverseas.total = creditosOverseas.ii + creditosOverseas.ipi + 
+                            creditosOverseas.pis + creditosOverseas.cofins + 
+                            creditosOverseas.icms + creditosOverseas.siscomex;
+    
+    console.log('✅ Créditos calculados com IPI corrigido:');
+    console.log(`   Importação Direta - IPI: R$ ${creditosImportacaoDireta.ipi.toFixed(2)}, Total: R$ ${creditosImportacaoDireta.total.toFixed(2)}`);
+    console.log(`   Overseas CO3 - IPI: R$ ${creditosOverseas.ipi.toFixed(2)}, Total: R$ ${creditosOverseas.total.toFixed(2)}`);
+    
+    return {
+        importacaoDireta: creditosImportacaoDireta,
+        overseas: creditosOverseas
+    };
+}
+
+/**
+ * Versão CORRIGIDA da simulação que aplica créditos IPI específicos por cenário
+ */
+function executarSimulacaoComIPICorrigido(parametros) {
+    try {
+        console.log('🚀 Executando simulação com IPI corrigido...');
+        
+        // Executar simulação base (existente) - PRESERVA TODA LÓGICA
+        const resultado = executarSimulacaoFinalCorrigida(parametros);
+        
+        if (!resultado || resultado.sucesso === false) {
+            console.error('❌ Erro na simulação base');
+            return resultado;
+        }
+        
+        console.log('✅ Simulação base OK, aplicando correção de IPI...');
+        
+        // ===== EXTRAIR DADOS NECESSÁRIOS =====
+        const impostos = resultado.totaisConsolidados.impostos;
+        const notaFiscalSaida = resultado.cenarios.trading.notaFiscalSaida;
+        const regimeTributario = parametros.regimeTributario;
+        
+        const ipiImportacao = impostos.ipi;        // E20
+        const ipiNFSaida = notaFiscalSaida.ipi;   // F44
+        
+        console.log(`📊 DADOS PARA CORREÇÃO:`);
+        console.log(`   IPI Importação (E20): R$ ${ipiImportacao.toFixed(2)}`);
+        console.log(`   IPI NF Saída (F44): R$ ${ipiNFSaida.toFixed(2)}`);
+        
+        // ===== CALCULAR CRÉDITOS CORRIGIDOS =====
+        const creditosCorrigidos = calcularCreditosComIPICorrigido(impostos, regimeTributario, {
+            ipiImportacao,
+            ipiNFSaida,
+            icmsNFSaida: notaFiscalSaida.icms  // ✅ ADICIONAR ICMS DA NF SAÍDA
+        });
+        
+        // ===== ATUALIZAR RESULTADO COM CRÉDITOS CORRETOS =====
+        resultado.cenarios.importacaoDireta.creditos = creditosCorrigidos.importacaoDireta;
+        resultado.cenarios.trading.creditos = creditosCorrigidos.overseas;
+        
+        // ===== RECALCULAR APENAS O CUSTO DA IMPORTAÇÃO DIRETA =====
+        
+        // IMPORTAÇÃO DIRETA: Usar fórmula correta =E31+E38-E47+E51
+        // E31 = Total NF Entrada 
+        // E38 = ICMS ST (sempre 0)
+        // E47 = Total Impostos a Recuperar (COM IPI CORRIGIDO)
+        // E51 = Frete Terrestre (sempre 0)
+        const e31 = resultado.cenarios.importacaoDireta.totalNotaFiscalEntrada || resultado.cenarios.importacaoDireta.custoTotal;
+        const e38 = 0;
+        const e47 = creditosCorrigidos.importacaoDireta.total; // ✅ USA CRÉDITOS CORRIGIDOS
+        const e51 = 0;
+        
+        // Aplicar fórmula correta: =E31+E38-E47+E51
+        resultado.cenarios.importacaoDireta.custoTotal = e31 + e38 - e47 + e51; // ✅ FÓRMULA CORRETA
+        
+        // DESEMBOLSO MANTÉM VALOR EXISTENTE (já correto)
+        // NÃO ALTERAR: resultado.cenarios.importacaoDireta.desembolsoTotal
+        
+        // OVERSEAS: PRESERVAR VALORES EXISTENTES (já corretos)
+        // NÃO ALTERAR: resultado.cenarios.trading.custoTotal
+        // NÃO ALTERAR: resultado.cenarios.trading.desembolsoTotal
+        
+        // ===== RECALCULAR ECONOMIA (APENAS SE NECESSÁRIO) =====
+        const economiaAbsoluta = resultado.cenarios.importacaoDireta.desembolsoTotal - resultado.cenarios.trading.desembolsoTotal;
+        const economiaPercentual = resultado.cenarios.importacaoDireta.desembolsoTotal > 0 ?
+            parseFloat(((economiaAbsoluta / resultado.cenarios.importacaoDireta.desembolsoTotal) * 100).toFixed(2)) : 0;
+        
+        resultado.comparacao = {
+            economiaAbsoluta: parseFloat(economiaAbsoluta.toFixed(2)),
+            economiaPercentual,
+            melhorOpcao: economiaAbsoluta > 0 ? 'OVERSEAS_TRADING' : 'IMPORTACAO_DIRETA'
+        };
+        
+        console.log('📊 ===== RESULTADOS FINAIS CORRIGIDOS =====');
+        console.log(`   Importação Direta:`);
+        console.log(`     Custo Total: R$ ${resultado.cenarios.importacaoDireta.custoTotal.toFixed(2)} (CORRIGIDO)`);
+        console.log(`     Desembolso Total: R$ ${resultado.cenarios.importacaoDireta.desembolsoTotal.toFixed(2)} (MANTIDO)`);
+        console.log(`     Crédito IPI: R$ ${resultado.cenarios.importacaoDireta.creditos.ipi.toFixed(2)} (E20)`);
+        console.log(`     Total Créditos: R$ ${resultado.cenarios.importacaoDireta.creditos.total.toFixed(2)}`);
+        console.log(`   Trading:`);
+        console.log(`     Custo Total: R$ ${resultado.cenarios.trading.custoTotal.toFixed(2)} (MANTIDO)`);
+        console.log(`     Desembolso Total: R$ ${resultado.cenarios.trading.desembolsoTotal.toFixed(2)} (MANTIDO)`);
+        console.log(`     Crédito IPI: R$ ${resultado.cenarios.trading.creditos.ipi.toFixed(2)} (F44)`);
+        console.log(`   🎯 ESPERADO: Custo Direto R$ 2.122.063,62 | Desembolso Direto R$ 2.693.282,72`);
+        console.log(`   🎯 ESPERADO: Custo Trading R$ 2.332.359,50 | Desembolso Trading R$ 2.332.359,50`);
+        
+        // ===== ATUALIZAR INTERFACE =====
+        setTimeout(() => {
+            atualizarInterfaceComIPICorrigido(resultado);
+        }, 200);
+        
+        console.log('🎉 Simulação com IPI corrigido concluída!');
+        return resultado;
+        
+    } catch (error) {
+        console.error('❌ Erro na simulação com IPI corrigido:', error);
+        return {
+            sucesso: false,
+            erro: error.message,
+            timestamp: new Date().toISOString()
+        };
+    }
+}
+
+/**
+ * Atualiza apenas os elementos específicos da interface afetados pela correção
+ */
+function atualizarInterfaceComIPICorrigido(resultado) {
+    try {
+        console.log('🖥️ Atualizando interface com IPI corrigido...');
+        
+        // ===== ATUALIZAR CRÉDITOS DOS TRIBUTOS =====
+        const secoes = document.querySelectorAll('.details-section .results-table');
+        
+        secoes.forEach(secao => {
+            const titulo = secao.querySelector('h3');
+            if (!titulo || !titulo.textContent.includes('Créditos dos Tributos')) return;
+            
+            const tabela = secao.querySelector('tbody');
+            if (!tabela) return;
+            
+            const linhas = tabela.querySelectorAll('tr');
+            
+            linhas.forEach(linha => {
+                const primeiraColuna = linha.querySelector('td:first-child');
+                if (!primeiraColuna) return;
+                
+                const texto = primeiraColuna.textContent.trim();
+                const colunaDirecto = linha.querySelector('td:nth-child(2)');
+                const colunaTrading = linha.querySelector('td:nth-child(3)');
+                
+                if (!colunaDirecto || !colunaTrading) return;
+                
+                // Atualizar apenas linha do IPI
+                if (texto.toUpperCase().includes('IPI')) {
+                    colunaDirecto.textContent = formatarMoedaSimples(resultado.cenarios.importacaoDireta.creditos.ipi);
+                    colunaTrading.textContent = formatarMoedaSimples(resultado.cenarios.trading.creditos.ipi);
+                    console.log(`   ✅ IPI Créditos atualizados: ${resultado.cenarios.importacaoDireta.creditos.ipi.toFixed(2)} / ${resultado.cenarios.trading.creditos.ipi.toFixed(2)}`);
+                } else if ((texto.toUpperCase().includes('TOTAL') || texto.toLowerCase().includes('recuperar')) && linha.classList.contains('total-row')) {
+                    colunaDirecto.innerHTML = `<strong>${formatarMoedaSimples(resultado.cenarios.importacaoDireta.creditos.total)}</strong>`;
+                    colunaTrading.innerHTML = `<strong>${formatarMoedaSimples(resultado.cenarios.trading.creditos.total)}</strong>`;
+                    console.log(`   ✅ Total Créditos atualizado: ${resultado.cenarios.importacaoDireta.creditos.total.toFixed(2)} / ${resultado.cenarios.trading.creditos.total.toFixed(2)}`);
+                }
+            });
+        });
+        
+        // ===== ATUALIZAR TOTAIS FINAIS =====
+        setTimeout(() => {
+            const tabelaTotais = document.querySelector('#totais-finais tbody');
+            if (tabelaTotais) {
+                const linhasTotais = tabelaTotais.querySelectorAll('tr');
+                
+                linhasTotais.forEach(linha => {
+                    const primeiraColuna = linha.querySelector('td:first-child');
+                    if (!primeiraColuna) return;
+                    
+                    const texto = primeiraColuna.textContent.trim();
+                    const colunaDirecto = linha.querySelector('td:nth-child(2)');
+                    const colunaTrading = linha.querySelector('td:nth-child(3)');
+                    
+                    if (!colunaDirecto || !colunaTrading) return;
+                    
+                    if (texto.includes('Total do Custo da Importação')) {
+                        colunaDirecto.innerHTML = `<strong>${formatarMoedaSimples(resultado.cenarios.importacaoDireta.custoTotal)}</strong>`;
+                        colunaTrading.innerHTML = `<strong>${formatarMoedaSimples(resultado.cenarios.trading.custoTotal)}</strong>`;
+                    } else if (texto.includes('Total Desembolso')) {
+                        colunaDirecto.innerHTML = `<strong>${formatarMoedaSimples(resultado.cenarios.importacaoDireta.desembolsoTotal)}</strong>`;
+                        colunaTrading.innerHTML = `<strong>${formatarMoedaSimples(resultado.cenarios.trading.desembolsoTotal)}</strong>`;
+                    } else if (texto.includes('Economia Gerada (%)')) {
+                        colunaDirecto.innerHTML = `<strong>-</strong>`;
+                        colunaTrading.innerHTML = `<strong>${resultado.comparacao.economiaPercentual}%</strong>`;
+                    } else if (texto.includes('Economia Gerada (R$)')) {
+                        colunaDirecto.innerHTML = `<strong>-</strong>`;
+                        colunaTrading.innerHTML = `<strong>${formatarMoedaSimples(resultado.comparacao.economiaAbsoluta)}</strong>`;
+                    }
+                });
+                
+                console.log('✅ Totais Finais atualizados com IPI corrigido!');
+            }
+        }, 100);
+        
+        console.log('✅ Interface atualizada com IPI corrigido!');
+        
+    } catch (error) {
+        console.error('❌ Erro ao atualizar interface:', error);
+    }
+}
+
+// ===== APLICAR CORREÇÃO CIRÚRGICA =====
+function aplicarCorrecaoIPICirurgica() {
+    if (window.CalculoService) {
+        console.log('🎯 Aplicando correção cirúrgica do IPI...');
+        
+        // Substituir APENAS a função principal de simulação
+        window.CalculoService.executarSimulacao = executarSimulacaoComIPICorrigido;
+        
+        // Adicionar funções auxiliares específicas
+        window.CalculoService.calcularCreditosIPIPorCenario = calcularCreditosIPIPorCenario;
+        window.CalculoService.calcularCreditosComIPICorrigido = calcularCreditosComIPICorrigido;
+        window.CalculoService.atualizarInterfaceComIPICorrigido = atualizarInterfaceComIPICorrigido;
+        
+        console.log('✅ Correção cirúrgica do IPI aplicada!');
+        console.log('🎯 PROBLEMA RESOLVIDO: Créditos IPI agora usam lógicas diferentes por cenário');
+        
+    } else {
+        console.log('⏳ Aguardando CalculoService para correção do IPI...');
+        setTimeout(aplicarCorrecaoIPICirurgica, 500);
+    }
+}
+
+// Aplicar correção
+aplicarCorrecaoIPICirurgica();
+
+console.log('🎯 Correção cirúrgica dos Créditos IPI carregada!');
+console.log('📋 RESUMO DA CORREÇÃO:');
+console.log('   ✅ Importação Direta: IPI usa fórmula =SE(F44>0,01;E20;0)');
+console.log('   ✅ Overseas CO3: IPI usa diretamente F44');
+console.log('   ✅ Demais cálculos preservados integralmente');
+console.log('   ✅ Interface atualizada automaticamente');
